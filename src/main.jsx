@@ -8,11 +8,12 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename='/Melodia'>
+    <BrowserRouter basename='/Melodia' fallback={<LogIn/>}>
       <Routes>
         <Route path="/" element={<LogIn/>} />
         <Route path="register" element={<Register/>}/>
         <Route path="homepage" element={<App/>}/>
+        <Route path="*" element={<App/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
