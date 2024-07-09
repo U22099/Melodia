@@ -1,5 +1,5 @@
 {
     "default": {
-        "origin" : "http://localhost:7700"
+        "origin" : "https://melodia-api.onrender.com"
     }
 }
