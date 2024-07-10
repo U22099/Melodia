@@ -4,7 +4,7 @@ import App from './App.jsx'
 import LogIn from './LogIn.jsx'
 import Register from './Register.jsx'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import './index.css'
+import '/index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
