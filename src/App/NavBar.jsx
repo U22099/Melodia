@@ -160,8 +160,9 @@ const NavBar = () => {
                         "artist": tag.tags.artist || '---',
                         "title": tag.tags.title,
                         "genre": tag.tags.genre || '---',
-                        "image": (tag.tags.picture ? await toBase64(new Blob([tag.tags.picture.data])) : await toBase64(img))
+                        "image": (tag.tags.picture ? `${tag.tags.picture.format};base64,${(await toBase64(new Blob([tag.tags.picture.data]))).split(',')[1]}` : await toBase64(img))
                     }
+console.log(result);
                     resolve(result);
                 },
                 onError: (err) => {
