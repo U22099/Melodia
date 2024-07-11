@@ -34,7 +34,7 @@ const LogIn = () => {
                     });
                 if (response.status === 200) { 
 localStorage.setItem('accessToken', response.data.token.accessToken);
-localStorage.setItem('refreshToken', response.data.token.refreshToken);
+localStorage.setItem('refreshToken', response.data.token?.refreshToken);
 navigate('/homepage', { replace: true, state: { fromRoute: true } }); }
             } catch (err) {
                 console.log(err);
