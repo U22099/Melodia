@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [react()],
   assetsInclude: ["**/*.{JPG,PNG,jpg,png}"],
   optimizeDeps:{
-    override: true,
-	 './jsmediatags/dist/jsmediatags.min.js' : 'global'
+    override: true
   }
 })
