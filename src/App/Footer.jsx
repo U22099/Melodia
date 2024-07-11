@@ -43,9 +43,9 @@ const Footer = (props) => {
                 <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                 <div className="w-[80%]">
                     <div className="flex justify-end p-[5px] pb-[0px] w-[100%]">
-                        <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2em]" onClick={() => props.setIsPlaying(false)} />
+                        <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => props.setIsPlaying(false)} />
                     </div>
-                    <h1 className="text-[1.8em] bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
+                    <h1 className="bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
                     <audio id="audio" hidden autoPlay>
                         <source src={props.file[props.x].data} key={props.file[props.x]._id} type="audio/mpeg" />
                     </audio>
