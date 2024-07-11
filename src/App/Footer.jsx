@@ -5,10 +5,10 @@ import { MdOutlineClose } from 'react-icons/md'
 const Footer = (props) => {
     const [pause, setPause] = useState(false);
     const [src, setSrc] = useState("");
-    const fetchMusicByTitle = async (title) => {
+    const fetchMusicDataById = async (_id) => {
         try {
             const url = origin.default.origin + '/musicapi';
-            const response = await axios.post(url,{"title" : title}, 
+            const response = await axios.post(url,{"_id" : _id}, 
             { withCredentials: true,
                  headers : {
                      "Content-Type" : "application/json"
@@ -49,7 +49,7 @@ const Footer = (props) => {
     }
     useEffect(async () => {
         if (props.isPlaying) {
-            await fetchMusicByTitle(props.file[props.x].title);
+            await fetchMusicDataById(props.file[props.x]._id);
             Load();
         }
     }, [props.x]);
