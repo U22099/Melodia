@@ -4,6 +4,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "mimeTypes": {
+		"css":"text/css"
+   }
   "scripts": {
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build",
@@ -16,9 +19,6 @@
     "axios": "^1.7.2",
     "framer-motion": "^11.0.24",
     "gsap": "^3.12.5",
-    "jsmediatags": "^3.9.7",
-    "music-metadata-browser": "^2.5.10",
-    "musicmetadata": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
