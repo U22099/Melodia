@@ -4,6 +4,21 @@ import { MdOutlineClose } from 'react-icons/md'
 
 const Footer = (props) => {
     const [pause, setPause] = useState(false);
+    const [src, setSrc] = useState("");
+    const fetchMusicByTitle = async (title) => {
+        try {
+            const url = origin.default.origin + '/musicapi';
+            const response = await axios.post(url,{"title" : title}, 
+            { withCredentials: true,
+                 headers : {
+                     "Content-Type" : "application/json"
+                 }
+            });
+            setSrc(response.data.src);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     const Play = () => {
         setPause(false);
         const audio = document.getElementById("audio");
@@ -32,8 +47,9 @@ const Footer = (props) => {
             slider.value = audio.currentTime;
         }, 500);
     }
-    useEffect(() => {
+    useEffect(async () => {
         if (props.isPlaying) {
+            await fetchMusicByTitle(props.file[props.x].title);
             Load();
         }
     }, [props.x]);
@@ -47,7 +63,7 @@ const Footer = (props) => {
                     </div>
                     <h1 className="bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
                     <audio id="audio" hidden autoPlay>
-                        <source src={props.file[props.x].data} key={props.file[props.x]._id} type="audio/mpeg" />
+                        <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
                     </audio>
                     <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
                     <div className="flex flex-wrap justify-between w-[70%] mx-auto">
