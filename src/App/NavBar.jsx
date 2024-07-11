@@ -98,7 +98,7 @@ const accessToken = localStorage.getItem('accessToken');
                     });
                 setText("Save");
             } catch (err) {
-                if (err.response.status === 401) {
+                if ([401,402,403,404].includes(err.response.status)) {
                     const res = await refresh();
                     if (res.status === 200) updateUserData();
                 } else {
@@ -176,7 +176,7 @@ alert(err);
                         "artist": tag.tags.artist || '---',
                         "title": tag.tags.title,
                         "genre": tag.tags.genre || '---',
-                        "image": (tag.tags.picture ? `${tag.tags.picture.format};base64,${(await toBase64(new Blob([tag.tags.picture.data]))).split(',')[1]}` : await toBase64(img))
+                        "image": (tag.tags.picture ? `data:${tag.tags.picture.format};base64,${(await toBase64(new Blob([tag.tags.picture.data]))).split(',')[1]}` : await toBase64(img))
                     }
 console.log(result);
                     resolve(result);
