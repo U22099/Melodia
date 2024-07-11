@@ -23,7 +23,7 @@ function AdminPanel(props) {
                 }
             }}
             className="flex flex-col bg-black rounded-xl p-[20px] dialog md:w-[60vw] w-[95vw] justify-center items-center gap-[10px] max-h-[80vh] overflow-y-scroll scrollbar">
-            <div className="flex gap-[10px] -end p-[5px] pb-[0px] w-[100%]">
+            <div className="flex gap-[10px] justify-end p-[5px] pb-[0px] w-[100%]">
                 <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.6em] fill-[var(--secondary-color)]"} onClick={refreshState} />
                 <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2.6em]" onClick={() => props.setShowAdminPanel(false)} />
             </div>
