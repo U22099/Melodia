@@ -97,7 +97,7 @@ const Footer = (props) => {
             </div>
         )
         } else {
-            <a id="roll1"></a>
+            return (<a id="roll1"></a>);
         }
     } else {
         return ""
