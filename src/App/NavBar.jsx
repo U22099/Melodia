@@ -25,7 +25,12 @@ const NavBar = () => {
     const fetchUserData = async () => {
         try {
             const url = origin.default.origin + '/user';
-            const response = await axios.get(url, { withCredentials: true });
+				const accessToken = localStorage.getItem('accessToken');
+            const response = await axios.get(url, { withCredentials: true,
+headers: {
+                    'Authorization': 'Bearer '+accessToken
+                }
+});
             setImage(response.data.image);
             email.current = response.data.email;
             username.current = response.data.username;
@@ -37,6 +42,7 @@ const NavBar = () => {
             if (err.response.status === 401) {
                 const res = await refresh();
                 if (res.status === 200){
+localStorage.setItem('accessToken', res.data.accessToken);
                     fetchUserData();
                 } else {
                     navigate('/', { replace: true });
@@ -47,10 +53,12 @@ const NavBar = () => {
     const refresh = async () => {
         try {
             const url = origin.default.origin + '/refresh';
+const refreshToken = localStorage.getItem('refreshToken');
             const response = await axios.post(url, {}, {
-                withCredentials: true,
+               withCredentials: true,
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+'Authorization': 'Bearer '+refreshToken
                 }
             });
             return response
@@ -78,11 +86,13 @@ const NavBar = () => {
                     'image': image
                 }
                 const url = origin.default.origin + '/user';
+const accessToken = localStorage.getItem('accessToken');
                 const response = await axios.put(url, DATA,
                     {
                         withCredentials: true,
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
+'Authorization': 'Bearer '+accessToken
                         }
                     });
                 setText("Save");
@@ -98,13 +108,16 @@ const NavBar = () => {
     }
     const logOut = async () => {
         try {
-            const url = origin.default.origin + '/logout';
-            const response = await axios.post(url, {}, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
+            //const url = origin.default.origin + '/logout';
+            //const response = await axios.post(url, {}, {
+                //withCredentials: true,
+                //headers: {
+                    //'Content-Type': 'application/json',
+//'Authorization': 'Bearer '+accessToken
+                //}
+            //});
+localStorage.removeItem('accessToken');
+localStorage.removeItem('refreshToken');
         } catch (err) {
             console.log(err);
         }
@@ -136,6 +149,7 @@ const NavBar = () => {
             if (response.status === 200) setUpload(true);
         } catch (err) {
             console.log(err);
+alert(err);
         }
     }
     const convertMusic = async (file) => {
@@ -174,11 +188,13 @@ console.log(result);
     const deleteUser = async () => {
         try {
             const url = origin.default.origin + '/user';
+const accessToken = localStorage.getItem('accessToken');
             const response = await axios.delete(url, {},
                 {
                     withCredentials: true,
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+'Authorization': 'Bearer '+accessToken
                     }
                 });
             await logOut();
@@ -186,7 +202,9 @@ console.log(result);
         } catch (err) {
             if (err.response.status === 401) {
                 const res = await refresh();
-                if (res.status === 200) deleteUser();
+                if (res.status === 200) {
+localStorage.setItem('accessToken', res.data.accessToken);
+deleteUser();}
             }
         }
     }
