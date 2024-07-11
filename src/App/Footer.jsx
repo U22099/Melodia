@@ -7,7 +7,7 @@ const Footer = (props) => {
     const [src, setSrc] = useState("");
     const fetchMusicDataById = async (_id) => {
         try {
-            const url = origin.default.origin + '/musicapi';
+            const url = origin.default.origin + '/musicapi/data';
             const response = await axios.post(url,{"_id" : _id}, 
             { withCredentials: true,
                  headers : {
