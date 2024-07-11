@@ -3,6 +3,7 @@ import { FaPlay, FaPause, FaForwardStep, FaBackwardStep } from 'react-icons/fa6'
 import { MdOutlineClose } from 'react-icons/md'
 
 const Footer = (props) => {
+    const [loading, setLoading] = useState(false);
     const [pause, setPause] = useState(false);
     const [src, setSrc] = useState("");
     const fetchMusicDataById = async (_id) => {
@@ -49,12 +50,14 @@ const Footer = (props) => {
     }
     useEffect(async () => {
         if (props.isPlaying) {
+            setLoading(true);
             await fetchMusicDataById(props.file[props.x]._id);
             Load();
+            setLoading(false);
         }
     }, [props.x]);
     if (props.isPlaying) {
-        return (
+        loading ? return(<a id="roll1"></a>) : return (
             <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                 <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                 <div className="w-[80%]">
