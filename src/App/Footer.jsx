@@ -48,14 +48,18 @@ const Footer = (props) => {
             slider.value = audio.currentTime;
         }, 500);
     }
-    useEffect(async () => {
+    useEffect(() => {
         if (props.isPlaying) {
             setLoading(true);
-            await fetchMusicDataById(props.file[props.x]._id);
-            Load();
+            fetchMusicDataById(props.file[props.x]._id);
             setLoading(false);
         }
     }, [props.x]);
+    useEffect(() => {
+        if (props.isPlaying) {
+            Load();
+        }
+    }, [src]);
     if (props.isPlaying) {
         loading ? return(<a id="roll1"></a>) : return (
             <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
