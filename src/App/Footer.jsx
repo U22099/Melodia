@@ -8,6 +8,7 @@ const Footer = (props) => {
     const [src, setSrc] = useState("");
     const fetchMusicDataById = async (_id) => {
         try {
+            console.log(_id)
             const url = origin.default.origin + '/musicapi/data';
             const response = await axios.post(url,{"_id" : _id}, 
             { withCredentials: true,
@@ -32,10 +33,11 @@ const Footer = (props) => {
         audio.pause();
     }
     const Load = () => {
+        console.log(src);
         setPause(false);
         const audio = document.getElementById("audio");
         const slider = document.getElementById("range");
-        audio.src = props.file[props.x].data;
+        audio.src = src;
         audio.load();
         slider.value = 0;
         audio.addEventListener('loadedmetadata', () => {
