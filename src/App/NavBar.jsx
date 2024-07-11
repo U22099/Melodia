@@ -98,7 +98,7 @@ const accessToken = localStorage.getItem('accessToken');
                     });
                 setText("Save");
             } catch (err) {
-                if (err.response.status === 401) {
+                if ([401,402,403,404].includes(err.response.status)) {
                     const res = await refresh();
                     if (res.status === 200) updateUserData();
                 } else {
