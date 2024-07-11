@@ -32,7 +32,10 @@ const LogIn = () => {
                             'Content-Type': 'application/json'
                         }
                     });
-                if (response.status === 200) { navigate('/homepage', { replace: true, state: { fromRoute: true } }); }
+                if (response.status === 200) { 
+localStorage.setItem('accessToken', response.data.token.accessToken);
+localStorage.setItem('refreshToken', response.data.token.refreshToken);
+navigate('/homepage', { replace: true, state: { fromRoute: true } }); }
             } catch (err) {
                 console.log(err);
                 const data = err.response.data;
