@@ -15,7 +15,8 @@ const Footer = (props) => {
                      "Content-Type" : "application/json"
                  }
             });
-            setSrc(response.data.src);
+            console.log(response.data);
+            setSrc(response.data.music);
         } catch (err) {
             console.log(err);
         }
