@@ -39,6 +39,7 @@ headers: {
                 setOtherData(response.data.otherData);
             }
         } catch (err) {
+alert(err);
             if (err.response.status === 401) {
                 const res = await refresh();
                 if (res.status === 200){
