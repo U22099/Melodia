@@ -108,14 +108,15 @@ const accessToken = localStorage.getItem('accessToken');
     }
     const logOut = async () => {
         try {
-            //const url = origin.default.origin + '/logout';
-            //const response = await axios.post(url, {}, {
-                //withCredentials: true,
-                //headers: {
-                    //'Content-Type': 'application/json',
-//'Authorization': 'Bearer '+accessToken
-                //}
-            //});
+            const url = origin.default.origin + '/logout';
+const accessToken = localStorage.getItem('accessToken');
+            const response = await axios.post(url, {}, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+'Authorization': 'Bearer '+accessToken
+                }
+            });
 localStorage.removeItem('accessToken');
 localStorage.removeItem('refreshToken');
         } catch (err) {
