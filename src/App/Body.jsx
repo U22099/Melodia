@@ -59,7 +59,7 @@ const Body = (props) => {
                             <div className="cursor-pointer p-[10px] hover:bg-[var(--primary-color)] rounded-[10px] flex gap-[20px] items-center">
                                 <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                                 <div className="w-[80%]">
-                                    <h1 className="text-[1.8em] bold md:text-[2.2em] font-[serif]">{x.title}</h1>
+                                    <h1 className="md:text-[1.8em] bold md:text-[2.2em] font-[serif]">{x.title}</h1>
                                     <div className="flex flex-wrap justify-between">
                                         <p>Artist: {x.artist}</p>
                                         <p>Genre: {x.genre}</p>
