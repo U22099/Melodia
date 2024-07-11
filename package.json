@@ -6,7 +6,7 @@
   "type": "module",
   "mimeTypes": {
 		"css":"text/css"
-   }
+   },
   "scripts": {
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build",
