@@ -17,9 +17,6 @@ const Body = (props) => {
     const refreshState = () => {
         setSpinning(true);
         setRefresh(!refresh);
-        setTimeout(() => {
-            setSpinning(false);
-        }, 1000)
     }
     const fetchMusic = async () => {
         try {
@@ -27,6 +24,7 @@ const Body = (props) => {
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
+            console.log(response.data.music);
         } catch (err) {
             console.log(err);
         }
@@ -34,6 +32,9 @@ const Body = (props) => {
     useEffect(() => {
         setOutputData(music.slice());
         filterOutput();
+        setTimeout(() => {
+            setSpinning(false);
+        }, 1000)
     }, [music]);
     useEffect(() => {
         fetchMusic();
