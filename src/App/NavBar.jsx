@@ -102,7 +102,7 @@ const accessToken = localStorage.getItem('accessToken');
                     const res = await refresh();
                     if (res.status === 200) updateUserData();
                 } else {
-                    setErrorText(err.response.message);
+                    setErrorText(err.response.data.message);
                 }
             }
         }
@@ -228,8 +228,8 @@ deleteUser();}
                     </div>
                     <div>
                         <input type="text" ref={email} defaultValue={email.current} onChange={(e) => email.current = e.target.value} className="bg-[black] rounded-[5px] p-[10px] mx-auto text-[1.3em] text-[white]" />
+                    	<p className={(errorText === "") ? "hidden" : "text-[0.8em] font-bold text-red-600"}>{errorText}</p>
                     </div>
-                    <p className={errorText === "" ? "hidden" : "text-[0.8em] font-bold text-red-500"}>{errorText}</p>
                     <button className="btn w-[100%]" onClick={updateUserData}>{text}</button>
                     <button className="btn w-[100%] bg-red-600" onClick={() => {
                         setConfirm(true);
