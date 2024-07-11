@@ -57,7 +57,7 @@ const Footer = (props) => {
         }
     }, [props.x]);
     if (props.isPlaying) {
-        loading ? return(<a className="roll"></a>) : return (
+        loading ? return(<a id="roll1"></a>) : return (
             <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                 <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                 <div className="w-[80%]">
