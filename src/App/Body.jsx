@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { MdRefresh, MdOutlineClose } from 'react-icons/md'
 import axios from 'axios'
+import ErrorDialog from '../utils/ErrorDialog'
 import origin from '../../config/origin.json'
 
 const Body = (props) => {
@@ -24,9 +25,8 @@ const Body = (props) => {
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
-            console.log(response.data.music);
         } catch (err) {
-            console.log(err);
+            props.setErr({ occured: true, msg: err.message });
         }
     }
     useEffect(() => {
@@ -71,6 +71,7 @@ const Body = (props) => {
                     ))}
                 </ol>
             </section>
+            {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
         </>
     )
 }

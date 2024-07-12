@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { FaPlay, FaPause, FaForwardStep, FaBackwardStep } from 'react-icons/fa6'
 import { MdOutlineClose } from 'react-icons/md'
+import ErrorDialog from '../utils/ErrorDialog'
+import origin from '../../config/origin.json'
 
 const Footer = (props) => {
     const [loading, setLoading] = useState(false);
@@ -8,18 +10,17 @@ const Footer = (props) => {
     const [src, setSrc] = useState("");
     const fetchMusicDataById = async (_id) => {
         try {
-            console.log(_id)
             const url = origin.default.origin + '/musicapi/data';
-            const response = await axios.post(url,{"_id" : _id}, 
-            { withCredentials: true,
-                 headers : {
-                     "Content-Type" : "application/json"
-                 }
-            });
-            console.log(response.data);
+            const response = await axios.post(url, { "_id": _id },
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
             setSrc(response.data.music);
         } catch (err) {
-            console.log(err);
+            props.setErr({ occured: true, msg: err.message });
         }
     }
     const Play = () => {
@@ -33,7 +34,6 @@ const Footer = (props) => {
         audio.pause();
     }
     const Load = () => {
-        console.log(src);
         setPause(false);
         const audio = document.getElementById("audio");
         const slider = document.getElementById("range");
@@ -64,43 +64,44 @@ const Footer = (props) => {
         }
     }, [src]);
     if (props.isPlaying) {
-        if(loading) {
+        if (loading) {
             return (
-            <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
-                <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
-                <div className="w-[80%]">
-                    <div className="flex justify-end p-[5px] pb-[0px] w-[100%]">
-                        <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => props.setIsPlaying(false)} />
+                <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
+                    <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
+                    <div className="w-[80%]">
+                        <div className="flex justify-end p-[5px] pb-[0px] w-[100%]">
+                            <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => props.setIsPlaying(false)} />
+                        </div>
+                        <h1 className="bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
+                        <audio id="audio" hidden autoPlay>
+                            <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
+                        </audio>
+                        <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
+                        <div className="flex flex-wrap justify-between w-[70%] mx-auto">
+                            <FaBackwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
+                                if (props.x <= 0) {
+                                    props.setX(0);
+                                } else {
+                                    props.setX(props.x - 1);
+                                }
+                                Play();
+                            }} />
+                            {pause ? <FaPlay onClick={Play} className="text-[2em] text-[var(--secondary-color)]" /> : <FaPause onClick={Pause} className="text-[2em] text-[var(--secondary-color)]" />}
+                            <FaForwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
+                                if (props.x >= props.file.length - 1) {
+                                    props.setX(0);
+                                } else {
+                                    props.setX(props.x + 1);
+                                }
+                                Play();
+                            }} />
+                        </div>
                     </div>
-                    <h1 className="bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
-                    <audio id="audio" hidden autoPlay>
-                        <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
-                    </audio>
-                    <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
-                    <div className="flex flex-wrap justify-between w-[70%] mx-auto">
-                        <FaBackwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
-                            if (props.x <= 0) {
-                                props.setX(0);
-                            } else {
-                                props.setX(props.x - 1);
-                            }
-                            Play();
-                        }} />
-                        {pause ? <FaPlay onClick={Play} className="text-[2em] text-[var(--secondary-color)]" /> : <FaPause onClick={Pause} className="text-[2em] text-[var(--secondary-color)]" />}
-                        <FaForwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
-                            if (props.x >= props.file.length - 1) {
-                                props.setX(0);
-                            } else {
-                                props.setX(props.x + 1);
-                            }
-                            Play();
-                        }} />
-                    </div>
+                    {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
                 </div>
-            </div>
-        )
+            )
         } else {
-            return (<a id="roll1"></a>);
+            return (<p id="roll1" className="text-[2em]"></p>);
         }
     } else {
         return ""

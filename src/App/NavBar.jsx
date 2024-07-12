@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminPanel from '../AdminPanel'
+import ErrorDialog from '../utils/ErrorDialog'
 import SuccessDialog from '../utils/SuccessDialog'
 import ConfirmDialog from '../utils/ConfirmDialog'
 import axios from 'axios'
-import img from '../../public/image.JPG'
 import toBase64 from './../utils/Base64.js'
 import origin from '../../config/origin.json'
 
-const NavBar = () => {
+const NavBar = (props) => {
     const navigate = useNavigate();
     const [menu, setMenu] = useState(false);
     const [text, setText] = useState("Save");
@@ -19,18 +19,19 @@ const NavBar = () => {
     const [admin, setAdmin] = useState(false);
     const [showAdminPanel, setShowAdminPanel] = useState(false);
     const [otherData, setOtherData] = useState();
-    const [image, setImage] = useState(img);
+    const [image, setImage] = useState("image.JPG");
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
         try {
             const url = origin.default.origin + '/user';
-	    const accessToken = localStorage.getItem('accessToken');
-            const response = await axios.get(url, { withCredentials: true,
-headers: {
-                    'Authorization': 'Bearer '+accessToken
+            const accessToken = localStorage.getItem('accessToken');
+            const response = await axios.get(url, {
+                withCredentials: true,
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
                 }
-});
+            });
             setImage(response.data.image);
             email.current = response.data.email;
             username.current = response.data.username;
@@ -39,11 +40,11 @@ headers: {
                 setOtherData(response.data.otherData);
             }
         } catch (err) {
-alert(err);
+            props.setErr({ occured: true, msg: err.message });
             if (err.response.status === 401) {
                 const res = await refresh();
-                if (res.status === 200){
-localStorage.setItem('accessToken', res.data.accessToken);
+                if (res.status === 200) {
+                    localStorage.setItem('accessToken', res.data.accessToken);
                     fetchUserData();
                 } else {
                     navigate('/', { replace: true });
@@ -54,17 +55,17 @@ localStorage.setItem('accessToken', res.data.accessToken);
     const refresh = async () => {
         try {
             const url = origin.default.origin + '/refresh';
-const refreshToken = localStorage.getItem('refreshToken');
+            const refreshToken = localStorage.getItem('refreshToken');
             const response = await axios.post(url, {}, {
-               withCredentials: true,
+                withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
-'Authorization': 'Bearer '+refreshToken
+                    'Authorization': 'Bearer ' + refreshToken
                 }
             });
-            return response
+            if (response.status === 200) return response
         } catch (err) {
-            if ((err.response.status === 403) || err.response.status === 401) {
+            if ((err.response.status === 403) || (err.response.status === 401)) {
                 navigate('/', { replace: true });
             }
         }
@@ -87,18 +88,18 @@ const refreshToken = localStorage.getItem('refreshToken');
                     'image': image
                 }
                 const url = origin.default.origin + '/user';
-const accessToken = localStorage.getItem('accessToken');
+                const accessToken = localStorage.getItem('accessToken');
                 const response = await axios.put(url, DATA,
                     {
                         withCredentials: true,
                         headers: {
                             'Content-Type': 'application/json',
-'Authorization': 'Bearer '+accessToken
+                            'Authorization': 'Bearer ' + accessToken
                         }
                     });
                 setText("Save");
             } catch (err) {
-                if ([401,402,403,404].includes(err.response.status)) {
+                if ([401, 402, 403, 404].includes(err.response.status)) {
                     const res = await refresh();
                     if (res.status === 200) updateUserData();
                 } else {
@@ -110,18 +111,20 @@ const accessToken = localStorage.getItem('accessToken');
     const logOut = async () => {
         try {
             const url = origin.default.origin + '/logout';
-const accessToken = localStorage.getItem('accessToken');
+            const refreshToken = localStorage.getItem('refreshToken');
             const response = await axios.post(url, {}, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json',
-'Authorization': 'Bearer '+accessToken
+                    'Authorization': 'Bearer ' + refreshToken
                 }
             });
-localStorage.removeItem('accessToken');
-localStorage.removeItem('refreshToken');
+            if (response.status === 200) {
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+            }
         } catch (err) {
-            console.log(err);
+            props.setErr({ occured: true, msg: err.message });
         }
     }
     const uploadMusic = async () => {
@@ -150,8 +153,7 @@ localStorage.removeItem('refreshToken');
 
             if (response.status === 200) setUpload(true);
         } catch (err) {
-            console.log(err);
-alert(err);
+            props.setErr({ occured: true, msg: err.message });
         }
     }
     const convertMusic = async (file) => {
@@ -178,7 +180,7 @@ alert(err);
                         "genre": tag.tags.genre || '---',
                         "image": (tag.tags.picture ? `data:${tag.tags.picture.format};base64,${(await toBase64(new Blob([tag.tags.picture.data]))).split(',')[1]}` : await toBase64(img))
                     }
-console.log(result);
+                    console.log(result);
                     resolve(result);
                 },
                 onError: (err) => {
@@ -190,24 +192,19 @@ console.log(result);
     const deleteUser = async () => {
         try {
             const url = origin.default.origin + '/user';
-const accessToken = localStorage.getItem('accessToken');
+            const refreshToken = localStorage.getItem('refreshToken');
             const response = await axios.delete(url, {},
                 {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json',
-'Authorization': 'Bearer '+accessToken
+                        'Authorization': 'Bearer ' + refreshToken
                     }
                 });
-            await logOut();
+            if (response.status === 200) await logOut();
             console.log("Deleted User Successfully");
         } catch (err) {
-            if (err.response.status === 401) {
-                const res = await refresh();
-                if (res.status === 200) {
-localStorage.setItem('accessToken', res.data.accessToken);
-deleteUser();}
-            }
+            props.setErr({ occured: true, msg: err.message });
         }
     }
     useEffect(() => {
@@ -228,7 +225,7 @@ deleteUser();}
                     </div>
                     <div>
                         <input type="text" ref={email} defaultValue={email.current} onChange={(e) => email.current = e.target.value} className="bg-[black] rounded-[5px] p-[10px] mx-auto text-[1.3em] text-[white]" />
-                    	<p className={(errorText === "") ? "hidden" : "text-[0.8em] font-bold text-red-600"}>{errorText}</p>
+                        <p className={(errorText === "") ? "hidden" : "text-[0.8em] font-bold text-red-600"}>{errorText}</p>
                     </div>
                     <button className="btn w-[100%]" onClick={updateUserData}>{text}</button>
                     <button className="btn w-[100%] bg-red-600" onClick={() => {
@@ -249,6 +246,7 @@ deleteUser();}
                     {admin ? <p to="/admin" className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
                 </div>
             </div>
+            {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
             {upload ? <SuccessDialog msg="Uploaded successfully" /> : ''}
             {confirm ? <ConfirmDialog var={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
