@@ -2,6 +2,6 @@
     "default": {
         "origin1" : "http://localhost:7700",
 	"origin2" : "https://melodia-api.onrender.com",
-	"origin" : "https://melodia-omega.vercel.app",
+	"origin" : "https://melodia-omega.vercel.app"
     }
 }
