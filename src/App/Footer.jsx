@@ -3,6 +3,7 @@ import { FaPlay, FaPause, FaForwardStep, FaBackwardStep } from 'react-icons/fa6'
 import { MdOutlineClose } from 'react-icons/md'
 import ErrorDialog from '../utils/ErrorDialog'
 import origin from '../../config/origin.json'
+import axios from 'axios'
 
 const Footer = (props) => {
     const [loading, setLoading] = useState(false);
