@@ -217,7 +217,7 @@ const NavBar = (props) => {
                 <img src={image} alt="Profile Picture" className="bg-[var(--primary-color)] rounded-full w-16 h-16 cursor-pointer" onClick={switchVisibility} />
                 <div className={menu ? "grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] absolute bg-[var(--primary-color)] top-[50%] p-[20px] rounded-[10px] z-[10]" : "hidden"}>
                     <label htmlFor='inputImage'>
-                        <input type="file" onChange={handleImage} accept="image/jpeg image/png image/jpg" id="inputImage" className="hidden" />
+                        <input type="file" onChange={handleImage} maxLength={3145728} accept="image/jpeg image/png image/jpg" id="inputImage" className="hidden" />
                         <img src={image} alt="Profile Picture" className="bg-[var(--primary-color)] rounded-full w-32 h-32 mx-auto" onClick={handleImage} />
                     </label>
                     <div>
@@ -246,7 +246,7 @@ const NavBar = (props) => {
                     {admin ? <p to="/admin" className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
                 </div>
             </div>
-            {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
+            {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
             {upload ? <SuccessDialog msg="Uploaded successfully" /> : ''}
             {confirm ? <ConfirmDialog var={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}

@@ -25,6 +25,7 @@ const Body = (props) => {
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
+            console.log(response.data.music);
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
         }
@@ -59,7 +60,7 @@ const Body = (props) => {
                             <div className="cursor-pointer p-[10px] hover:bg-[var(--primary-color)] rounded-[10px] flex gap-[20px] items-center">
                                 <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                                 <div className="w-[80%]">
-                                    <h1 className="bold md:text-[2.2em] font-[serif]">{x.title}</h1>
+                                    <h1 className="font-extrabold md:text-[2.2em] font-[serif]">{x.title}</h1>
                                     <div className="flex flex-wrap justify-between">
                                         <p>Artist: {x.artist}</p>
                                         <p>Genre: {x.genre}</p>
@@ -71,7 +72,7 @@ const Body = (props) => {
                     ))}
                 </ol>
             </section>
-            {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
+            {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
         </>
     )
 }
