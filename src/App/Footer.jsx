@@ -6,7 +6,7 @@ import origin from '../../config/origin.json'
 import axios from 'axios'
 
 const Footer = (props) => {
-    const [loading, setLoading] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const [pause, setPause] = useState(false);
     const [src, setSrc] = useState("");
     const fetchMusicDataById = async (_id) => {
@@ -54,18 +54,21 @@ const Footer = (props) => {
     }
     useEffect(() => {
         if (props.isPlaying) {
-            setLoading(true);
+            setLoaded(false);
             fetchMusicDataById(props.file[props.x]._id);
-            setLoading(false);
+            setLoaded(true);
+            if (props.isPlaying&&loaded) {
+            Load();
+        }
         }
     }, [props.x]);
     useEffect(() => {
-        if (props.isPlaying) {
+        if (props.isPlaying&&loaded) {
             Load();
         }
     }, [src]);
     if (props.isPlaying) {
-        if (loading) {
+        if (loaded) {
             return (
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                     <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
@@ -102,7 +105,12 @@ const Footer = (props) => {
                 </div>
             )
         } else {
-            return (<p id="roll1" className="text-[2em]"></p>);
+            return (<>
+                <audio id="audio" hidden autoPlay>
+                            <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
+                </audio>
+                <p id="roll1" className="text-[2em]"></p>
+            </>);
         }
     } else {
         return ""
