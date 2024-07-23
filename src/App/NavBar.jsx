@@ -236,7 +236,7 @@ const NavBar = (props) => {
                     <div className="grid cursor-pointer grid-cols-[4fr_1fr]">
                         <label htmlFor='upload' className="cursor-pointer">
                             <input type="file" accept=".mp3 .m4a" id="upload" className="hidden" onChange={(e) => setFileCount(e.target.files.length)} multiple />
-                            <div className={((upload === false) ? "glow " : "") + "grid grid-cols-[4fr_1fr] border-[2px] border-white border-dashed text-[1.2em] font-bold rounded-[10px] p-[8px]"}>
+                            <div className={((upload.state === false) ? "glow " : "") + "grid grid-cols-[4fr_1fr] border-[2px] border-white border-dashed text-[1.2em] font-bold rounded-[10px] p-[8px]"}>
                                 <h1>Upload</h1>
                                 <p className="text-[var(--secondary-color)] bold">{fileCount}</p>
                             </div>

@@ -36,25 +36,24 @@ const Footer = (props) => {
         audio.pause();
     }
     const Load = () => {
-	console.log("Called Load");
-        if(loaded){
-            setPause(false);
-            const audio = document.getElementById("audio");
-            const slider = document.getElementById("range");
-            audio.src = src;
-            audio.load();
-            slider.value = 0;
-            audio.addEventListener('loadedmetadata', () => {
-                slider.max = audio.duration;
-            });
-            slider.onchange = () => {
-                audio.currentTime = slider.value;
-                audio.play();
-            }
-            setInterval(() => {
-                slider.value = audio.currentTime;
-            }, 500);
+        console.log("Called Load");
+        setPause(false);
+        const audio = document.getElementById("audio");
+        const slider = document.getElementById("range");
+        audio.src = src;
+        audio.load();
+        audio.play();
+        slider.value = 0;
+        audio.addEventListener('loadedmetadata', () => {
+            slider.max = audio.duration;
+        });
+        slider.onchange = () => {
+            audio.currentTime = slider.value;
+            audio.play();
         }
+        setInterval(() => {
+            slider.value = audio.currentTime;
+        }, 500);
     }
     useEffect(() => {
         if (props.isPlaying) {
@@ -107,7 +106,9 @@ const Footer = (props) => {
             )
         } else {
             return (
-                <p id="roll1" className="text-[2em]"></p>
+                <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
+                    <p id="roll1" className="text-[2em]"></p>
+                </div>
             );
         }
     } else {

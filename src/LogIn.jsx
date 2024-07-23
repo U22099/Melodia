@@ -32,10 +32,11 @@ const LogIn = () => {
                             'Content-Type': 'application/json'
                         }
                     });
-                if (response.status === 200) { 
-localStorage.setItem('accessToken', response.data.token.accessToken);
-localStorage.setItem('refreshToken', response.data.token?.refreshToken);
-navigate('/homepage', { replace: true, state: { fromRoute: true } }); }
+                if (response.status === 200) {
+                    localStorage.setItem('accessToken', response.data.token.accessToken);
+                    localStorage.setItem('refreshToken', response.data.token?.refreshToken);
+                    navigate('/homepage', { replace: true, state: { fromRoute: true } });
+                }
             } catch (err) {
                 console.log(err);
                 const data = err.response.data;
@@ -69,7 +70,7 @@ navigate('/homepage', { replace: true, state: { fromRoute: true } }); }
                 </button>
             </form>
             <footer className="mt-[20px] flex flex-col gap-[20px] align-center justify-center text-center w-[100%]">
-                <Link className="underline my-[10px] hover:cursor-pointer">Forgot your password</Link>
+                <Link to="/forgotPassword" className="underline my-[10px] hover:cursor-pointer">Forgot your password</Link>
                 <div className="gap-[20px]">
                     <p className="text-[var(--text-primary-color)] font-bold hover:cursor-pointer">Don't have an account?</p>
                     <Link to="/register" className="underline mt-[20px] hover:cursor-pointer">Sign up for Melodia</Link>
