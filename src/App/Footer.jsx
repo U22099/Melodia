@@ -19,7 +19,7 @@ const Footer = (props) => {
                         "Content-Type": "application/json"
                     }
                 });
-            setSrc(response.data.music);
+            setSrc(response.data.music.data);
             console.log(src);
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
@@ -35,23 +35,26 @@ const Footer = (props) => {
         const audio = document.getElementById("audio");
         audio.pause();
     }
-    const Load = () => {
-        setPause(false);
-        const audio = document.getElementById("audio");
-        const slider = document.getElementById("range");
-        audio.src = src;
-        audio.load();
-        slider.value = 0;
-        audio.addEventListener('loadedmetadata', () => {
-            slider.max = audio.duration;
-        });
-        slider.onchange = () => {
-            audio.currentTime = slider.value;
-            audio.play();
+    const Load = () => 
+        console.log("Called Load");
+        if(loaded){
+            setPause(false);
+            const audio = document.getElementById("audio");
+            const slider = document.getElementById("range");
+            audio.src = src;
+            audio.load();
+            slider.value = 0;
+            audio.addEventListener('loadedmetadata', () => {
+                slider.max = audio.duration;
+            });
+            slider.onchange = () => {
+                audio.currentTime = slider.value;
+                audio.play();
+            }
+            setInterval(() => {
+                slider.value = audio.currentTime;
+            }, 500);
         }
-        setInterval(() => {
-            slider.value = audio.currentTime;
-        }, 500);
     }
     useEffect(() => {
         if (props.isPlaying) {
@@ -59,8 +62,7 @@ const Footer = (props) => {
             fetchMusicDataById(props.file[props.x]._id);
         }
     }, [props.x]);
-    useEffect(() => {
-        console.log(src);
+    useEffect(() => 
         setLoaded(true);
         if (props.isPlaying) {
             Load();
@@ -104,9 +106,12 @@ const Footer = (props) => {
                 </div>
             )
         } else {
-            return (
+            return (<>
+                <audio id="audio" hidden autoPlay>
+                            <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
+                </audio>
                 <p id="roll1" className="text-[2em]"></p>
-            );
+            </>);
         }
     } else {
         return ""
