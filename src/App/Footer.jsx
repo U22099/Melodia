@@ -69,8 +69,8 @@ const Footer = (props) => {
         }
     }, [src]);
     if (props.isPlaying) {
-        if (loaded) {
-            return (
+        return (                
+            {if (loaded) {
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                     <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                     <div className="w-[80%]">
@@ -104,12 +104,10 @@ const Footer = (props) => {
                     </div>
                     {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
                 </div>
-            )
-        } else {
-            return (
+            } else {
                 <p id="roll1" className="text-[2em]"></p>
-            );
-        }
+        }}
+    )   
 }
 
 export default Footer
