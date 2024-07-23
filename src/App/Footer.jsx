@@ -35,8 +35,8 @@ const Footer = (props) => {
         const audio = document.getElementById("audio");
         audio.pause();
     }
-    const Load = () => 
-        console.log("Called Load");
+    const Load = () => {
+	console.log("Called Load");
         if(loaded){
             setPause(false);
             const audio = document.getElementById("audio");
@@ -62,15 +62,15 @@ const Footer = (props) => {
             fetchMusicDataById(props.file[props.x]._id);
         }
     }, [props.x]);
-    useEffect(() => {
+    useEffect(() => 
         setLoaded(true);
         if (props.isPlaying) {
             Load();
         }
     }, [src]);
     if (props.isPlaying) {
-        return (                
-            {if (loaded) {
+        if (loaded) {
+            return (
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                     <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                     <div className="w-[80%]">
@@ -102,12 +102,17 @@ const Footer = (props) => {
                             }} />
                         </div>
                     </div>
-                    {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
+                    {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
                 </div>
-            } else {
+            )
+        } else {
+            return (
                 <p id="roll1" className="text-[2em]"></p>
-        }}
-    )   
+            );
+        }
+    } else {
+        return ""
+    }
 }
 
 export default Footer
