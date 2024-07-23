@@ -62,7 +62,7 @@ const Footer = (props) => {
             fetchMusicDataById(props.file[props.x]._id);
         }
     }, [props.x]);
-    useEffect(() => 
+    useEffect(() => {
         setLoaded(true);
         if (props.isPlaying) {
             Load();
