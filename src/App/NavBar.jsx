@@ -174,11 +174,12 @@ const NavBar = (props) => {
         return new Promise((resolve, reject) => {
             jsmediatags.read(file, {
                 onSuccess: async (tag) => {
+                    console.log(tag);
                     const result = {
                         "artist": tag.tags.artist || '---',
                         "title": tag.tags.title,
                         "genre": tag.tags.genre || '---',
-                        "image": (tag.tags.picture ? `data:${tag.tags.picture.format};base64,${(await toBase64(new Blob([tag.tags.picture.data]))).split(',')[1]}` : await toBase64(img))
+                        "image": (tag.tags.picture ? await toBase64(new Blob([tag.tags.picture.data], {type: tag.tags.picture.format})) : await toBase64(img))
                     }
                     console.log(result);
                     resolve(result);
