@@ -193,7 +193,8 @@ const NavBar = (props) => {
         try {
             const url = origin.default.origin + '/user';
             const refreshToken = localStorage.getItem('refreshToken');
-            const response = await axios.delete(url, {},
+            console.log(refreshToken);
+            const response = await axios.delete(url,
                 {
                     withCredentials: true,
                     headers: {
