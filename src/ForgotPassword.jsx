@@ -28,7 +28,7 @@ const ForgotPassword = () => {
                 }
             } catch (err) {
                 const data = err.response.data;
-                setError(data.message);
+                setError(data.message || "Error");
                 setText('Submit Email');
             }
         } else {
