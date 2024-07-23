@@ -129,7 +129,7 @@ const NavBar = (props) => {
     }
     const uploadMusic = async () => {
         try {
-            setUpload({state: true, msg: ""});
+            setUpload({state: false, msg: ""});
             const file = Array.from(document.getElementById('upload').files);
             const output = await Promise.all(file.map(async (x) => await convertMusic(x)));
             const url = origin.default.origin + '/musicapi';
