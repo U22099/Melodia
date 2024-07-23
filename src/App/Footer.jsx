@@ -106,16 +106,10 @@ const Footer = (props) => {
                 </div>
             )
         } else {
-            return (<>
-                <audio id="audio" hidden autoPlay>
-                            <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
-                </audio>
+            return (
                 <p id="roll1" className="text-[2em]"></p>
-            </>);
+            );
         }
-    } else {
-        return ""
-    }
 }
 
 export default Footer
