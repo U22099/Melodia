@@ -174,7 +174,6 @@ const NavBar = (props) => {
         return new Promise((resolve, reject) => {
             jsmediatags.read(file, {
                 onSuccess: async (tag) => {
-                    console.log(tag);
                     const result = {
                         "artist": tag.tags.artist || '---',
                         "title": tag.tags.title,
