@@ -129,7 +129,7 @@ const NavBar = (props) => {
     }
     const uploadMusic = async () => {
         try {
-            setUpload(false);
+            setUpload({state: true, msg: ""});
             const file = Array.from(document.getElementById('upload').files);
             const output = await Promise.all(file.map(async (x) => await convertMusic(x)));
             const url = origin.default.origin + '/musicapi';
@@ -151,7 +151,7 @@ const NavBar = (props) => {
                     }
                 });
 
-            if (response.status === 200) setUpload(true);
+            if (response.status === 200) setUpload({state: true, msg: response.data.message});
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
         }
@@ -247,7 +247,7 @@ const NavBar = (props) => {
                 </div>
             </div>
             {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
-            {upload ? <SuccessDialog msg="Uploaded successfully" /> : ''}
+            {upload.state ? <SuccessDialog msg={upload.msg} /> : ''}
             {confirm ? <ConfirmDialog var={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
             {showAdminPanel ? <AdminPanel users={otherData.users} music_count={otherData.music_count} setShowAdminPanel={setShowAdminPanel} refresh={fetchUserData} /> : ''}
