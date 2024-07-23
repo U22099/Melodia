@@ -20,6 +20,7 @@ const Footer = (props) => {
                     }
                 });
             setSrc(response.data.music);
+            console.log(src);
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
         }
@@ -56,11 +57,12 @@ const Footer = (props) => {
         if (props.isPlaying) {
             setLoaded(false);
             fetchMusicDataById(props.file[props.x]._id);
-            setLoaded(true);
         }
     }, [props.x]);
     useEffect(() => {
-        if (props.isPlaying&&loaded) {
+        console.log(src);
+        setLoaded(true);
+        if (props.isPlaying) {
             Load();
         }
     }, [src]);
@@ -102,12 +104,9 @@ const Footer = (props) => {
                 </div>
             )
         } else {
-            return (<>
-                <audio id="audio" hidden autoPlay>
-                            <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
-                </audio>
+            return (
                 <p id="roll1" className="text-[2em]"></p>
-            </>);
+            );
         }
     } else {
         return ""
