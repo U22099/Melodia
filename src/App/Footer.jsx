@@ -35,9 +35,7 @@ const Footer = (props) => {
         audio.pause();
     }
     const Load = () => {
-        console.log("Called Load");
         if(loaded){
-            console.log("ENTERED");
             setPause(false);
             const audio = document.getElementById("audio");
             const slider = document.getElementById("range");
@@ -54,7 +52,7 @@ const Footer = (props) => {
             }
             setInterval(() => {
                 slider.value = audio.currentTime;
-            }, 500);
+            }, 100);
         }
     }
     useEffect(() => {
