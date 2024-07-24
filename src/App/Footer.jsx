@@ -20,8 +20,8 @@ const Footer = (props) => {
                             "Content-Type": "application/json"
                         }
                     });
+                props.file[props.x].data = response.data.music.data;
                 setSrc(response.data.music.data);
-                props.file[props.x].data = response.music.data;
             } else {
                 setSrc(props.file[props.x].data);
             }
