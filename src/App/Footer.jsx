@@ -99,12 +99,12 @@ const Footer = (props) => {
                     </div>
                     {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
                 </div>
-            )
             {
                 if (props.isPlaying&&loaded) {
                     Load();
                 }
             }
+            )
         } else {
             return (
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex justify-center items-center">
