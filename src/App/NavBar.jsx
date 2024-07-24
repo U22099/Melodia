@@ -192,20 +192,29 @@ const NavBar = (props) => {
     const deleteUser = async () => {
         try {
             const url = origin.default.origin + '/user';
-            const refreshToken = localStorage.getItem('refreshToken');
-            console.log(refreshToken);
+            const accessToken = localStorage.getItem('accessToken');
             const response = await axios.delete(url,
                 {
                     withCredentials: true,
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + refreshToken
+                        'Authorization': 'Bearer ' + accessToken
                     }
                 });
             if (response.status === 200) await logOut();
             console.log("Deleted User Successfully");
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
+            if (err.response.status === 401) {
+                const res = await refresh();
+                if (res.status === 200) {
+                    localStorage.setItem('accessToken', res.data.accessToken);
+                    deleteUser();
+                } else {
+                    navigate('/', { replace: true });
+                }
+            }
+
         }
     }
     useEffect(() => {
