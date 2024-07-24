@@ -113,10 +113,12 @@
     animation: glow 2s ease infinite alternate;
 }
 #range{
+    outline: none;
     -webkit-appearance: none;
+    appearance: none
     width: 100%;
     height: 20px;
-    background: transparent;
+    background-color: var(--primary-color);
 }
 #range::-webkit-slider-thumb{
     -webkit-appearance: none;
@@ -131,7 +133,6 @@
     width: 100%;
     border-radius: 20px;
     height: 15px;
-    background-color: var(--primary-color);
 }
 #range::-webkit-slider-fill{
     border-radius: 20px;
