@@ -9,7 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repo
         uses: actions/checkout@v3
+      - name: SetupNodejs
         uses: actions/setup-node@v3
         with:
           node-version: [20.x]
