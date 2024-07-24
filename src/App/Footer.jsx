@@ -64,7 +64,6 @@ const Footer = (props) => {
     }, [props.x]);
     useEffect(() => {
         setLoaded(true);
-        Load();
     }, [src]);
     useEffect(() => {
         Load();
