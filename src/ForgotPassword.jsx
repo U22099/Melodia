@@ -38,7 +38,7 @@ const ForgotPassword = () => {
     return (
         <div className="flex flex-col justify-center md:p-[30px] rounded-[10px] align-center w-[80%] md:w-[50%] lg:w-[40%] bg-black md:bg-[var(--primary-color)] gap-[20px] my-[20px]">
             <header className="flex justify-start text-start w-[100%]">
-                <h1 className="text-[1.5em] md:text-[2.4em] text-[var(--secondary-color)] font-extrabold">Retrieve Password</h1>
+                <h1 className="text-[1.5em] md:text-[2.4em] text-[var(--secondary-color)] font-extrabold">Request New Password</h1>
             </header>
             <form action="" method="post" className="w-[100%] flex flex-col justify-start gap-[10px]">
                 <p className="text-[1.1em] font-bold">Email</p>
