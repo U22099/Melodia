@@ -41,7 +41,7 @@ const NavBar = (props) => {
             }
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
-            if (err.response.status === 401) {
+            if ([401, 403].includes(err.response.status)) {
                 const res = await refresh();
                 if (res.status === 200) {
                     localStorage.setItem('accessToken', res.data.accessToken);
@@ -209,7 +209,7 @@ const NavBar = (props) => {
             }}
             
         } catch (err) {
-            if (err.response.status === 401) {
+            if ([401, 403].includes(err.response.status)) {
                 const res = await refresh();
                 if (res.status === 200) {
                     localStorage.setItem('accessToken', res.data.accessToken);
