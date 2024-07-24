@@ -85,7 +85,7 @@ const Footer = (props) => {
                         <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
                         <div className="flex flex-wrap justify-between w-[70%] mx-auto">
                             <FaBackwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
-                                if (props.x <= 0) {
+                                if (props.x === 0) {
                                     props.setX(0);
                                 } else {
                                     props.setX(props.x - 1);
@@ -94,7 +94,7 @@ const Footer = (props) => {
                             }} />
                             {pause ? <FaPlay onClick={Play} className="text-[2em] text-[var(--secondary-color)]" /> : <FaPause onClick={Pause} className="text-[2em] text-[var(--secondary-color)]" />}
                             <FaForwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
-                                if (props.x >= props.file.length - 1) {
+                                if (props.x === props.file.length - 1) {
                                     props.setX(0);
                                 } else {
                                     props.setX(props.x + 1);
