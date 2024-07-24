@@ -118,7 +118,7 @@
     appearance: none
     width: 100%;
     height: 20px;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
 }
 #range::-webkit-slider-thumb{
     -webkit-appearance: none;
@@ -126,18 +126,8 @@
     height: 15px;
     border-radius: 50%;
     cursor: pointer;
-    background-color: var(--secondary-color);
+    background: var(--secondary-color);
     border: none;
-}
-#range::-webkit-runnable-track{
-    width: 100%;
-    border-radius: 20px;
-    height: 15px;
-}
-#range::-webkit-slider-fill{
-    border-radius: 20px;
-    height: 15px;
-    background-color: var(--secondary-color);
 }
 #range:focus{
     outline: none;
