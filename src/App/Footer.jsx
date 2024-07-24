@@ -6,8 +6,8 @@ import origin from '../../config/origin.json'
 import axios from 'axios'
 
 const Footer = (props) => {
-    const [loaded, setLoaded] = useState(false);
-    const [pause, setPause] = useState(false);
+    const [loaded, setLoaded] = useState();
+    const [pause, setPause] = useState();
     const [src, setSrc] = useState("");
     const fetchMusicDataById = async (_id) => {
         try {
@@ -100,7 +100,7 @@ const Footer = (props) => {
                         </div>
                     </div>
                     {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
-                     {(props.isPlaying&&loaded) ? Load() : ''}
+                    {loaded ? Load() : ''}
                 </div>
             )
         } else {
