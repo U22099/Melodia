@@ -14,7 +14,7 @@ const NavBar = (props) => {
     const [text, setText] = useState("Save");
     const [errorText, setErrorText] = useState("");
     const [fileCount, setFileCount] = useState(0);
-    const [upload, setUpload] = useState({state: false, msg: ""});
+    const [upload, setUpload] = useState({state: , msg: ""});
     const [confirm, setConfirm] = useState(false);
     const [admin, setAdmin] = useState(false);
     const [showAdminPanel, setShowAdminPanel] = useState(false);
