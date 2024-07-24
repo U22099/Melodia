@@ -9,9 +9,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Set Github token
-        env:
-          GITHUB_TOKEN: ${{secrets.A_T}}
       - name: Checkout code
         uses: actions/checkout@v2
         with:
@@ -19,6 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build and deploy
+        env:
+          GITHUB_TOKEN: ${{secrets.A_T}}
         run: |
           git config --global user.name "U22099"
           git config --global user.email "nifemiolaniyi4@gmail.com
