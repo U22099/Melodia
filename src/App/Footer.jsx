@@ -107,7 +107,7 @@ const Footer = (props) => {
         } else {
             return (
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex justify-center items-center">
-                    <p id="roll1" className="text-[4em] bg-[var(--secondary-color)]"></p>
+                    <p id="roll2"></p>
                 </div>
             );
         }
