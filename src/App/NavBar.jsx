@@ -201,7 +201,7 @@ const NavBar = (props) => {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-            if (response.status === 200) () => {await logOut(); navigate('/', { replace: true });}
+            if (response.status === 200) async () => {await logOut(); navigate('/', { replace: true });}
             console.log("Deleted User Successfully");
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
