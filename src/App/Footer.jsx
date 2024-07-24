@@ -37,6 +37,7 @@ const Footer = (props) => {
     const Load = () => {
         console.log("Called Load");
         if(loaded){
+            console.log("ENTERED");
             setPause(false);
             const audio = document.getElementById("audio");
             const slider = document.getElementById("range");
@@ -66,7 +67,9 @@ const Footer = (props) => {
         setLoaded(true);
     }, [src]);
     useEffect(() => {
-        Load();
+        if(loaded){
+            Load();
+        }
     }, [loaded]);
     if (props.isPlaying) {
         if (loaded) {
