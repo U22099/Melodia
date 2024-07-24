@@ -56,7 +56,6 @@ const Body = (props) => {
                             const audio = document.getElementById("audio");
                             audio?.pause();
                             props.play(music, i);
-                            console.log(x);
                         }}>
                             <div className="cursor-pointer p-[10px] hover:bg-[var(--primary-color)] rounded-[10px] flex gap-[20px] items-center">
                                 <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
