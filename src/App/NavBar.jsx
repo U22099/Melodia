@@ -151,9 +151,10 @@ const NavBar = (props) => {
                     }
                 });
 
-            if (response.status === 200) setUpload({state: true, msg: response.data.message});
+            if (response.status === 200) setUpload({state: true, msg: response.data.message, show: true});
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
+            setUpload({state: true, msg: err.response.data.message, show: false});
         }
     }
     const convertMusic = async (file) => {
@@ -262,7 +263,7 @@ const NavBar = (props) => {
                 </div>
             </div>
             {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
-            {upload.state ? <SuccessDialog msg={upload.msg} /> : ''}
+            {upload.show ? <SuccessDialog msg={upload.msg} /> : ''}
             {confirm ? <ConfirmDialog var={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
             {showAdminPanel ? <AdminPanel users={otherData.users} music_count={otherData.music_count} setShowAdminPanel={setShowAdminPanel} refresh={fetchUserData} /> : ''}
