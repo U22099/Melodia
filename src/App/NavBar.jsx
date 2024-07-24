@@ -151,7 +151,10 @@ const NavBar = (props) => {
                     }
                 });
 
-            if (response.status === 200) setUpload({state: true, msg: response.data.message, show: true});
+            if (response.status === 200){
+                setUpload({state: true, msg: response.data.message, show: true});
+                setFileCount(0);
+            }
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
             setUpload({state: true, msg: err.response.data.message, show: false});
@@ -203,11 +206,10 @@ const NavBar = (props) => {
                     }
                 });
             if (response.status === 200){
-                async () => {
                     await logOut(); 
                     console.log("Deleted User Successfully");
                     navigate('/', { replace: true });
-            }}
+            }
             
         } catch (err) {
             if ([401, 403].includes(err.response.status)) {
