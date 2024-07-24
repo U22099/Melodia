@@ -63,7 +63,7 @@ const Footer = (props) => {
     }, [props.x]);
     useEffect(() => {
         setLoaded(true);
-        if (props.isPlaying) {
+        if (props.isPlaying&&loaded) {
             Load();
         }
     }, [src]);
@@ -107,7 +107,7 @@ const Footer = (props) => {
         } else {
             return (
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
-                    <p id="roll1" className="text-[2em]"></p>
+                    <p id="roll1" className="text-[2em] bg-[var(--secondary-color)]"></p>
                 </div>
             );
         }
