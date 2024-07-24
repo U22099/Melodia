@@ -8,7 +8,7 @@ import axios from 'axios'
 const Footer = (props) => {
     const [loaded, setLoaded] = useState();
     const [pause, setPause] = useState();
-    const [src, setSrc] = useState("");
+    const [src, setSrc] = useState();
     const fetchMusicDataById = async (_id) => {
         try {
             const url = origin.default.origin + '/musicapi/data';
@@ -64,7 +64,7 @@ const Footer = (props) => {
         }
     }, [props.x]);
     useEffect(() => {
-        setLoaded(true);
+        src ? setLoaded(true) : "";
     }, [src]);
     useEffect(() => {
         if(loaded){
