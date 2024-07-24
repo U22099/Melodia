@@ -64,7 +64,11 @@ const Footer = (props) => {
     }, [props.x]);
     useEffect(() => {
         setLoaded(true);
+        Load();
     }, [src]);
+    useEffect(() => {
+        Load();
+    }, [loaded]);
     if (props.isPlaying) {
         if (loaded) {
             return (
@@ -75,7 +79,7 @@ const Footer = (props) => {
                             <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => props.setIsPlaying(false)} />
                         </div>
                         <h1 className="bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
-                        <audio id="audio" onLoadedMetaData={Load} hidden autoPlay>
+                        <audio id="audio" hidden autoPlay>
                             <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
                         </audio>
                         <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
