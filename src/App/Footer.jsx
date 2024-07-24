@@ -36,23 +36,25 @@ const Footer = (props) => {
     }
     const Load = () => {
         console.log("Called Load");
-        setPause(false);
-        const audio = document.getElementById("audio");
-        const slider = document.getElementById("range");
-        audio.src = src;
-        audio.load();
-        audio.play();
-        slider.value = 0;
-        audio.addEventListener('loadedmetadata', () => {
-            slider.max = audio.duration;
-        });
-        slider.onchange = () => {
-            audio.currentTime = slider.value;
+        if(loaded){
+            setPause(false);
+            const audio = document.getElementById("audio");
+            const slider = document.getElementById("range");
+            audio.src = src;
+            audio.load();
             audio.play();
+            slider.value = 0;
+            audio.addEventListener('loadedmetadata', () => {
+                slider.max = audio.duration;
+            });
+            slider.onchange = () => {
+                audio.currentTime = slider.value;
+                audio.play();
+            }
+            setInterval(() => {
+                slider.value = audio.currentTime;
+            }, 500);
         }
-        setInterval(() => {
-            slider.value = audio.currentTime;
-        }, 500);
     }
     useEffect(() => {
         if (props.isPlaying) {
