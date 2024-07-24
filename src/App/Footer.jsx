@@ -20,7 +20,6 @@ const Footer = (props) => {
                     }
                 });
             setSrc(response.data.music.data);
-            console.log(src);
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
         }
@@ -63,6 +62,7 @@ const Footer = (props) => {
     }, [props.x]);
     useEffect(() => {
         setLoaded(true);
+        console.log(loaded);
         if (props.isPlaying&&loaded) {
             Load();
         }
