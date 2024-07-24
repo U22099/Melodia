@@ -201,10 +201,14 @@ const NavBar = (props) => {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-            if (response.status === 200) async () => {await logOut(); navigate('/', { replace: true });}
-            console.log("Deleted User Successfully");
+            if (response.status === 200){
+                async () => {
+                    await logOut(); 
+                    console.log("Deleted User Successfully");
+                    navigate('/', { replace: true });
+            }}
+            
         } catch (err) {
-            props.setErr({ occured: true, msg: err.message });
             if (err.response.status === 401) {
                 const res = await refresh();
                 if (res.status === 200) {
@@ -213,8 +217,9 @@ const NavBar = (props) => {
                 } else {
                     navigate('/', { replace: true });
                 }
+            } else {
+                props.setErr({ occured: true, msg: err.message });
             }
-
         }
     }
     useEffect(() => {
