@@ -98,7 +98,7 @@ const Footer = (props) => {
                         </div>
                     </div>
                     {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
-                     {if (props.isPlaying&&loaded) Load();}
+                     {(props.isPlaying&&loaded) ? Load() : ''}
                 </div>
             )
         } else {
