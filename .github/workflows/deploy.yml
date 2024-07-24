@@ -8,12 +8,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: node
-      value: '20.x'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          node-version: '20.x'
       - name: Install dependencies
         run: npm install
       - name: Build and deploy
