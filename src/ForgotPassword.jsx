@@ -49,6 +49,7 @@ const ForgotPassword = () => {
                 </button>
             </form>
             <footer className="mt-[20px] flex flex-col gap-[20px] align-center justify-center text-center w-[100%]">
+                <Link to="/" className="underline mb-[10px] hover:cursor-pointer">Log In to Melodia</Link>
                 <div className="gap-[20px]">
                     <p className="text-[var(--text-primary-color)] font-bold hover:cursor-pointer">Don't have an account?</p>
                     <Link to="/register" className="underline mt-[20px] hover:cursor-pointer">Sign up for Melodia</Link>
