@@ -137,6 +137,10 @@
     outline: none;
 }
 .borderAnim{
+    background: none;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 3em;
     border: 2px solid var(--secondary-color);
     transition: 1s;
     animation: hueRotate 3s linear infinite;
