@@ -8,6 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: node
+      value: '20.x'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
