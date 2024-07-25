@@ -47,8 +47,8 @@ localStorage.setItem('refreshToken', response.data.token?.refreshToken);
     }
   }
   const handleImage = async (e) => {
-    const data = await imagebase64(e.target.files[0]);
-    setImage(data || "image.JPG");
+    const data = await imagebase64(e.target.files[0] || "image.JPG");
+    setImage(data)
   }
   const imagebase64 = (file) => {
     const reader = new FileReader();
