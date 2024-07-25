@@ -182,7 +182,7 @@ const NavBar = (props) => {
                         "artist": tag.tags.artist || '---',
                         "title": tag.tags.title,
                         "genre": tag.tags.genre || '---',
-                        "image": (tag.tags.picture ? await toBase64(new Blob([new Uint8Array(tag.tags.picture.data)], {type: tag.tags.picture.format})) : await toBase64("image.JPG"))
+                        "image": (tag.tags.picture ? await toBase64(new Blob([new Uint8Array(tag.tags.picture.data)], {type: tag.tags.picture.format})) : await toBase64(new Blob([atob(image.split(',')[1]), {type: image.split(',')[0]}))
                     }
                     console.log(result);
                     resolve(result);
