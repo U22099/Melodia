@@ -35,8 +35,8 @@ function AdminPanel(props) {
                             <li key={i}>
                                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                                     <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
-                                    <div className="w-[80%] overflow-wrap">
-                                        <h1 className="text-[1.8em] bold md:text-[2.2em] font-[serif] overflow-wrap max-w-[90%]">{x.username}</h1>
+                                    <div className="w-[80%] overflow-x-wrap">
+                                        <h1 className="text-[1.8em] bold md:text-[2.2em] font-[serif] overflow-x-wrap max-w-[90%]">{x.username}</h1>
                                         <p>Email: {x.email}</p>
                                     </div>
                                 </div>
