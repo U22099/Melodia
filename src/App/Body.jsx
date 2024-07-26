@@ -71,8 +71,9 @@ const Body = (props) => {
                     {outputData.map((x, i) => (
                         <li key={i} onMouseDown={() => {
                             const timeout = setTimeout(()=>{
-                                setConfirm(true);
                                 setId(x._id);
+                                console.log(id, x._id);
+                                setConfirm(true);
                             },2000);
                         }
                         } onClick={() => {
