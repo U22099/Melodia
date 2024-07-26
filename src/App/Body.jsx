@@ -3,6 +3,7 @@ import { FaSearch } from 'react-icons/fa'
 import { MdRefresh, MdOutlineClose } from 'react-icons/md'
 import axios from 'axios'
 import ErrorDialog from '../utils/ErrorDialog'
+import ConfirmDialog from '../utils/ConfirmDialog'
 import origin from '../../config/origin.json'
 
 const Body = (props) => {
@@ -30,6 +31,13 @@ const Body = (props) => {
             props.setErr({ occured: true, msg: err.message });
         }
     }
+    const deleteMusic = async (_id) => {
+        if(props.isAdmin){
+            const url = origin.default.origin + '/musicapi';
+            const response = await axios.delete(url,{_id: _id}, { withCredentials: true });
+            if(response.status === 200) console.log("Success");
+        }
+    }
     useEffect(() => {
         setOutputData(music.slice());
         filterOutput();
@@ -52,7 +60,7 @@ const Body = (props) => {
             <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] pb-[20px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[40px]">
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
-                        <li key={i} onClick={() => {
+                        <li key={i} onMouseDown={() => deleteMusic(x._id)} onMouseUp={clearTimeout} onClick={() => {
                             const audio = document.getElementById("audio");
                             audio?.pause();
                             props.play(music, i);
