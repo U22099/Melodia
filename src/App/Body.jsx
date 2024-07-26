@@ -27,7 +27,7 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = () => {
-        if(JSON.parse(localStorage.getItem('musicdata')){
+        if(JSON.parse(localStorage.getItem('musicdata'))){
             setOutputData([]);
             setMusic(JSON.parse(localStorage.getItem('musicdata')));
         } else {
