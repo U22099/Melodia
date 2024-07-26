@@ -75,10 +75,10 @@ const Body = (props) => {
                             props.play(music, i);
                         }}>
                             <div className="cursor-pointer p-[10px] hover:bg-[var(--primary-color)] rounded-[10px] flex gap-[20px] items-center">
-                                <img src={x.image} onDoubleClick={
+                                <img src={x.image}  onDoubleClick={()=>{
                                     id = x._id;
                                     console.log(id, x._id);
-                                    setConfirm(true);
+                                    setConfirm(true);}
                                 }
                                 alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                                 <div className="w-[80%]">
