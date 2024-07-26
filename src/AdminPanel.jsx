@@ -11,6 +11,9 @@ function AdminPanel(props) {
             setSpinning(false);
         }, 1000)
     }
+    (()=>{
+        console.log(props.users);
+    })()
     return (
         <motion.div
             initial={{
@@ -36,8 +39,8 @@ function AdminPanel(props) {
                                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                                     <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                                     <div className="max-w-[80%] truncate">
-                                        <h1 className="text-[1.8em] bold md:text-[2.2em] font-[serif] max-w-[250px] truncate md:max-w-[350px]">{x.username}</h1>
-                                        <p>Email: {x.email}</p>
+                                        <h1 className="text-[1.8em] bold md:text-[2.2em] font-[serif] max-w-[220px] truncate md:max-w-[350px]">{x.username}</h1>
+                                        <p className="max-w-[220px] truncate md:max-w-[350px]">Email: {x.email}</p>
                                     </div>
                                 </div>
                             </li>
