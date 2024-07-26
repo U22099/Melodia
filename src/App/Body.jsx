@@ -49,7 +49,7 @@ const Body = (props) => {
             <section className="flex justify-end p-[10px] pb-[0px] md:w-[90%] mx-auto">
                 <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.6em] fill-[var(--secondary-color)] bg-[hsl(0,5%,2%)] p-[10px] rounded-[10px]  mt-[15px] mb-[5px]"} onClick={refreshState} />
             </section>
-            <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto">
+            <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[20px]">
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
                         <li key={i} onClick={() => {
@@ -61,7 +61,7 @@ const Body = (props) => {
                                 <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                                 <div className="w-[80%]">
                                     <h1 className="font-extrabold md:text-[2.2em] font-[serif]">{x.title}</h1>
-                                    <div className="flex flex-wrap justify-between">
+                                    <div className="flex flex-wrap justify-between text-[0.9em] md:text-[1.3em]">
                                         <p>Artist: {x.artist}</p>
                                         <p>Genre: {x.genre}</p>
                                         <p>Uploaded by: {x.uploader}</p>
