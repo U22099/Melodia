@@ -28,31 +28,26 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
-        console.log("CH")
         const data = await indexedDB.getData("MusicData", indexedDB.init);
-        console.log(data)
         if(data){
             setOutputData([]);
             setMusic(data);
         } else {
-            console.log("C");
             await fetchMusic();
         }
         
     }
     const fetchMusic = async () => {
         try {
-            console.log("HK");
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
-            const response = await axios.get('https://jsonplaceholder.typicode.com/todos', { withCredentials: true });
-            //const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
-            console.log(response.data, "ok");
+            const response = await axios.get(url, { withCredentials: true });
+            const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
             indexedDB.saveData(response.data, "MusicData", indexedDB.init);
-            //setMusic(data);
-            //console.log(response.data.music);
+            setMusic(data);
+            console.log(response.data.music);
         } catch (err) {
-            console.log(err.message, "New");
+            console.log(err.message);
             props.setErr({ occured: true, msg: err.message });
         }
     }
