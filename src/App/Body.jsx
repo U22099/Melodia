@@ -11,7 +11,7 @@ import origin from '../../config/origin.json'
 const Body = (props) => {
     let id = "";
     const [refresh, setRefresh] = useState(false);
-    const [forceRefresh, setForceRefresh] = useState(true);
+    const [forceRefresh, setForceRefresh] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [success, setSuccess] = useState(false);
     const [confirm, setConfirm] = useState(false);
@@ -28,10 +28,12 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
-        const data = await indexedDB.getData("MusicData", indexedDB.init);
-        if(data){
+        const stored = JSON.parse(localStorage.getItem('store2');
+        if(stored){
+            const data = await indexedDB.getData("MusicData", indexedDB.init);
             setOutputData([]);
             setMusic(data);
+            setForceRefresh(true);
         } else {
             await fetchMusic();
         }
@@ -44,6 +46,7 @@ const Body = (props) => {
             const response = await axios.get(url, { withCredentials: true });
             const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
             indexedDB.saveData(response.data, "MusicData", indexedDB.init);
+            localStorage.setItem('store2', true);
             setMusic(data);
             console.log(response.data.music);
         } catch (err) {
