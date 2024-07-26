@@ -27,9 +27,11 @@ const NavBar = (props) => {
         try {
             console.log("CAlledd");
             console.log(indexDB);
-            const data = "" //await indexDB.getData("UserData");
+            const data = "";
+            //await indexDB.getData("UserData");
             console.log(data);
             if(data && !forceRefresh){
+                console.log("E")
                 setImage(data.image);
                 email.current = data.email;
                 username.current = data.username;
