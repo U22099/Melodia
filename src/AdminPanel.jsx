@@ -11,9 +11,6 @@ function AdminPanel(props) {
             setSpinning(false);
         }, 1000)
     }
-    (()=>{
-        console.log(props.users);
-    })()
     return (
         <motion.div
             initial={{
