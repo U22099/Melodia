@@ -51,7 +51,7 @@ const Body = (props) => {
             setMusic(data);
             console.log(response.data.music);
         } catch (err) {
-            console.log(err);
+            console.log(err.message, "New");
             props.setErr({ occured: true, msg: err.message });
         }
     }
