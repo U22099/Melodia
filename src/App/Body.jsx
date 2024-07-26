@@ -19,7 +19,7 @@ const Body = (props) => {
     const filterOutput = () => {
         const input = document.getElementById('input').value;
 
-        setOutputData(music.filter(x => x.title.match(new RegExp(input, 'i')) || x.artist.match(new RegExp(input, 'i') || x.uploader.match(new RegExp(input, 'i'))));
+        setOutputData(music.filter(x => x.title.match(new RegExp(input, 'i')) || x.artist.match(new RegExp(input, 'i')) || x.uploader.match(new RegExp(input, 'i'))));
     }
     const refreshState = () => {
         setSpinning(true);
