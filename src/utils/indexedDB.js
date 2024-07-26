@@ -27,7 +27,7 @@ const getData = (objStore) => {
     result.onsuccess = () => {
         data = result.result;
     }
-    transaction.oncomplete = () =.; {
+    transaction.oncomplete = () => {
         db.close();
     }
     return data;
