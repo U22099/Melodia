@@ -9,7 +9,7 @@ const addData = async (data, objStore) => {
     const store = transaction.objectStore(objStore);
     await store.add(data, 1);
 }
-const getData = async (data, objStore) => {
+const getData = async (objStore) => {
     const db = await init(objStore);
     const transaction = db.transaction(objStore, 'readwrite');
     const store = transaction.objectStore(objStore);
