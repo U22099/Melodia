@@ -9,6 +9,9 @@ import origin from '../../config/origin.json'
 const Body = (props) => {
     const [refresh, setRefresh] = useState(false);
     const [spinning, setSpinning] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [confirm, setConfirm] = useState(false);
+    const [id, setId] = useState();
     const [music, setMusic] = useState([]);
     const [outputData, setOutputData] = useState(music.slice());
     const filterOutput = () => {
@@ -31,11 +34,15 @@ const Body = (props) => {
             props.setErr({ occured: true, msg: err.message });
         }
     }
-    const deleteMusic = async (_id) => {
+    const deleteMusic = async () => {
         if(props.isAdmin){
-            const url = origin.default.origin + '/musicapi';
-            const response = await axios.delete(url,{_id: _id}, { withCredentials: true });
-            if(response.status === 200) console.log("Success");
+            try {
+                const url = origin.default.origin + '/musicapi';
+                const response = await axios.delete(url,{_id: id}, { withCredentials: true });
+                if(response.status === 200) setSuccess(true);
+            } catch (err) {
+                props.setErr({ occured: true, msg: err.message });
+            }
         }
     }
     useEffect(() => {
@@ -60,7 +67,13 @@ const Body = (props) => {
             <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] pb-[20px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[40px]">
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
-                        <li key={i} onMouseDown={() => deleteMusic(x._id)} onMouseUp={clearTimeout} onClick={() => {
+                        <li key={i} onMouseDown={() => {
+                            const timeout = setTimeout(()=>{
+                                setConfirm(true);
+                                setId(x._id);
+                            },2000);
+                        }
+                        } onMouseUp={()=> clearTimeout(timeout)} onClick={() => {
                             const audio = document.getElementById("audio");
                             audio?.pause();
                             props.play(music, i);
@@ -80,6 +93,8 @@ const Body = (props) => {
                     ))}
                 </ol>
             </section>
+            {confirm ? <ConfirmDialog callback={deleteMusic} var2={
+                setConfirm} msg="Are you sure about this, buddy?" /> : ''}
             {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
         </>
     )
