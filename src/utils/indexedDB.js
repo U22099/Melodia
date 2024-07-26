@@ -1,6 +1,6 @@
 const init = (objStore) => {
     console.log("init");
-    const opendb = await indexedDB.open("Melodia");
+    const opendb = indexedDB.open("Melodia");
     opendb.onupgradeneeded = (event) => {
         const db = event.target.result;
         db.createObjectStore(objStore);
