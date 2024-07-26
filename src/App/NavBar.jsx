@@ -24,7 +24,7 @@ const NavBar = (props) => {
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
-        const data = await indexedDB.getData("UserData");	
+        const data = await indexedDB.getData("UserData", indexedDB.init);	
         console.log(data);	
         if(data && !forceRefresh){	
             setImage(data.image);	
@@ -45,7 +45,7 @@ const NavBar = (props) => {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-                indexedDB.saveData(response.data, "UserData");
+                indexedDB.saveData(response.data, "UserData", indexedDB.init);
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
@@ -122,7 +122,7 @@ const NavBar = (props) => {
                     'email': email.current,
                     'image': image,
                     'otherData': otherData
-                }, "UserData");
+                }, "UserData", indexedDB.init);
                 setText("Save");
             } catch (err) {
                 if ([401, 402, 403, 404].includes(err.response.status)) {
