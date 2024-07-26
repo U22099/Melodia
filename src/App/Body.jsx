@@ -4,6 +4,7 @@ import { MdRefresh, MdOutlineClose } from 'react-icons/md'
 import axios from 'axios'
 import ErrorDialog from '../utils/ErrorDialog'
 import ConfirmDialog from '../utils/ConfirmDialog'
+import SuccessDialog from '../utils/SuccessDialog'
 import origin from '../../config/origin.json'
 
 const Body = (props) => {
@@ -93,6 +94,7 @@ const Body = (props) => {
                     ))}
                 </ol>
             </section>
+            {success ? <SuccessDialog msg="Music deleted successfully" /> : ''}
             {confirm ? <ConfirmDialog callback={deleteMusic} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
             {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
