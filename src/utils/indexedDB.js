@@ -1,22 +1,35 @@
-const init = async (objStore) => {
+const init = (objStore) => {
     console.log("init");
-    const db = await indexedDB.open("Melodia");
-    db.createObjectStore(objStore);
-    return db;
+    const opendb = await indexedDB.open("Melodia");
+    opendb.onupgradeneeded = () => {
+        const db = opendb.result;
+        db.createObjectStore(objStore);
+    }
+    return opendb;
 }
-const saveData = async (data, objStore) => {
+const saveData = (data, objStore) => {
     console.log("savedata")
-    const db = await init(objStore);
+    const db = (init(objStore)).result;
     const transaction = db.transaction(objStore, 'readwrite');
     const store = transaction.objectStore(objStore);
-    await store.add(data, 1);
+    store.put(data);
+    transaction.oncomplete = () => {
+        db.close();
+    }
 }
-const getData = async (objStore) => {
+const getData = (objStore) => {
     console.log("called getData");
-    const db = await init(objStore);
+    const db = (init(objStore)).result;
     const transaction = db.transaction(objStore, 'readonly');
     const store = transaction.objectStore(objStore);
-    const data = await store.getAll();
+    const result = store.getAll();
+    let data = ""
+    result.onsuccess = () => {
+        data = result.result;
+    }
+    transaction.oncomplete = () =.; {
+        db.close();
+    }
     return data;
 }
 init()
