@@ -10,6 +10,7 @@ import origin from '../../config/origin.json'
 const Body = (props) => {
     let id = "";
     const [refresh, setRefresh] = useState(false);
+    const [forceRefresh, setForceRefresh] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [success, setSuccess] = useState(false);
     const [confirm, setConfirm] = useState(false);
@@ -18,11 +19,21 @@ const Body = (props) => {
     const filterOutput = () => {
         const input = document.getElementById('input').value;
 
-        setOutputData(music.filter(x => x.title.match(new RegExp(input, 'i')) || x.artist.match(new RegExp(input, 'i'))));
+        setOutputData(music.filter(x => x.title.match(new RegExp(input, 'i')) || x.artist.match(new RegExp(input, 'i') || x.uploader.match(new RegExp(input, 'i'))));
     }
     const refreshState = () => {
         setSpinning(true);
+        setForceRefresh(true);
         setRefresh(!refresh);
+    }
+    const retrieveStoredData = () => {
+        if(JSON.parse(localStorage.getItem('musicdata')){
+            setOutputData([]);
+            setMusic(JSON.parse(localStorage.getItem('musicdata')));
+        } else {
+            fetchMusic();
+        }
+        
     }
     const fetchMusic = async () => {
         try {
@@ -31,6 +42,7 @@ const Body = (props) => {
             const response = await axios.get(url, { withCredentials: true });
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
             console.log(response.data.music);
+localStorage.setItem('musicdata', JSON.stringify(response.data.music));
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
         }
@@ -38,6 +50,7 @@ const Body = (props) => {
     const deleteMusic = async () => {
         if(props.isAdmin){
             try {
+alert(id);
                 setSuccess(false);
                 const url = origin.default.origin + '/musicapi';
                 const response = await axios.delete(url,{_id: id}, { withCredentials: true });
@@ -55,7 +68,11 @@ const Body = (props) => {
         }, 1000)
     }, [music]);
     useEffect(() => {
-        fetchMusic();
+        if(forceRefresh){
+            fetchMusic();
+        }else{
+            retrieveStoredData();
+        }
     }, [refresh])
     return (
         <>
