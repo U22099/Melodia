@@ -19,5 +19,5 @@ const getData = async (objStore) => {
     const data = await store.getAll();
     return data;
 }
-
+init()
 module.exports = {saveData, getData}
