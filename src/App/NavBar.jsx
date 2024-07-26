@@ -24,7 +24,7 @@ const NavBar = (props) => {
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
-        const data = indexedDB.getData("UserData");	
+        const data = await indexedDB.getData("UserData");	
         console.log(data);	
         if(data && !forceRefresh){	
             setImage(data.image);	
