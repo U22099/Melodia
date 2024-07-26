@@ -28,7 +28,7 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
-        const stored = JSON.parse(localStorage.getItem('store2');
+        const stored = JSON.parse(localStorage.getItem('store2'));
         if(stored){
             const data = await indexedDB.getData("MusicData", indexedDB.init);
             setOutputData([]);
