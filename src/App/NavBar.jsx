@@ -27,7 +27,7 @@ const NavBar = (props) => {
         try {
             console.log("CAlledd");
             console.log(indexDB);
-            //const data = await indexDB.getData("UserData");
+            const data = "" //await indexDB.getData("UserData");
             console.log(data);
             if(data && !forceRefresh){
                 setImage(data.image);
