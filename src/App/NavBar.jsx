@@ -25,7 +25,7 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         try {
-            console.log("CAlled");
+            console.log("CAlledd");
             const data = await indexDB.getData("UserData");
             console.log(data);
             if(data && !forceRefresh){
@@ -56,6 +56,7 @@ const NavBar = (props) => {
                 }
             }
         } catch (err) {
+            console.log(err);
             props.setErr({ occured: true, msg: err.message });
             if ([401, 403].includes(err.response.status)) {
                 const res = await refresh();
