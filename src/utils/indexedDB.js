@@ -20,20 +20,19 @@ const saveData = (data, objStore) => {
 }
 const getData = (objStore) => {
     const request = init(objStore);
-    request.onsuccess = event => {
-        const db = event.target.result;
-        const transaction = db.transaction(objStore, 'readonly');
-        const store = transaction.objectStore(objStore);
-        const result = store.getAll();
-        let data = ""
-        result.onsuccess = () => {
-            data = result.result;
+    return new Promise(resolve => {
+        request.onsuccess = event => {
+            const db = event.target.result;
+            const transaction = db.transaction(objStore, 'readonly');
+            const store = transaction.objectStore(objStore);
+            const result = store.getAll();
+            result.onsuccess = () => {
+                resolve(result.result);
+            }
+            transaction.oncomplete = () => {
+                db.close();
+            }
         }
-        transaction.oncomplete = () => {
-            db.close();
-        }
-        console.log(data)
-        return data;
-    }
+    });
 }
 module.exports = {saveData, getData}
