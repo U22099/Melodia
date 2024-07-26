@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { MdRefresh, MdOutlineClose } from 'react-icons/md'
 import axios from 'axios'
-import * as indexedDB from '../utils/indexedDB.js'
+import { saveData, getData, init} from '../utils/indexedDB.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import ConfirmDialog from '../utils/ConfirmDialog'
 import SuccessDialog from '../utils/SuccessDialog'
@@ -29,7 +29,7 @@ const Body = (props) => {
     }
     const retrieveStoredData = async () => {
         console.log("CH")
-        const data = await indexedDB.getData("MusicData", indexedDB.init);
+        const data = await getData("MusicData", init);
         console.log(data)
         if(data){
             setOutputData([]);
@@ -47,8 +47,8 @@ const Body = (props) => {
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get('https://jsonplaceholder.typicode.com/todos', { withCredentials: true });
             //const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
-            console.log(response.data);
-            indexedDB.saveData(response.data, "MusicData", indexedDB.init);
+            console.log(response.data, "NEwK");
+            saveData(response.data, "MusicData", init);
             //setMusic(data);
             //console.log(response.data.music);
         } catch (err) {
