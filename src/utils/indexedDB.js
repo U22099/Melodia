@@ -31,7 +31,6 @@ const getData = (objStore) => {
         let data = ""
         result.onsuccess = () => {
             data = result.result;
-            console.log(result.result);
         }
         transaction.oncomplete = () => {
             db.close();
