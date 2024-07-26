@@ -28,6 +28,7 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
+        console.log("CH")
         const data = await indexDB.getData("MusicData");
         console.log(data)
         if(data){
@@ -41,6 +42,7 @@ const Body = (props) => {
     }
     const fetchMusic = async () => {
         try {
+            console.log("HK");
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
