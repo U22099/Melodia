@@ -8,11 +8,11 @@ import SuccessDialog from '../utils/SuccessDialog'
 import origin from '../../config/origin.json'
 
 const Body = (props) => {
+    const id = "";
     const [refresh, setRefresh] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [success, setSuccess] = useState(false);
     const [confirm, setConfirm] = useState(false);
-    const [id, setId] = useState();
     const [music, setMusic] = useState([]);
     const [outputData, setOutputData] = useState(music.slice());
     const filterOutput = () => {
@@ -69,18 +69,18 @@ const Body = (props) => {
             <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] pb-[20px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[40px]">
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
-                        <li key={i} onDoubleClick={
-                            setId(x._id);
-                            console.log(id, x._id);
-                            setConfirm(true);
-                        }
-                        } onClick={() => {
+                        <li key={i} onClick={() => {
                             const audio = document.getElementById("audio");
                             audio?.pause();
                             props.play(music, i);
                         }}>
                             <div className="cursor-pointer p-[10px] hover:bg-[var(--primary-color)] rounded-[10px] flex gap-[20px] items-center">
-                                <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
+                                <img src={x.image} onDoubleClick={
+                                    id = x._id;
+                                    console.log(id, x._id);
+                                    setConfirm(true);
+                                }
+                                alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
                                 <div className="w-[80%]">
                                     <h1 className="font-extrabold md:text-[2.2em] font-[serif]">{x.title}</h1>
                                     <div className="flex flex-wrap justify-between text-[0.9em] md:text-[1.3em]">
