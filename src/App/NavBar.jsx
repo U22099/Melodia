@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminPanel from '../AdminPanel'
-import * as indexedDB from '../utils/indexDb.js'
+import * as indexedDB from '../utils/indexedDB.js'
 import toBase64 from './../utils/Base64.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import SuccessDialog from '../utils/SuccessDialog'
