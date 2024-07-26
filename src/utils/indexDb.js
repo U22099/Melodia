@@ -11,7 +11,7 @@ const saveData = async (data, objStore) => {
 }
 const getData = async (objStore) => {
     const db = await init(objStore);
-    const transaction = db.transaction(objStore, 'readwrite');
+    const transaction = db.transaction(objStore, 'readonly');
     const store = transaction.objectStore(objStore);
     const data = await store.getAll();
     return data;
