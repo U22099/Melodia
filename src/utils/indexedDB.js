@@ -1,14 +1,14 @@
-const init = (objStore) => {
+const init = () => {
     const opendb = indexedDB.open("Melodia");
     opendb.onupgradeneeded = (event) => {
         const db = event.target.result;
-        db.createObjectStore(objStore);
-        console.log("Done")
+        db.createObjectStore("MusicData");
+        db.createObjectStore("UserData");
     }
     return opendb;
 }
 const saveData = (data, objStore, init) => {
-    const request = init(objStore);
+    const request = init();
     request.onsuccess = event => {
         const db = event.target.result;
         const transaction = db.transaction(objStore, 'readwrite');
@@ -20,7 +20,7 @@ const saveData = (data, objStore, init) => {
     }
 }
 const getData = (objStore, init) => {
-    const request = init(objStore);
+    const request = init();
     return new Promise(resolve => {
         request.onsuccess = event => {
             const db = event.target.result;
