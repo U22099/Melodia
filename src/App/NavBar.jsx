@@ -50,7 +50,8 @@ const NavBar = (props) => {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-                await indexDB.saveData(response.data, "UserData");
+                console.log("KL")
+                //await indexDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
