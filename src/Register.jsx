@@ -31,10 +31,12 @@ const Register = () => {
               'Content-Type': 'application/json'
             }
           });
-		  localStorage.setItem('accessToken', response.data.token.accessToken);
-localStorage.setItem('refreshToken', response.data.token?.refreshToken);
-        navigate('/homepage', { replace: true, state: { fromRoute: true } });
-        setError('');
+	if(response.status === 200){
+		localStorage.setItem('accessToken', response.data.token.accessToken);
+		localStorage.setItem('refreshToken', response.data.token?.refreshToken);
+	        navigate('/homepage', { replace: true, state: { fromRoute: true } });
+	        setError('');
+	}
 
       } catch (err) {
         console.log(err);
