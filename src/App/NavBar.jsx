@@ -24,23 +24,21 @@ const NavBar = (props) => {
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
-        try {
-            console.log("CAlleddd");
-            console.log(indexDB);
-            const data = null;
-            //await indexDB.getData("UserData");
-            console.log(data);
-            if(data && !forceRefresh){
-                console.log("E")
-                setImage(data.image);
-                email.current = data.email;
-                username.current = data.username;
-                if (data.otherData) {
-                    props.setIsAdmin(true);
-                    setOtherData(data.otherData);
-                }
-                setForceRefresh(true);
-            } else {
+        console.log("CAlleddjd");
+        const data = await indexDB.getData("UserData");
+        console.log(data);
+        if(data && !forceRefresh){
+            console.log("E")
+            setImage(data.image);
+            email.current = data.email;
+            username.current = data.username;
+            if (data.otherData) {
+                props.setIsAdmin(true);
+                setOtherData(data.otherData);
+            }
+            setForceRefresh(true);
+        } else {
+            try {
                 console.log("F")
                 const url = origin.default.origin + '/user';
                 const accessToken = localStorage.getItem('accessToken');
@@ -51,7 +49,7 @@ const NavBar = (props) => {
                     }
                 });
                 console.log("KL")
-                //await indexDB.saveData(response.data, "UserData");
+                await indexDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
@@ -59,21 +57,22 @@ const NavBar = (props) => {
                     props.setIsAdmin(true);
                     setOtherData(response.data.otherData);
                 }
-            }
-        } catch (err) {
-            console.log(err);
-            props.setErr({ occured: true, msg: err.message });
-            if ([401, 403].includes(err.response.status)) {
-                const res = await refresh();
-                if (res.status === 200) {
-                    localStorage.setItem('accessToken', res.data.accessToken);
-                    fetchUserData();
-                } else {
-                    navigate('/', { replace: true });
+        
+            } catch (err) {
+                console.log(err);
+                props.setErr({ occured: true, msg: err.message });
+                if ([401, 403].includes(err.response.status)) {
+                    const res = await refresh();
+                    if (res.status === 200) {
+                        localStorage.setItem('accessToken', res.data.accessToken);
+                        fetchUserData();
+                    } else {
+                        navigate('/', { replace: true });
+                    }
                 }
-            }
-            if(err.message.includes("Network")){
-                fetchUserData();
+                if(err.message.includes("Network")){
+                    fetchUserData();
+                }
             }
         }
     }
