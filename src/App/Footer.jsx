@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { FaPlay, FaPause, FaForwardStep, FaBackwardStep } from 'react-icons/fa6'
 import { MdOutlineClose } from 'react-icons/md'
+import indexedDB from '../utils/indexedDB.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import origin from '../../config/origin.json'
 import axios from 'axios'
@@ -21,6 +22,8 @@ const Footer = (props) => {
                         }
                     });
                 props.file[props.x].data = response.data.music.data;
+                indexedDB.saveData(props.file, "MusicData", indexedDB.init);
+                localStorage.setItem('store2', true);
                 setSrc(response.data.music.data);
             } else {
                 setSrc(props.file[props.x].data);
