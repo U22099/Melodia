@@ -24,20 +24,7 @@ const NavBar = (props) => {
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
-        console.log("CAlleddjd");
-        const data = await indexDB.getData("UserData");
-        console.log(data);
-        if(data && !forceRefresh){
-            console.log("E")
-            setImage(data.image);
-            email.current = data.email;
-            username.current = data.username;
-            if (data.otherData) {
-                props.setIsAdmin(true);
-                setOtherData(data.otherData);
-            }
-            setForceRefresh(true);
-        } else {
+        
             try {
                 console.log("F")
                 const url = origin.default.origin + '/user';
@@ -74,7 +61,7 @@ const NavBar = (props) => {
                     fetchUserData();
                 }
             }
-        }
+        
     }
     const refresh = async () => {
         try {
