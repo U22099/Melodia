@@ -25,7 +25,9 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         try {
+            console.log("CAlled");
             const data = await indexDB.getData("UserData");
+            console.log(data);
             if(data && !forceRefresh){
                 setImage(data.image);
                 email.current = data.email;
