@@ -25,9 +25,9 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         try {
-            console.log("CAlledd");
+            console.log("CAlleddd");
             console.log(indexDB);
-            const data = "";
+            const data = null;
             //await indexDB.getData("UserData");
             console.log(data);
             if(data && !forceRefresh){
@@ -41,6 +41,7 @@ const NavBar = (props) => {
                 }
                 setForceRefresh(true);
             } else {
+                console.log("F")
                 const url = origin.default.origin + '/user';
                 const accessToken = localStorage.getItem('accessToken');
                 const response = await axios.get(url, {
