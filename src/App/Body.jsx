@@ -38,6 +38,7 @@ const Body = (props) => {
     const deleteMusic = async () => {
         if(props.isAdmin){
             try {
+                setSuccess(false);
                 const url = origin.default.origin + '/musicapi';
                 const response = await axios.delete(url,{_id: id}, { withCredentials: true });
                 if(response.status === 200) setSuccess(true);
