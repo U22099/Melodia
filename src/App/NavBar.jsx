@@ -148,6 +148,7 @@ const NavBar = (props) => {
             if (response.status === 200) {
                 localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
+                navigate('/', { replace: true });
             }
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
@@ -286,7 +287,7 @@ const NavBar = (props) => {
                         </label>
                         <button className="btn bg-none extrabold" onClick={uploadMusic}>↑</button>
                     </div>
-                    <Link to="/" className="link mt-[10px] text-[1.2em]" onClick={logOut}>Log Out</Link>
+                    <p className="link mt-[10px] text-[1.2em]" onClick={logOut}>Log Out</p>
                     {props.isAdmin ? <p to="/admin" className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
                 </div>
             </div>
