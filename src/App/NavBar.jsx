@@ -26,6 +26,7 @@ const NavBar = (props) => {
     const fetchUserData = async () => {
         try {
             console.log("CAlledd");
+            console.log(indexDB);
             const data = await indexDB.getData("UserData");
             console.log(data);
             if(data && !forceRefresh){
