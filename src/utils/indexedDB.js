@@ -1,5 +1,4 @@
 const init = (objStore) => {
-    console.log("init0");
     const opendb = indexedDB.open("Melodia");
     opendb.onupgradeneeded = (event) => {
         const db = event.target.result;
@@ -8,7 +7,6 @@ const init = (objStore) => {
     return opendb;
 }
 const saveData = (data, objStore) => {
-    console.log("savedata1")
     const request = init(objStore);
     request.onsuccess = event => {
         const db = event.target.result;
@@ -21,7 +19,6 @@ const saveData = (data, objStore) => {
     }
 }
 const getData = (objStore) => {
-    console.log("called getData1");
     const request = init(objStore);
     request.onsuccess = event => {
         const db = event.target.result;
@@ -39,7 +36,4 @@ const getData = (objStore) => {
         return data;
     }
 }
-saveData([2,3,4,5], "Test");
-getData("Test");
-
 module.exports = {saveData, getData}
