@@ -69,12 +69,10 @@ const Body = (props) => {
             <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] pb-[20px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[40px]">
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
-                        <li key={i} onMouseDown={() => {
-                            const timeout = setTimeout(()=>{
-                                setId(x._id);
-                                console.log(id, x._id);
-                                setConfirm(true);
-                            },2000);
+                        <li key={i} onDoubleClick={
+                            setId(x._id);
+                            console.log(id, x._id);
+                            setConfirm(true);
                         }
                         } onClick={() => {
                             const audio = document.getElementById("audio");
