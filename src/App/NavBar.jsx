@@ -25,7 +25,7 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         console.log("ssds");	
-        const data = await indexedDB.getData("UserData");	
+        const data = indexedDB.getData("UserData");	
         console.log(data);	
         if(data && !forceRefresh){	
             console.log("E")	
@@ -49,7 +49,7 @@ const NavBar = (props) => {
                     }
                 });
                 console.log("KL")
-                await indexedDB.saveData(response.data, "UserData");
+                indexedDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
@@ -121,7 +121,7 @@ const NavBar = (props) => {
                             'Authorization': 'Bearer ' + accessToken
                         }
                     });
-                await indexedDB.saveData({
+                indexedDB.saveData({
                     'username': username.current,
                     'email': email.current,
                     'image': image,
