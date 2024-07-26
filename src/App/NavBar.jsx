@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminPanel from '../AdminPanel'
-import * as indexDB from '../utils/indexDb.js'
+import * as indexedDB from '../utils/indexDb.js'
 import toBase64 from './../utils/Base64.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import SuccessDialog from '../utils/SuccessDialog'
@@ -25,7 +25,7 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         console.log("ssds");	
-        const data = await indexDB.getData("UserData");	
+        const data = await indexedDB.getData("UserData");	
         console.log(data);	
         if(data && !forceRefresh){	
             console.log("E")	
@@ -49,7 +49,7 @@ const NavBar = (props) => {
                     }
                 });
                 console.log("KL")
-                await indexDB.saveData(response.data, "UserData");
+                await indexedDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
@@ -121,7 +121,7 @@ const NavBar = (props) => {
                             'Authorization': 'Bearer ' + accessToken
                         }
                     });
-                await indexDB.saveData({
+                await indexedDB.saveData({
                     'username': username.current,
                     'email': email.current,
                     'image': image,
