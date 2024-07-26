@@ -35,4 +35,6 @@ const getData = (objStore) => {
         }
     });
 }
+
+saveData([{id: 12, name: "Hello"},{id: 12, name: "Hello"},{id: 12, name: "Hello"},{id: 12, name: "Hello"},], "Music");
 module.exports = {saveData, getData}
