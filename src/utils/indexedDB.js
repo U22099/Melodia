@@ -1,7 +1,7 @@
 const init = async (objStore) => {
     console.log("init");
     const db = await indexedDB.open("Melodia");
-    if(!db.createObjectNames.contains(objStore)) db.createObjectStore(objStore);
+    db.createObjectStore(objStore);
     return db;
 }
 const saveData = async (data, objStore) => {
