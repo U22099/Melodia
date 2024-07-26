@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { MdRefresh, MdOutlineClose } from 'react-icons/md'
 import axios from 'axios'
+import indexDB from '../utils/indexDb.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import ConfirmDialog from '../utils/ConfirmDialog'
 import SuccessDialog from '../utils/SuccessDialog'
@@ -26,15 +27,13 @@ const Body = (props) => {
         setForceRefresh(true);
         setRefresh(!refresh);
     }
-    const retrieveStoredData = () => {
-        alert(localStorage.getItem('musicdata'))
-        if(localStorage.getItem('musicdata')){
+    const retrieveStoredData = async () => {
+        const data = await indexDB.getData("MusicData");
+        console.log(data)
+        if(data){
             setOutputData([]);
-            const data = JSON.parse(localStorage.getItem('musicdata'));
             setMusic(data);
-            alert("Retrieved");
         } else {
-            alert("Fetch")
             fetchMusic();
         }
         
@@ -44,8 +43,7 @@ const Body = (props) => {
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
-        localStorage.setItem('musicdata',JSON.stringify(response.data.music.sort((a, b) => a.title.localeCompare(b.title))));
-        alert("Saved");
+            indexDB.saveData(response.data.music.sort((a, b) => a.title.localeCompare(b.title)), "MusicData");
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
             console.log(response.data.music);
         } catch (err) {
@@ -55,7 +53,7 @@ const Body = (props) => {
     const deleteMusic = async () => {
         if(props.isAdmin){
             try {
-alert(id);
+                alert(id);
                 setSuccess(false);
                 const url = origin.default.origin + '/musicapi';
                 const response = await axios.delete(url,{_id: id}, { withCredentials: true });
