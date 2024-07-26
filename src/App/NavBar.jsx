@@ -50,6 +50,9 @@ const NavBar = (props) => {
                     navigate('/', { replace: true });
                 }
             }
+            if(err.message.includes("Network")){
+                fetchUserData();
+            }
         }
     }
     const refresh = async () => {
