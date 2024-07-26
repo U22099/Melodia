@@ -75,7 +75,7 @@ const Body = (props) => {
                                 setId(x._id);
                             },2000);
                         }
-                        } onMouseUp={()=> clearTimeout(timeout)} onClick={() => {
+                        } onClick={() => {
                             const audio = document.getElementById("audio");
                             audio?.pause();
                             props.play(music, i);
