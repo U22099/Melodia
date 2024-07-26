@@ -64,8 +64,9 @@ const NavBar = (props) => {
                         localStorage.setItem('accessToken', res.data.accessToken);
                         fetchUserData();
                     } else {
-                        navigate('/', { replace: true });
-                    }
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                        navigate('/', { replace: true });              
                 }
                 if(err.message.includes("Network")){
                     fetchUserData();
