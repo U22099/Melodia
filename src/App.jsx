@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div className="grid gap-[20px] h-[100vh] my-[10px] w-[100vw]">
       <header className="grid grid-cols-[2fr_1fr] border-b-2 border-green-100 p-[10px]">
-        <NavBar err={err} setErr={setErr} setIsAdmin={setIsAdmin} />
+        <NavBar err={err} setErr={setErr} setIsAdmin={setIsAdmin} isAdmin={isAdmin} />
       </header>
       <main>
         <Body play={play} err={err} setErr={setErr} isAdmin={isAdmin} />
