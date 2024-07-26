@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import AdminPanel from '../AdminPanel'
+import indexDB from '../utils/indexDb.js'
+import toBase64 from './../utils/Base64.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import SuccessDialog from '../utils/SuccessDialog'
 import ConfirmDialog from '../utils/ConfirmDialog'
 import axios from 'axios'
-import toBase64 from './../utils/Base64.js'
 import origin from '../../config/origin.json'
 
 const NavBar = (props) => {
     const navigate = useNavigate();
     const [menu, setMenu] = useState(false);
+    const [forceRefresh, setForceRefresh] = useState(false);
     const [text, setText] = useState("Save");
     const [errorText, setErrorText] = useState("");
     const [fileCount, setFileCount] = useState(0);
@@ -23,20 +25,33 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         try {
-            const url = origin.default.origin + '/user';
-            const accessToken = localStorage.getItem('accessToken');
-            const response = await axios.get(url, {
-                withCredentials: true,
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken
+            const data = await indexDB.getData("UserData");
+            if(data && !forceRefresh){
+                setImage(data.image);
+                email.current = data.email;
+                username.current = data.username;
+                if (data.otherData) {
+                    props.setIsAdmin(true);
+                    setOtherData(data.otherData);
                 }
-            });
-            setImage(response.data.image);
-            email.current = response.data.email;
-            username.current = response.data.username;
-            if (response.data.otherData) {
-                props.setIsAdmin(true);
-                setOtherData(response.data.otherData);
+                setForceRefresh(true);
+            } else {
+                const url = origin.default.origin + '/user';
+                const accessToken = localStorage.getItem('accessToken');
+                const response = await axios.get(url, {
+                    withCredentials: true,
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    }
+                });
+                await indexDB.saveData(response.data, "UserData");
+                setImage(response.data.image);
+                email.current = response.data.email;
+                username.current = response.data.username;
+                if (response.data.otherData) {
+                    props.setIsAdmin(true);
+                    setOtherData(response.data.otherData);
+                }
             }
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
@@ -99,6 +114,7 @@ const NavBar = (props) => {
                             'Authorization': 'Bearer ' + accessToken
                         }
                     });
+                await indexDB.saveData(response.data, "UserData");
                 setText("Save");
             } catch (err) {
                 if ([401, 402, 403, 404].includes(err.response.status)) {
