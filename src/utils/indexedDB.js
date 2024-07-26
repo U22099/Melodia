@@ -38,5 +38,5 @@ const getData = (objStore, init) => {
     });
 }
 
-saveData([{id: 12, name: "Hello"},{id: 12, name: "Hello"}], "Music", init);
-module.exports = { saveData, getData, init }
+saveData([{id: 12, name: "Hello"},{id: 12, name: "Hello"},{id: 12, name: "Hello"}], "Music", init);
+export default { saveData, getData, init }
