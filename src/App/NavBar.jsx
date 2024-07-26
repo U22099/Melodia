@@ -268,7 +268,7 @@ const NavBar = (props) => {
             </div>
             {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
             {upload.show ? <SuccessDialog msg={upload.msg} /> : ''}
-            {confirm ? <ConfirmDialog var={deleteUser} var2={
+            {confirm ? <ConfirmDialog callback={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
             {showAdminPanel ? <AdminPanel users={otherData.users} music_count={otherData.music_count} setShowAdminPanel={setShowAdminPanel} refresh={fetchUserData} /> : ''}
         </>
