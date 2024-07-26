@@ -24,11 +24,9 @@ const NavBar = (props) => {
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
-        console.log("ssds");	
         const data = indexedDB.getData("UserData");	
         console.log(data);	
         if(data && !forceRefresh){	
-            console.log("E")	
             setImage(data.image);	
             email.current = data.email;	
             username.current = data.username;	
@@ -39,7 +37,6 @@ const NavBar = (props) => {
             setForceRefresh(true);	
         } else {
             try {
-                console.log("F")
                 const url = origin.default.origin + '/user';
                 const accessToken = localStorage.getItem('accessToken');
                 const response = await axios.get(url, {
@@ -48,7 +45,6 @@ const NavBar = (props) => {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-                console.log("KL")
                 indexedDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
