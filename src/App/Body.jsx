@@ -49,7 +49,7 @@ const Body = (props) => {
             <section className="flex justify-end p-[10px] pb-[0px] md:w-[90%] mx-auto">
                 <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.6em] fill-[var(--secondary-color)] bg-[hsl(0,5%,2%)] p-[10px] rounded-[10px]  mt-[15px] mb-[5px]"} onClick={refreshState} />
             </section>
-            <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[20px]">
+            <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] pb-[20px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[40px]">
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
                         <li key={i} onClick={() => {
