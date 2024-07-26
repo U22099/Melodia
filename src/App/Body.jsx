@@ -11,7 +11,7 @@ import origin from '../../config/origin.json'
 const Body = (props) => {
     let id = "";
     const [refresh, setRefresh] = useState(false);
-    const [forceRefresh, setForceRefresh] = useState(false);
+    const [forceRefresh, setForceRefresh] = useState(true);
     const [spinning, setSpinning] = useState(false);
     const [success, setSuccess] = useState(false);
     const [confirm, setConfirm] = useState(false);
@@ -28,16 +28,16 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
-        console.log("CH")
-        const data = await indexDB.getData("MusicData");
-        console.log(data)
-        if(data){
-            setOutputData([]);
-            setMusic(data);
-        } else {
-            console.log("C");
-            await fetchMusic();
-        }
+      //  console.log("CH")
+    //    const data = await indexDB.getData("MusicData");
+  //      console.log(data)
+//        if(data){
+       //     setOutputData([]);
+     //       setMusic(data);
+     //   } else {
+     //       console.log("C");
+      //      await fetchMusic();
+       // }
         
     }
     const fetchMusic = async () => {
