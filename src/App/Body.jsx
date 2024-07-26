@@ -27,10 +27,13 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = () => {
-        if(JSON.parse(localStorage.getItem('musicdata'))){
+        if(localStorage.getItem('musicdata')){
             setOutputData([]);
-            setMusic(JSON.parse(localStorage.getItem('musicdata')));
+            const data = JSON.parse(localStorage.getItem('musicdata'));
+            setMusic(data);
+            alert("Retrieved");
         } else {
+            alert("Fetch")
             fetchMusic();
         }
         
@@ -40,9 +43,9 @@ const Body = (props) => {
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
+        localStorage.setItem('musicdata',JSON.stringify(response.data.music.sort((a, b) => a.title.localeCompare(b.title))));
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
             console.log(response.data.music);
-localStorage.setItem('musicdata', JSON.stringify(response.data.music));
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
         }
