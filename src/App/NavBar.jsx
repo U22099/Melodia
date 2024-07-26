@@ -16,7 +16,6 @@ const NavBar = (props) => {
     const [fileCount, setFileCount] = useState(0);
     const [upload, setUpload] = useState({state: null, msg: ""});
     const [confirm, setConfirm] = useState(false);
-    const [admin, setAdmin] = useState(false);
     const [showAdminPanel, setShowAdminPanel] = useState(false);
     const [otherData, setOtherData] = useState();
     const [image, setImage] = useState("image.JPG");
@@ -36,7 +35,7 @@ const NavBar = (props) => {
             email.current = response.data.email;
             username.current = response.data.username;
             if (response.data.otherData) {
-                setAdmin(true);
+                props.setIsAdmin(true);
                 setOtherData(response.data.otherData);
             }
         } catch (err) {
@@ -264,7 +263,7 @@ const NavBar = (props) => {
                         <button className="btn bg-none extrabold" onClick={uploadMusic}>↑</button>
                     </div>
                     <Link to="/" className="link mt-[10px] text-[1.2em]" onClick={logOut}>Log Out</Link>
-                    {admin ? <p to="/admin" className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
+                    {props.isAdmin ? <p to="/admin" className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
                 </div>
             </div>
             {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
