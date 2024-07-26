@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSearch } from 'react-icons/fa'
 import { MdRefresh, MdOutlineClose } from 'react-icons/md'
 import axios from 'axios'
-import * as indexDB from '../utils/indexDb.js'
+import * as indexedDB from '../utils/indexDb.js'
 import ErrorDialog from '../utils/ErrorDialog'
 import ConfirmDialog from '../utils/ConfirmDialog'
 import SuccessDialog from '../utils/SuccessDialog'
@@ -28,16 +28,16 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
-      //  console.log("CH")
-    //    const data = await indexDB.getData("MusicData");
-  //      console.log(data)
-//        if(data){
-       //     setOutputData([]);
-     //       setMusic(data);
-     //   } else {
-     //       console.log("C");
-      //      await fetchMusic();
-       // }
+        console.log("CH")
+        const data = await indexedDB.getData("MusicData");
+        console.log(data)
+        if(data){
+            setOutputData([]);
+            setMusic(data);
+        } else {
+            console.log("C");
+            await fetchMusic();
+        }
         
     }
     const fetchMusic = async () => {
@@ -46,7 +46,7 @@ const Body = (props) => {
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
-            await indexDB.saveData(response.data.music.sort((a, b) => a.title.localeCompare(b.title)), "MusicData");
+            await indexedDB.saveData(response.data.music.sort((a, b) => a.title.localeCompare(b.title)), "MusicData");
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
             console.log(response.data.music);
         } catch (err) {
