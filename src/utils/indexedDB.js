@@ -1,8 +1,8 @@
 const init = (objStore) => {
     console.log("init");
     const opendb = await indexedDB.open("Melodia");
-    opendb.onupgradeneeded = () => {
-        const db = opendb.result;
+    opendb.onupgradeneeded = (event) => {
+        const db = event.target.result;
         db.createObjectStore(objStore);
     }
     return opendb;
@@ -32,5 +32,5 @@ const getData = (objStore) => {
     }
     return data;
 }
-init()
+init("Music")
 module.exports = {saveData, getData}
