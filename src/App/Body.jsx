@@ -48,7 +48,7 @@ const Body = (props) => {
             const response = await axios.get('https://jsonplaceholder.typicode.com/todos', { withCredentials: true });
             //const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
             console.log(response.data);
-            indexedDB.saveData(response.data, "MusicData");
+            indexedDB.saveData([2,3,4,5,5], "MusicData");
             //setMusic(data);
             //console.log(response.data.music);
         } catch (err) {
