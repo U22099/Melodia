@@ -32,5 +32,7 @@ const getData = (objStore) => {
     }
     return data;
 }
-init("Music")
+saveData([2,3,4,5], "Test");
+getData("Test");
+
 module.exports = {saveData, getData}
