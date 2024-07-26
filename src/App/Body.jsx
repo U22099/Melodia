@@ -46,11 +46,11 @@ const Body = (props) => {
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get('https://jsonplaceholder.typicode.com/todos', { withCredentials: true });
-            const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
-            console.log(data);
-            indexedDB.saveData(data, "MusicData");
-            setMusic(data);
-            console.log(response.data.music);
+            //const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
+            console.log(response.data);
+            indexedDB.saveData(response.data, "MusicData");
+            //setMusic(data);
+            //console.log(response.data.music);
         } catch (err) {
             console.log(err.message, "New");
             props.setErr({ occured: true, msg: err.message });
