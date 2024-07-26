@@ -29,7 +29,7 @@ const Body = (props) => {
     }
     const retrieveStoredData = async () => {
         console.log("CH")
-        const data = indexedDB.getData("MusicData");
+        const data = await indexedDB.getData("MusicData");
         console.log(data)
         if(data){
             setOutputData([]);
