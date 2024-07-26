@@ -36,7 +36,7 @@ const NavBar = (props) => {
                     }
                 });
                 console.log("KL")
-                await indexDB.saveData(response.data, "UserData");
+                //await indexDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
@@ -108,7 +108,12 @@ const NavBar = (props) => {
                             'Authorization': 'Bearer ' + accessToken
                         }
                     });
-                await indexDB.saveData(response.data, "UserData");
+                //await indexDB.saveData({
+                  //  'username': username.current,
+                    //'email': email.current,
+                  //  'image': image,
+                //    'otherData': otherData
+              //  }, "UserData");
                 setText("Save");
             } catch (err) {
                 if ([401, 402, 403, 404].includes(err.response.status)) {
