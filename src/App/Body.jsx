@@ -97,7 +97,7 @@ const Body = (props) => {
             </section>
             {success ? <SuccessDialog msg="Music deleted successfully" /> : ''}
             {confirm ? <ConfirmDialog callback={deleteMusic} var2={
-                setConfirm} msg="Are you sure about this, buddy?" /> : ''}
+                setConfirm} msg="Are you sure you'd like to delete this music?" /> : ''}
             {props.err.occured ? <ErrorDialog msg={props.err.msg} setErr={props.setErr} /> : ''}
         </>
     )
