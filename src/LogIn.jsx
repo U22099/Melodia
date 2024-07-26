@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { FaEye, FaEyeSlash } from 'react-icons/fa6'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import origin from '../config/origin.json'
 
@@ -35,7 +35,7 @@ const LogIn = () => {
                 if (response.status === 200) {
                     localStorage.setItem('accessToken', response.data.token.accessToken);
                     localStorage.setItem('refreshToken', response.data.token?.refreshToken);
-                    navigate('/homepage', { replace: true, state: { fromRoute: true } });
+                    navigate('/homepage', { replace: true });
                 }
             } catch (err) {
                 console.log(err);
@@ -47,6 +47,10 @@ const LogIn = () => {
             setError('No username or password');
         }
     }
+    useEffect(()=>{
+        const refreshToken = localStorage.getItem('refreshToken');
+        if(refreshToken) navigate('/homepage', { replace: true });
+    }, [])
     return (
         <div className="flex flex-col justify-center md:p-[30px] rounded-[10px] align-center w-[80%] md:w-[50%] lg:w-[40%] bg-black md:bg-[var(--primary-color)] gap-[20px] my-[20px]">
             <header className="flex justify-start text-start w-[100%]">
