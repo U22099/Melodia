@@ -24,7 +24,20 @@ const NavBar = (props) => {
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
-        
+        console.log("ssds");	
+        const data = await indexDB.getData("UserData");	
+        console.log(data);	
+        if(data && !forceRefresh){	
+            console.log("E")	
+            setImage(data.image);	
+            email.current = data.email;	
+            username.current = data.username;	
+            if (data.otherData) {	
+                props.setIsAdmin(true);	
+                setOtherData(data.otherData);	
+            }	
+            setForceRefresh(true);	
+        } else {
             try {
                 console.log("F")
                 const url = origin.default.origin + '/user';
@@ -36,7 +49,7 @@ const NavBar = (props) => {
                     }
                 });
                 console.log("KL")
-                //await indexDB.saveData(response.data, "UserData");
+                await indexDB.saveData(response.data, "UserData");
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
@@ -61,7 +74,7 @@ const NavBar = (props) => {
                     fetchUserData();
                 }
             }
-        
+        }
     }
     const refresh = async () => {
         try {
@@ -108,12 +121,12 @@ const NavBar = (props) => {
                             'Authorization': 'Bearer ' + accessToken
                         }
                     });
-                //await indexDB.saveData({
-                  //  'username': username.current,
-                    //'email': email.current,
-                  //  'image': image,
-                //    'otherData': otherData
-              //  }, "UserData");
+                await indexDB.saveData({
+                    'username': username.current,
+                    'email': email.current,
+                    'image': image,
+                    'otherData': otherData
+                }, "UserData");
                 setText("Save");
             } catch (err) {
                 if ([401, 402, 403, 404].includes(err.response.status)) {
