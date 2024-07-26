@@ -7,6 +7,7 @@ const init = (objStore) => {
     return opendb;
 }
 const saveData = (data, objStore, init) => {
+    console.log(init)
     const request = init(objStore);
     request.onsuccess = event => {
         const db = event.target.result;
@@ -19,6 +20,7 @@ const saveData = (data, objStore, init) => {
     }
 }
 const getData = (objStore, init) => {
+    console.log(init);
     const request = init(objStore);
     return new Promise(resolve => {
         request.onsuccess = event => {
@@ -36,5 +38,5 @@ const getData = (objStore, init) => {
     });
 }
 
-saveData([{id: 12, name: "Hello"},{id: 12, name: "Hello"},{id: 12, name: "Hello"}], "Music", init);
+saveData([{id: 12, name: "Hello"},{id: 12, name: "Hello"}], "Music", init);
 module.exports = { saveData, getData, init }
