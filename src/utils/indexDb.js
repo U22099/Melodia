@@ -3,7 +3,7 @@ const init = async (objStore) => {
     db.createObjectStore(objStore);
     return db;
 }
-const addData = async (data, objStore) => {
+const saveData = async (data, objStore) => {
     const db = await init(objStore);
     const transaction = db.transaction(objStore, 'readwrite');
     const store = transaction.objectStore(objStore);
@@ -17,4 +17,4 @@ const getData = async (objStore) => {
     return data;
 }
 
-module.exports = {addData, getData}
+module.exports = {saveData, getData}
