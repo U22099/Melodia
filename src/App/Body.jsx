@@ -29,7 +29,7 @@ const Body = (props) => {
     }
     const retrieveStoredData = async () => {
         console.log("CH")
-        const data = await indexedDB.getData("MusicData");
+        const data = indexedDB.getData("MusicData");
         console.log(data)
         if(data){
             setOutputData([]);
@@ -46,7 +46,7 @@ const Body = (props) => {
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
-            await indexedDB.saveData(response.data.music.sort((a, b) => a.title.localeCompare(b.title)), "MusicData");
+            indexedDB.saveData(response.data.music.sort((a, b) => a.title.localeCompare(b.title)), "MusicData");
             setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
             console.log(response.data.music);
         } catch (err) {
