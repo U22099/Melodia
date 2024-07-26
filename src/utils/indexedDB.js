@@ -10,27 +10,33 @@ const init = (objStore) => {
 const saveData = (data, objStore) => {
     console.log("savedata")
     const db = (init(objStore)).result;
-    const transaction = db.transaction(objStore, 'readwrite');
-    const store = transaction.objectStore(objStore);
-    store.put(data);
-    transaction.oncomplete = () => {
-        db.close();
+    db.onsuccess = () => {
+        const transaction = db.transaction(objStore, 'readwrite');
+        const store = transaction.objectStore(objStore);
+        store.put(data);
+        transaction.oncomplete = () => {
+            db.close();
+        }
     }
 }
 const getData = (objStore) => {
     console.log("called getData");
     const db = (init(objStore)).result;
-    const transaction = db.transaction(objStore, 'readonly');
-    const store = transaction.objectStore(objStore);
-    const result = store.getAll();
-    let data = ""
-    result.onsuccess = () => {
-        data = result.result;
+    db.onsuccess = () => {
+        const transaction = db.transaction(objStore, 'readonly');
+        const store = transaction.objectStore(objStore);
+        const result = store.getAll();
+        let data = ""
+        result.onsuccess = () => {
+            data = result.result;
+            console.log(result.result);
+        }
+        transaction.oncomplete = () => {
+            db.close();
+        }
+        console.log(data)
+        return data;
     }
-    transaction.oncomplete = () => {
-        db.close();
-    }
-    return data;
 }
 saveData([2,3,4,5], "Test");
 getData("Test");
