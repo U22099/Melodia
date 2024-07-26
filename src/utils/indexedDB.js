@@ -9,12 +9,12 @@ const init = (objStore) => {
 }
 const saveData = (data, objStore) => {
     console.log("savedata1")
-    const request = (init(objStore));
+    const request = init(objStore);
     request.onsuccess = event => {
         const db = event.target.result;
         const transaction = db.transaction(objStore, 'readwrite');
         const store = transaction.objectStore(objStore);
-        store.put(data);
+        store.put(data, 1);
         transaction.oncomplete = () => {
             db.close();
         }
@@ -22,7 +22,7 @@ const saveData = (data, objStore) => {
 }
 const getData = (objStore) => {
     console.log("called getData1");
-    const request = (init(objStore));
+    const request = init(objStore);
     request.onsuccess = event => {
         const db = event.target.result;
         const transaction = db.transaction(objStore, 'readonly');
