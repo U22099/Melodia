@@ -29,7 +29,7 @@ const Body = (props) => {
     }
     const retrieveStoredData = async () => {
         console.log("CH")
-        const data = await indexedDB.getData("MusicData");
+        const data = await indexedDB.getData("MusicData", indexedDB.init);
         console.log(data)
         if(data){
             setOutputData([]);
@@ -48,7 +48,7 @@ const Body = (props) => {
             const response = await axios.get('https://jsonplaceholder.typicode.com/todos', { withCredentials: true });
             //const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
             console.log(response.data);
-            indexedDB.saveData([2,3,4,5,5], "MusicData");
+            indexedDB.saveData(response.data, "MusicData", indexedDB.init);
             //setMusic(data);
             //console.log(response.data.music);
         } catch (err) {
