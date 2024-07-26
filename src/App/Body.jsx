@@ -46,8 +46,9 @@ const Body = (props) => {
             setOutputData([]);
             const url = origin.default.origin + '/musicapi';
             const response = await axios.get(url, { withCredentials: true });
-            indexedDB.saveData(response.data.music.sort((a, b) => a.title.localeCompare(b.title)), "MusicData");
-            setMusic(response.data.music.sort((a, b) => a.title.localeCompare(b.title)));
+            const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
+            indexedDB.saveData(data, "MusicData");
+            setMusic(data);
             console.log(response.data.music);
         } catch (err) {
             props.setErr({ occured: true, msg: err.message });
