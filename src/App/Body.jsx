@@ -77,7 +77,6 @@ const Body = (props) => {
         }, 1000)
     }, [music]);
     useEffect(() => {
-        indexedDB.getData("Music", indexedDB.init);
         if(forceRefresh){
             fetchMusic();
         }else{
