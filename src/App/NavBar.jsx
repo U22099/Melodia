@@ -89,6 +89,8 @@ const NavBar = (props) => {
             if (response.status === 200) return response
         } catch (err) {
             if ((err.response.status === 403) || (err.response.status === 401)) {
+                                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
                 navigate('/', { replace: true });
             }
         }
