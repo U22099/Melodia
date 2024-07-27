@@ -4,9 +4,76 @@ import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 
 function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
+    const [users, setUsers] = useState(false);
+    const [musicCount, setMusicCount] = useState(false);
+    const fetchUserData = async () => {
+        setLoading(true);
+        const stored = JSON.parse(localStorage.getItem('store3'));
+        if(stored && !forceRefresh){
+            const data = await indexedDB.getData("AdminData", indexedDB.init);
+            setUsers(data.users);
+            setMusicCount(data.musicCount);
+            setForceRefresh(true);
+            setLoading(false);
+        } else {
+            try {
+                const url = origin.default.origin + '/user/admin';
+                const accessToken = localStorage.getItem('accessToken');
+                const response = await axios.get(url, {
+                    withCredentials: true,
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken
+                    }
+                });
+                indexedDB.saveData(response.data, "AdminData", indexedDB.init);
+                localStorage.setItem('store3', true);
+                setUsers(response.data.users);
+                setMusicCount(response.data.musicCount);
+                setLoading(false);
+        
+            } catch (err) {
+                console.log(err);
+                props.setErr({ occured: true, msg: err.message });
+                if ([401, 403].includes(err.response.status)) {
+                    const res = await refresh();
+                    if (res.status === 200) {
+                        localStorage.setItem('accessToken', res.data.accessToken);
+                        fetchUserData();
+                    } else {
+                        localStorage.removeItem('accessToken');
+                        localStorage.removeItem('refreshToken');
+                        navigate('/', { replace: true });
+                    }
+                }
+                if(err.message.includes("Network")){
+                    fetchUserData();
+                }
+            }
+        }
+    }
+    const refresh = async () => {
+        try {
+            const url = origin.default.origin + '/refresh';
+            const refreshToken = localStorage.getItem('refreshToken');
+            const response = await axios.post(url, {}, {
+                withCredentials: true,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + refreshToken
+                }
+            });
+            if (response.status === 200) return response
+        } catch (err) {
+            if ((err.response.status === 403) || (err.response.status === 401)) {
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                navigate('/', { replace: true });
+            }
+        }
+    }
     const refreshState = () => {
         setSpinning(true);
-        props.refresh();
+        refresh();
         setTimeout(() => {
             setSpinning(false);
         }, 1000)
@@ -30,8 +97,9 @@ function AdminPanel(props) {
             <section>
                 <header>Users' data: </header>
                 <main>
+                    {loading ? <div><p></p></div> :
                     <ol className="flex flex-col gap-[10px]">
-                        {props.users.sort((a, b) => a.username.localeCompare(b.username)).map((x, i) => (
+                        {users.sort((a, b) => a.username.localeCompare(b.username)).map((x, i) => (
                             <li key={i}>
                                 <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
                                     <img src={x.image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
@@ -42,12 +110,12 @@ function AdminPanel(props) {
                                 </div>
                             </li>
                         ))}
-                    </ol>
+                    </ol> }
                 </main>
             </section>
             <section className="mx-auto">
                 <header>
-                    Current Music Count: {props.music_count}
+                    Current Music Count: {musicCount}
                 </header>
             </section>
         </motion.div>
