@@ -143,6 +143,28 @@
     transition: 1s;
     animation: hueRotate 3s linear infinite;
 }
+#loader{
+    border: 3px solid var(--secondary-color);
+    border-top: transparent;
+    border-left: transparent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: rotate 1s linear infinite;
+}
+#loader > p{
+    border: 3px solid var(--secondary-color);
+    border-left: transparent;
+    border-bottom: transparent;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: rotate 1s linear infinite reverse;
+}
+.profileLoader{
+    border: 2px solid black;
+    animation: borderHue 1s linear infinite;
+}
 @keyframes glow{
     0%{
         border-color: white;
@@ -168,6 +190,22 @@
     }
     100%{
         filter: hue-rotate(360deg);
+    }
+}
+@keyframs rotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+@keyframes borderHue{
+    0%{
+        border-color: hsl(0, 100%, 50%);
+    }
+    100%{
+        border-color: hsl(360, 100%, 50%);
     }
 }
 @tailwind base;
