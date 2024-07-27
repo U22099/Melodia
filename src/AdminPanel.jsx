@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa6'
+import origin from '../config/origin.json'
 
 function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
