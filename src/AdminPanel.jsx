@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa6'
+import axios from 'axios'
 import origin from '../config/origin.json'
 
 function AdminPanel(props) {
@@ -13,7 +14,7 @@ function AdminPanel(props) {
     const [chunkNo, setChunkNo] = useState(1);
     const [chunkAmount, setChunkAmount] = useState(0);
     const fetchAdminData = async () => {
-        console.log("id: 121212");
+        console.log("id: 12121");
         setLoading(true);
         const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored'))[chunkNo - 1] : false;
         if(stored && !forceRefresh){
