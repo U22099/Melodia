@@ -25,9 +25,10 @@ const NavBar = (props) => {
     const username = useRef("");
     const fetchUserData = async () => {
         setLoading(true);
-        const stored = JSON.parse(localStorage.getItem('store1'));
+        const stored = JSON.parse(localStorage.getItem('user_stored'));
         if(stored && !forceRefresh){
             const data = (await indexedDB.getData("UserData", indexedDB.init))[0];
+            console.log(await indexedDB.getData("UserData", indexedDB.init))
             setImage(data.image);
             email.current = data.email;	
             username.current = data.username;	
@@ -47,7 +48,7 @@ const NavBar = (props) => {
                     }
                 });
                 indexedDB.saveData(response.data, "UserData", indexedDB.init);
-                localStorage.setItem('store1', true);
+                localStorage.setItem('user_stored', true);
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
