@@ -49,7 +49,7 @@ function AdminPanel(props) {
                     const res = await refresh();
                     if (res.status === 200) {
                         localStorage.setItem('accessToken', res.data.accessToken);
-                        console.log("Done");
+                        console.log(res.data.accessToken);
                         fetchAdminData();
                     } else {
                         localStorage.removeItem('accessToken');
