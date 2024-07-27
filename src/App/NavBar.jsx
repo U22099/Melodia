@@ -51,9 +51,8 @@ const NavBar = (props) => {
                 setImage(response.data.image);
                 email.current = response.data.email;
                 username.current = response.data.username;
-                if (response.data.otherData) {
+                if (response.data.isAdmin) {
                     props.setIsAdmin(true);
-                    setOtherData(response.data.otherData);
                 }
                 setLoading(false);
         
@@ -267,7 +266,7 @@ const NavBar = (props) => {
         <>
             <h1 className="text-[var(--secondary-color)] ml-[15px] text-[2.6em] w-[100%] flex justify-start font-[var(--font)] extrabold">Melodia</h1>
             <div className="flex justify-end align-center items-center relative">
-                <img src={image} alt="Profile Picture" className={(loading ? "profileLoad " : "" ) +"bg-[var(--primary-color)] rounded-full w-16 h-16 cursor-pointer"} onClick={switchVisibility} />
+                <img src={image} alt="Profile Picture" className={(loading ? "profileLoader " : "" ) +"bg-[var(--primary-color)] rounded-full w-16 h-16 cursor-pointer"} onClick={switchVisibility} />
                 <div className={menu ? "grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] absolute bg-[var(--primary-color)] top-[50%] p-[20px] rounded-[10px] z-[10]" : "hidden"}>
                     <label htmlFor='inputImage'>
                         <input type="file" onChange={handleImage} maxLength={3145728} accept="image/jpeg, image/png, image/jpg" id="inputImage" className="hidden" />
