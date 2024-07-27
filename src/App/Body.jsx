@@ -11,6 +11,7 @@ import origin from '../../config/origin.json'
 const Body = (props) => {
     let id = "";
     const [refresh, setRefresh] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [forceRefresh, setForceRefresh] = useState(false);
     const [spinning, setSpinning] = useState(false);
     const [success, setSuccess] = useState(false);
@@ -28,6 +29,7 @@ const Body = (props) => {
         setRefresh(!refresh);
     }
     const retrieveStoredData = async () => {
+        setLoading(true);
         const stored = JSON.parse(localStorage.getItem('store2'));
         console.log("stored");
         if(stored){
@@ -36,6 +38,7 @@ const Body = (props) => {
             setMusic(data);
             console.log(data);
             setForceRefresh(true);
+            setLoading(false);
         } else {
             await fetchMusic();
         }
@@ -51,6 +54,7 @@ const Body = (props) => {
             localStorage.setItem('store2', true);
             setMusic(data);
             console.log(response.data.music);
+            setLoading(false);
         } catch (err) {
             console.log(err.message);
             props.setErr({ occured: true, msg: err.message });
@@ -93,6 +97,7 @@ const Body = (props) => {
                 <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.6em] fill-[var(--secondary-color)] bg-[hsl(0,5%,2%)] p-[10px] rounded-[10px]  mt-[15px] mb-[5px]"} onClick={refreshState} />
             </section>
             <section className="overflow-y-scroll h-[62vh] scrollbar p-[10px] pb-[20px] rounded-[10px] md:bg-[hsl(0,5%,2%)] md:w-[90%] mx-auto mb-[40px]">
+                {loading ? <div id="loader"><p></p></div> :
                 <ol className="flex flex-col gap-[10px]">
                     {outputData.map((x, i) => (
                         <li key={i} onClick={() => {
@@ -118,7 +123,7 @@ const Body = (props) => {
                             </div>
                         </li>
                     ))}
-                </ol>
+                </ol> }
             </section>
             {success ? <SuccessDialog msg="Music deleted successfully" /> : ''}
             {confirm ? <ConfirmDialog callback={deleteMusic} var2={
