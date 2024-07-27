@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 
@@ -6,7 +6,7 @@ function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
     const [users, setUsers] = useState(false);
     const [musicCount, setMusicCount] = useState(false);
-    const fetchUserData = async () => {
+    const fetchAdminData = async () => {
         setLoading(true);
         const stored = JSON.parse(localStorage.getItem('store3'));
         if(stored && !forceRefresh){
@@ -73,11 +73,14 @@ function AdminPanel(props) {
     }
     const refreshState = () => {
         setSpinning(true);
-        refresh();
+        fetchAdminData();
         setTimeout(() => {
             setSpinning(false);
         }, 1000)
     }
+    useEffect(()=>{
+        fetchAdminData()
+    },[])
     return (
         <motion.div
             initial={{
@@ -97,7 +100,7 @@ function AdminPanel(props) {
             <section>
                 <header>Users' data: </header>
                 <main>
-                    {loading ? <div><p></p></div> :
+                    {loading ? <div id="loader"><p></p></div> :
                     <ol className="flex flex-col gap-[10px]">
                         {users.sort((a, b) => a.username.localeCompare(b.username)).map((x, i) => (
                             <li key={i}>
