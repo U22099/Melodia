@@ -4,6 +4,7 @@ import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 
 function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
+    const [forceRefresh, setForceRefresh] = useState(false);
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState(false);
     const [musicCount, setMusicCount] = useState(false);
@@ -31,7 +32,6 @@ function AdminPanel(props) {
                 setUsers(response.data.users);
                 setMusicCount(response.data.musicCount);
                 setLoading(false);
-        
             } catch (err) {
                 console.log(err);
                 props.setErr({ occured: true, msg: err.message });
