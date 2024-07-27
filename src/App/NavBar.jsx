@@ -13,28 +13,29 @@ const NavBar = (props) => {
     const navigate = useNavigate();
     const [menu, setMenu] = useState(false);
     const [forceRefresh, setForceRefresh] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [text, setText] = useState("Save");
     const [errorText, setErrorText] = useState("");
     const [fileCount, setFileCount] = useState(0);
     const [upload, setUpload] = useState({state: null, msg: ""});
     const [confirm, setConfirm] = useState(false);
     const [showAdminPanel, setShowAdminPanel] = useState(false);
-    const [otherData, setOtherData] = useState();
     const [image, setImage] = useState("image.JPG");
     const email = useRef("");
     const username = useRef("");
     const fetchUserData = async () => {
+        setLoading(true);
         const stored = JSON.parse(localStorage.getItem('store1'));
         if(stored && !forceRefresh){
             const data = await indexedDB.getData("UserData", indexedDB.init);
             setImage(data.image);
             email.current = data.email;	
             username.current = data.username;	
-            if (data.otherData) {	
+            if (data.isAdmin) {	
                 props.setIsAdmin(true);	
-                setOtherData(data.otherData);	
             }	
-            setForceRefresh(true);	
+            setForceRefresh(true);
+            setLoading(false);
         } else {
             try {
                 const url = origin.default.origin + '/user';
@@ -54,6 +55,7 @@ const NavBar = (props) => {
                     props.setIsAdmin(true);
                     setOtherData(response.data.otherData);
                 }
+                setLoading(false);
         
             } catch (err) {
                 console.log(err);
@@ -265,7 +267,7 @@ const NavBar = (props) => {
         <>
             <h1 className="text-[var(--secondary-color)] ml-[15px] text-[2.6em] w-[100%] flex justify-start font-[var(--font)] extrabold">Melodia</h1>
             <div className="flex justify-end align-center items-center relative">
-                <img src={image} alt="Profile Picture" className="bg-[var(--primary-color)] rounded-full w-16 h-16 cursor-pointer" onClick={switchVisibility} />
+                <img src={image} alt="Profile Picture" className={(loading ? "profileLoad " : "" ) +"bg-[var(--primary-color)] rounded-full w-16 h-16 cursor-pointer"} onClick={switchVisibility} />
                 <div className={menu ? "grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] absolute bg-[var(--primary-color)] top-[50%] p-[20px] rounded-[10px] z-[10]" : "hidden"}>
                     <label htmlFor='inputImage'>
                         <input type="file" onChange={handleImage} maxLength={3145728} accept="image/jpeg, image/png, image/jpg" id="inputImage" className="hidden" />
@@ -294,14 +296,14 @@ const NavBar = (props) => {
                         <button className="btn bg-none extrabold" onClick={uploadMusic}>↑</button>
                     </div>
                     <p className="link mt-[10px] text-[1.2em]" onClick={logOut}>Log Out</p>
-                    {props.isAdmin ? <p to="/admin" className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
+                    {props.isAdmin ? <p className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]" onClick={() => setShowAdminPanel(true)}>Admin Panel</p> : ''}
                 </div>
             </div>
             {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
             {upload.show ? <SuccessDialog msg={upload.msg} /> : ''}
             {confirm ? <ConfirmDialog callback={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
-            {showAdminPanel ? <AdminPanel users={otherData.users} music_count={otherData.music_count} setShowAdminPanel={setShowAdminPanel} refresh={fetchUserData} /> : ''}
+            {showAdminPanel ? <AdminPanel setShowAdminPanel={setShowAdminPanel} /> : ''}
         </>
     )
 }
