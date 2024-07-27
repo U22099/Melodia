@@ -14,7 +14,8 @@ function AdminPanel(props) {
     const fetchAdminData = async () => {
         console.log("id: 1212");
         setLoading(true);
-        const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored')[chunkNo - 1]) : false;
+        const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored'))[chunkNo - 1] : false;
+        console.log("id: 1212");
         if(stored && !forceRefresh){
             const data = await indexedDB.getData("AdminData", indexedDB.init, chunkNo);
             setUsers(data.users);
@@ -36,7 +37,7 @@ function AdminPanel(props) {
                 const arr = localStorage.getItem('music_stored');
                 console.log(response.data);
                 const data = arr ? [...JSON.parse(arr).push(true)] : [true]
-                localStorage.setItem('music_stored', data);
+                localStorage.setItem('music_stored', JSON.stringify(data));
                 setUsers(response.data.users.data);
                 setMusicCount(response.data.musicCount);
                 setLoading(false);
@@ -89,7 +90,7 @@ function AdminPanel(props) {
     }
     useEffect(()=>{
         fetchAdminData()
-    },[])
+    },[chunkNo])
     return (
         <motion.div
             initial={{
