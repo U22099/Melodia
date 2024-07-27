@@ -148,27 +148,29 @@
     justify-content: center;
     align-items: center;
     margin: auto auto;
+	padding: 5px;
     border: 3px solid var(--secondary-color);
     border-top: transparent;
     border-left: transparent;
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    animation: rotate 2s linear infinite;
+    animation: rotate 1s linear infinite;
 }
 #loader > p{
+	margin: none;
     border: 3px solid var(--secondary-color);
     border-left: transparent;
     border-bottom: transparent;
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    animation: rotate 2s linear infinite;
-	 animation-direction: reverse;
+    animation: rotate 0.5s linear infinite;
+	animation-direction: reverse;
 }
 .profileLoader{
     border: 2px solid green;
-    animation: glow 2s linear infinite;
+    animation: glow 1s linear infinite;
 }
 @keyframes glow{
     0%{
