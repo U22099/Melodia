@@ -302,7 +302,7 @@ const NavBar = (props) => {
             {upload.show ? <SuccessDialog msg={upload.msg} /> : ''}
             {confirm ? <ConfirmDialog callback={deleteUser} var2={
                 setConfirm} msg="Are you sure about this, buddy?" /> : ''}
-            {showAdminPanel ? <AdminPanel setShowAdminPanel={setShowAdminPanel} err={props.err} /> : ''}
+            {showAdminPanel ? <AdminPanel setShowAdminPanel={setShowAdminPanel} setErr={props.setErr} /> : ''}
         </>
     )
 }
