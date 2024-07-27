@@ -100,8 +100,8 @@ function AdminPanel(props) {
                 <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2.6em]" onClick={() => props.setShowAdminPanel(false)} />
             </div>
             <div className="flex gap-[5px]">
-                < className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
-                < className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
+                <FaArrowLeft className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
+                <FaArrowRight className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
             </div>
             <section>
                 <header>Users' data: </header>
