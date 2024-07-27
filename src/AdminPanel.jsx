@@ -4,6 +4,7 @@ import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 
 function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState(false);
     const [musicCount, setMusicCount] = useState(false);
     const fetchAdminData = async () => {
