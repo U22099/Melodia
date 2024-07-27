@@ -4,6 +4,7 @@ const init = () => {
         const db = event.target.result;
         db.createObjectStore("MusicData");
         db.createObjectStore("UserData");
+        db.createObjectStore("AdminData");
     }
     return opendb;
 }
