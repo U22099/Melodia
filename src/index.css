@@ -154,7 +154,7 @@
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    animation: rotate 1s linear infinite;
+    animation: rotate 2s linear infinite;
 }
 #loader > p{
     border: 3px solid var(--secondary-color);
@@ -163,11 +163,11 @@
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    animation: rotate 1s linear infinite reverse;
+    animation: rotate 2s linear infinite reverse;
 }
 .profileLoader{
     border: 2px solid green;
-    animation: borderHue 5s linear infinite;
+    animation: borderHue 2s linear infinite;
 }
 @keyframes glow{
     0%{
