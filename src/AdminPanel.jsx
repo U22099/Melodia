@@ -14,7 +14,7 @@ function AdminPanel(props) {
     const [chunkNo, setChunkNo] = useState(1);
     const [chunkAmount, setChunkAmount] = useState(0);
     const fetchAdminData = async () => {
-        console.log("id: 12121");
+        console.log("id: 1211");
         setLoading(true);
         const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored'))[chunkNo - 1] : false;
         if(stored && !forceRefresh){
@@ -49,6 +49,7 @@ function AdminPanel(props) {
                     const res = await refresh();
                     if (res.status === 200) {
                         localStorage.setItem('accessToken', res.data.accessToken);
+                        console.log("Done");
                         fetchAdminData();
                     } else {
                         localStorage.removeItem('accessToken');
