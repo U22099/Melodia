@@ -30,7 +30,7 @@ const Body = (props) => {
     }
     const retrieveStoredData = async () => {
         setLoading(true);
-        const stored = JSON.parse(localStorage.getItem('store2'));
+        const stored = JSON.parse(localStorage.getItem('music_stored'));
         console.log("stored");
         if(stored){
             setOutputData([]);
@@ -51,7 +51,7 @@ const Body = (props) => {
             const response = await axios.get(url, { withCredentials: true });
             const data = response.data.music.sort((a, b) => a.title.localeCompare(b.title));
             indexedDB.saveData(response.data.music, "MusicData", indexedDB.init);
-            localStorage.setItem('store2', true);
+            localStorage.setItem('music_stored', true);
             setMusic(data);
             console.log(response.data.music);
             setLoading(false);
