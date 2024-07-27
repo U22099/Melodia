@@ -27,7 +27,7 @@ const NavBar = (props) => {
         setLoading(true);
         const stored = JSON.parse(localStorage.getItem('store1'));
         if(stored && !forceRefresh){
-            const data = await indexedDB.getData("UserData", indexedDB.init);
+            const data = (await indexedDB.getData("UserData", indexedDB.init))[0];
             setImage(data.image);
             email.current = data.email;	
             username.current = data.username;	
