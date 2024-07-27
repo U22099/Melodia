@@ -8,26 +8,26 @@ const init = () => {
     }
     return opendb;
 }
-const saveData = (data, objStore, init) => {
+const saveData = (data, objStore, init, key = 1) => {
     const request = init();
     request.onsuccess = event => {
         const db = event.target.result;
         const transaction = db.transaction(objStore, 'readwrite');
         const store = transaction.objectStore(objStore);
-        store.put(data, 1);
+        store.put(data, key);
         transaction.oncomplete = () => {
             db.close();
         }
     }
 }
-const getData = (objStore, init) => {
+const getData = (objStore, init, key = 1) => {
     const request = init();
     return new Promise(resolve => {
         request.onsuccess = event => {
             const db = event.target.result;
             const transaction = db.transaction(objStore, 'readonly');
             const store = transaction.objectStore(objStore);
-            const result = store.getAll();
+            const result = store.get(key);
             result.onsuccess = () => {
                 resolve(result.result);
             }
