@@ -108,10 +108,10 @@ function AdminPanel(props) {
             </div>
             <div className="flex gap-[5px]">
                 <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
-                    chunkNo--;
+                    setChunkNo(chunkNo--);
                 }}/>
                 <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
-                    chunkNo++;
+                    setChunkNo(chunkNo++);
                 }}/>
             </div>
             <section>
