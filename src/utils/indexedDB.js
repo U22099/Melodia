@@ -37,6 +37,8 @@ const getData = (objStore, init) => {
         }
     });
 }
-const data = await indexedDB.getData("MusicData", indexedDB.init);
-console.log(data, "retrieved")
+(async () => { 
+    const data = await indexedDB.getData("MusicData", indexedDB.init);
+    console.log(data, "retrieved")
+})()
 export default { saveData, getData, init }
