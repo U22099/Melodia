@@ -29,10 +29,12 @@ const Body = (props) => {
     }
     const retrieveStoredData = async () => {
         const stored = JSON.parse(localStorage.getItem('store2'));
+        console.log("stored");
         if(stored){
-            const data = await indexedDB.getData("MusicData", indexedDB.init);
             setOutputData([]);
+            const data = await indexedDB.getData("MusicData", indexedDB.init);
             setMusic(data);
+            console.log(data);
             setForceRefresh(true);
         } else {
             await fetchMusic();
