@@ -167,7 +167,7 @@
 }
 .profileLoader{
     border: 2px solid green;
-    animation: borderHue 2s linear infinite;
+    animation: glow 2s linear infinite;
 }
 @keyframes glow{
     0%{
@@ -196,20 +196,12 @@
         filter: hue-rotate(360deg);
     }
 }
-@keyframs rotate{
+@keyframes rotate{
     0%{
         transform: rotate(0deg);
     }
     100%{
         transform: rotate(360deg);
-    }
-}
-@keyframes borderHue{
-    0%{
-        border-color: hsl(0, 100%, 50%);
-    }
-    100%{
-        border-color: hsl(360, 100%, 50%);
     }
 }
 @tailwind base;
