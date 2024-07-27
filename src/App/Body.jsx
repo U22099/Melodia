@@ -35,7 +35,7 @@ const Body = (props) => {
         if(stored){
             setOutputData([]);
             const data = await indexedDB.getData("MusicData", indexedDB.init);
-            setMusic(data);
+            setMusic(data[0]);
             console.log(data);
             setForceRefresh(true);
             setLoading(false);
