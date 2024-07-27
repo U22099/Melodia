@@ -13,10 +13,9 @@ function AdminPanel(props) {
     const [chunkNo, setChunkNo] = useState(1);
     const [chunkAmount, setChunkAmount] = useState(0);
     const fetchAdminData = async () => {
-        console.log("id: 1212");
+        console.log("id: 121212");
         setLoading(true);
         const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored'))[chunkNo - 1] : false;
-        console.log("id: 1212");
         if(stored && !forceRefresh){
             const data = await indexedDB.getData("AdminData", indexedDB.init, chunkNo);
             setUsers(data.users);
