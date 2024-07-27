@@ -49,7 +49,7 @@ function AdminPanel(props) {
                     const res = await refresh();
                     if (res.status === 200) {
                         localStorage.setItem('accessToken', res.data.accessToken);
-                        fetchUserData();
+                        fetchAdminData();
                     } else {
                         localStorage.removeItem('accessToken');
                         localStorage.removeItem('refreshToken');
@@ -57,7 +57,7 @@ function AdminPanel(props) {
                     }
                 }
                 if(err.message.includes("Network")){
-                    fetchUserData();
+                    fetchAdminData();
                 }
             }
         }
