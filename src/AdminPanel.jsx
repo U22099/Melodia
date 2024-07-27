@@ -6,8 +6,8 @@ function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
     const [forceRefresh, setForceRefresh] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [users, setUsers] = useState(false);
-    const [musicCount, setMusicCount] = useState(false);
+    const [users, setUsers] = useState([]);
+    const [musicCount, setMusicCount] = useState(0);
     const fetchAdminData = async () => {
         setLoading(true);
         const stored = JSON.parse(localStorage.getItem('store3'));
