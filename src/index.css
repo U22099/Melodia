@@ -147,6 +147,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: auto auto;
     border: 3px solid var(--secondary-color);
     border-top: transparent;
     border-left: transparent;
