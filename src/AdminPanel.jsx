@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { MdOutlineClose, MdRefresh } from 'react-icons/md'
+import {FaArrowLeft, FaArrowRight} from 'react-icons/fa6'
 
 function AdminPanel(props) {
     const [spinning, setSpinning] = useState(false);
@@ -9,14 +10,15 @@ function AdminPanel(props) {
     const [users, setUsers] = useState([]);
     const [musicCount, setMusicCount] = useState(0);
     const [chunkNo, setChunkNo] = useState(1);
+    const [chunkAmount, setChunkAmount] = useState(0);
     const fetchAdminData = async () => {
         setLoading(true);
-        const stored = JSON.parse(localStorage.getItem('store3'));
+        const stored = JSON.parse(localStorage.getItem('music_stored')[chunkNo - 1]);
         if(stored && !forceRefresh){
             const data = await indexedDB.getData("AdminData", indexedDB.init, chunkNo);
             setUsers(data.users);
             setMusicCount(data.musicCount);
-            setForceRefresh(true);
+            if(chunkNo === chunkAmount) setForceRefresh(true);
             setLoading(false);
         } else {
             try {
@@ -28,8 +30,11 @@ function AdminPanel(props) {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
+                setChunkAmount(response.data.users.chunkAmount);
                 indexedDB.saveData({users: response.data.users.data, musicCount: response.data.musicCount}, "AdminData", indexedDB.init, chunkNo);
-                localStorage.setItem('store3', true);
+                const arr = localStorage.getItem('music_stored');
+                const data = arr ? [...JSON.parse(arr).push(true)] : [true]
+                localStorage.setItem('music_stored', data);
                 setUsers(response.data.users.data);
                 setMusicCount(response.data.musicCount);
                 setLoading(false);
@@ -100,8 +105,12 @@ function AdminPanel(props) {
                 <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2.6em]" onClick={() => props.setShowAdminPanel(false)} />
             </div>
             <div className="flex gap-[5px]">
-                <FaArrowLeft className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
-                <FaArrowRight className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
+                <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
+                    chunkNo--;
+                }}/>
+                <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
+                    chunkNo++;
+                }}/>
             </div>
             <section>
                 <header>Users' data: </header>
