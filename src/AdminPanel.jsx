@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa6'
@@ -6,6 +7,7 @@ import axios from 'axios'
 import origin from '../config/origin.json'
 
 function AdminPanel(props) {
+    const navigate = useNavigate();
     const [spinning, setSpinning] = useState(false);
     const [forceRefresh, setForceRefresh] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ function AdminPanel(props) {
             try {
                 const url = `${origin.default.origin}/user/admin?chunkNo=${chunkNo}`;
                 const accessToken = localStorage.getItem('accessToken');
+                console.log(accessToken)
                 const response = await axios.get(url, {
                     withCredentials: true,
                     headers: {
