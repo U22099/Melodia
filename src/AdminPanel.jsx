@@ -8,18 +8,19 @@ function AdminPanel(props) {
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [musicCount, setMusicCount] = useState(0);
+    const [chunkNo, setChunkNo] = useState(1);
     const fetchAdminData = async () => {
         setLoading(true);
         const stored = JSON.parse(localStorage.getItem('store3'));
         if(stored && !forceRefresh){
-            const data = await indexedDB.getData("AdminData", indexedDB.init);
+            const data = await indexedDB.getData("AdminData", indexedDB.init, chunkNo);
             setUsers(data.users);
             setMusicCount(data.musicCount);
             setForceRefresh(true);
             setLoading(false);
         } else {
             try {
-                const url = origin.default.origin + '/user/admin';
+                const url = `${origin.default.origin}/user/admin?chunkNo=${chunkNo}`;
                 const accessToken = localStorage.getItem('accessToken');
                 const response = await axios.get(url, {
                     withCredentials: true,
@@ -27,9 +28,9 @@ function AdminPanel(props) {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-                indexedDB.saveData(response.data, "AdminData", indexedDB.init);
+                indexedDB.saveData({users: response.data.users.data, musicCount: response.data.musicCount}, "AdminData", indexedDB.init, chunkNo);
                 localStorage.setItem('store3', true);
-                setUsers(response.data.users);
+                setUsers(response.data.users.data);
                 setMusicCount(response.data.musicCount);
                 setLoading(false);
             } catch (err) {
@@ -97,6 +98,10 @@ function AdminPanel(props) {
             <div className="flex gap-[10px] justify-end p-[5px] pb-[0px] w-[100%]">
                 <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.6em] fill-[var(--secondary-color)]"} onClick={refreshState} />
                 <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2.6em]" onClick={() => props.setShowAdminPanel(false)} />
+            </div>
+            <div className="flex gap-[5px]">
+                < className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
+                < className="text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"/>
             </div>
             <section>
                 <header>Users' data: </header>
