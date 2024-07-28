@@ -37,11 +37,10 @@ function AdminPanel(props) {
                 });
                 console.log(response.data);
                 setChunkAmount(response.data.users.chunkAmount);
-        const result = {
-"users": response.data.users.data, 
-"musicCount": response.data.musicCount
-}
-alert(result);
+                const result = {
+                    "users": response.data.users.data, 
+                    "musicCount": response.data.musicCount
+                }
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
                 const arr = localStorage.getItem('music_stored');
                 const data = arr ? [...JSON.parse(arr).push(true)] : [true]
