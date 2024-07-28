@@ -16,7 +16,7 @@ function AdminPanel(props) {
     const [chunkNo, setChunkNo] = useState(1);
     const [chunkAmount, setChunkAmount] = useState(0);
     const fetchAdminData = async () => {
-        console.log("id: 1211");
+        console.log("id: 12112");
         setLoading(true);
         const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored'))[chunkNo - 1] : false;
         if(stored && !forceRefresh){
@@ -36,10 +36,10 @@ function AdminPanel(props) {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
+                console.log(response.data);
                 setChunkAmount(response.data.users.chunkAmount);
                 indexedDB.saveData({users: response.data.users.data, musicCount: response.data.musicCount}, "AdminData", indexedDB.init, chunkNo);
                 const arr = localStorage.getItem('music_stored');
-                console.log(response.data);
                 const data = arr ? [...JSON.parse(arr).push(true)] : [true]
                 localStorage.setItem('music_stored', JSON.stringify(data));
                 setUsers(response.data.users.data);
@@ -114,10 +114,10 @@ function AdminPanel(props) {
             </div>
             <div className="flex gap-[5px]">
                 <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
-                    setChunkNo(chunkNo--);
+                    setChunkNo(chunkNo - 1);
                 }}/>
                 <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
-                    setChunkNo(chunkNo++);
+                    setChunkNo(chunkNo + 1);
                 }}/>
             </div>
             <section>
