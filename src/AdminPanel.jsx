@@ -38,14 +38,15 @@ function AdminPanel(props) {
                 console.log(response.data);
                 setChunkAmount(response.data.users.chunkAmount);
                 const result = {
-                    "users": response.data.users.data, 
+                    "users": response.data.users.chunk, 
                     "musicCount": response.data.musicCount
                 }
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
                 const arr = localStorage.getItem('music_stored');
                 const data = arr ? [...JSON.parse(arr).push(true)] : [true]
+                console.log(data);
                 localStorage.setItem('music_stored', JSON.stringify(data));
-                setUsers(response.data.users.data);
+                setUsers(response.data.users.chunk);
                 setMusicCount(response.data.musicCount);
                 setLoading(false);
             } catch (err) {
