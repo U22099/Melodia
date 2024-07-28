@@ -29,7 +29,6 @@ function AdminPanel(props) {
             try {
                 const url = `${origin.default.origin}/user/admin?chunkNo=${chunkNo}`;
                 const accessToken = localStorage.getItem('accessToken');
-                console.log(accessToken)
                 const response = await axios.get(url, {
                     withCredentials: true,
                     headers: {
@@ -52,7 +51,6 @@ function AdminPanel(props) {
                     const res = await refresh();
                     if (res.status === 200) {
                         localStorage.setItem('accessToken', res.data.accessToken);
-                        console.log(res.data.accessToken);
                         fetchAdminData();
                     } else {
                         localStorage.removeItem('accessToken');
