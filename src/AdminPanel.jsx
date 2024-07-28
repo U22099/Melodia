@@ -51,7 +51,7 @@ function AdminPanel(props) {
                 setLoading(false);
             } catch (err) {
                 console.log(err);
-                props.setErr({ occured: true, msg: err.message });
+                props.setErr({ occured: true, msg: err.response.data.message });
                 if ([401, 403].includes(err.response.status)) {
                     const res = await refresh();
                     if (res.status === 200) {
