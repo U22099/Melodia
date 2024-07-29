@@ -270,8 +270,8 @@ const NavBar = (props) => {
                 <img src={image} alt="Profile Picture" className={(loading ? "profileLoader " : "" ) +"bg-[var(--primary-color)] rounded-full w-16 h-16 cursor-pointer"} onClick={switchVisibility} />
                 <div className={menu ? "grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] absolute bg-[var(--primary-color)] top-[50%] p-[20px] rounded-[10px] z-[10]" : "hidden"}>
                     <label htmlFor='inputImage'>
-                        <input type="file" onChange={handleImage} maxLength={3145728} accept="image/jpeg, image/png, image/jpg" id="inputImage" className="hidden" />
-                        <img src={image} alt="Profile Picture" className="bg-[var(--primary-color)] rounded-full w-32 h-32 mx-auto" onClick={handleImage} />
+                        <input type="file" onChange={handleImage} accept="image/jpeg, image/png, image/jpg" id="inputImage" className="hidden" />
+                        <img src={image} alt="Profile Picture" className="bg-[var(--primary-color)] rounded-full w-32 h-32 mx-auto" />
                     </label>
                     <div>
                         <input type="text" ref={username} defaultValue={username.current} onChange={(e) => username.current = e.target.value} className="bg-[black] rounded-[5px] p-[10px] mx-auto text-[1.3em] text-[white]" />
