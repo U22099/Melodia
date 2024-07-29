@@ -36,7 +36,6 @@ function AdminPanel(props) {
                         'Authorization': 'Bearer ' + accessToken
                     }
                 });
-                console.log(response.data);
                 setChunkAmount(response.data.users.chunkAmount);
                 const result = {
                     "users": response.data.users.chunk, 
@@ -45,7 +44,7 @@ function AdminPanel(props) {
                 console.log(result);
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
                 const arr = localStorage.getItem('music_stored');
-                const data = arr ? [...JSON.parse(arr).push(true)] : [true]
+                const data = arr ? [...((JSON.parse(arr)).push(true))] : [true]
                 console.log(data);
                 localStorage.setItem('music_stored', JSON.stringify(data));
                 setUsers(response.data.users.chunk);
@@ -53,7 +52,6 @@ function AdminPanel(props) {
                 setLoading(false);
             } catch (err) {
                 console.log(err);
-                props.setErr({ occured: true, msg: err.response.data.message });
                 if ([401, 403].includes(err.response.status)) {
                     const res = await refresh();
                     if (res.status === 200) {
@@ -64,6 +62,8 @@ function AdminPanel(props) {
                         localStorage.removeItem('refreshToken');
                         navigate('/', { replace: true });
                     }
+                } else {
+                    props.setErr({ occured: true, msg: err.message });
                 }
                 if(err.message.includes("Network")){
                     fetchAdminData();
@@ -113,17 +113,19 @@ function AdminPanel(props) {
                 }
             }}
             className="flex flex-col bg-black rounded-xl p-[20px] dialog md:w-[60vw] w-[95vw] justify-start items-start gap-[10px] h-[80vh] overflow-y-scroll overflow-x-hidden scrollbar py-[10px]">
-            <div className="flex gap-[10px] justify-end p-[5px] pb-[0px] w-[100%]">
-                <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.6em] fill-[var(--secondary-color)]"} onClick={refreshState} />
-                <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2.6em]" onClick={() => props.setShowAdminPanel(false)} />
-            </div>
-            <div className="flex gap-[5px]">
-                <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
-                    setChunkNo(chunkNo - 1);
-                }}/>
-                <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[1.6em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
-                    setChunkNo(chunkNo + 1);
-                }}/>
+            <div className="flex gap-[10px] justify-between p-[5px] pb-[0px] w-[100%]">
+                <div className="flex gap-[5px]">
+                    <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[1.8em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
+                        setChunkNo(chunkNo - 1);
+                    }}/>
+                    <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[1.8em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
+                        setChunkNo(chunkNo + 1);
+                    }}/>
+                </div>
+                <div className="flex gap-[5px]">
+                    <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2em] fill-[var(--secondary-color)]"} onClick={refreshState} />
+                    <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2em]" onClick={() => props.setShowAdminPanel(false)} />
+                </div>
             </div>
             <section>
                 <header>Users' data: </header>
