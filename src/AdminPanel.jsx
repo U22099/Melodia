@@ -46,7 +46,7 @@ function AdminPanel(props) {
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
                 const arr = localStorage.getItem('users_stored') ? JSON.parse(localStorage.getItem('users_stored')) : null;
                 console.log(arr);
-                const data = arr ? [...(arr.push(true))] : [true]
+                const data = arr ? [...arr, true] : [true]
                 console.log(data);
                 localStorage.setItem('users_stored', JSON.stringify(data));
                 setUsers(response.data.users.chunk);
