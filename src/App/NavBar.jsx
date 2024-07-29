@@ -58,7 +58,6 @@ const NavBar = (props) => {
         
             } catch (err) {
                 console.log(err);
-                props.setErr({ occured: true, msg: err.message });
                 if ([401, 403].includes(err.response.status)) {
                     const res = await refresh();
                     if (res.status === 200) {
@@ -69,6 +68,8 @@ const NavBar = (props) => {
                         localStorage.removeItem('refreshToken');
                         navigate('/', { replace: true });
                     }
+                } else {
+                    props.setErr({ occured: true, msg: err.message });                    
                 }
                 if(err.message.includes("Network")){
                     fetchUserData();
@@ -90,7 +91,7 @@ const NavBar = (props) => {
             if (response.status === 200) return response
         } catch (err) {
             if ((err.response.status === 403) || (err.response.status === 401)) {
-                                localStorage.removeItem('accessToken');
+                localStorage.removeItem('accessToken');
                 localStorage.removeItem('refreshToken');
                 navigate('/', { replace: true });
             }
