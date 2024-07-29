@@ -49,7 +49,7 @@ const Register = () => {
     }
   }
   const handleImage = async (e) => {
-    const data = await imagebase64(e.target.files[0]) || await imagebase64("image.JPG");
+    const data = e.target.files[0] ? await imagebase64(e.target.files[0]) : await imagebase64("image.JPG");
     setImage(data)
   }
   const imagebase64 = (file) => {
