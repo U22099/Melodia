@@ -130,7 +130,7 @@ function AdminPanel(props) {
                 </div>
             </div>
             <section>
-                <header>Users' data: </header>
+                <header className="bold font-serif bg-[var(--primary-color)] rounded p-[5px]">Users' data: </header>
                 <main>
                     {loading ? <div id="loader"><p></p></div> :
                     <ol className="flex flex-col gap-[10px]">
@@ -148,9 +148,9 @@ function AdminPanel(props) {
                     </ol> }
                 </main>
             </section>
-            <section className="mx-auto">
+            <section className="mx-auto bold bg-[var(--primary-color)] rounded p-[5px]">
                 <header>
-                    Current Music Count: {musicCount}
+                    Current Music Count: <span className="font-mono text-[var(--secondary-color)]">{musicCount}</span>
                 </header>
             </section>
         </motion.div>
