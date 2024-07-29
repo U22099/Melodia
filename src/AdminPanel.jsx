@@ -43,8 +43,8 @@ function AdminPanel(props) {
                 }
                 console.log(result);
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
-                const arr = localStorage.getItem('music_stored');
-                const data = arr ? [...((JSON.parse(arr)).push(true))] : [true]
+                const arr = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored')) : null;
+                const data = arr ? [...(arr.push(true))] : [true]
                 console.log(data);
                 localStorage.setItem('music_stored', JSON.stringify(data));
                 setUsers(response.data.users.chunk);
@@ -123,8 +123,8 @@ function AdminPanel(props) {
                     }}/>
                 </div>
                 <div className="flex gap-[5px]">
-                    <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2em] fill-[var(--secondary-color)]"} onClick={refreshState} />
-                    <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2em]" onClick={() => props.setShowAdminPanel(false)} />
+                    <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[1.8em] fill-[var(--secondary-color)]  bg-[var(--primary-color)] rounded p-[5px]"} onClick={refreshState} />
+                    <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[1.8em]  bg-[var(--primary-color)] rounded p-[5px]" onClick={() => props.setShowAdminPanel(false)} />
                 </div>
             </div>
             <section>
