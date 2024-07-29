@@ -17,7 +17,8 @@ function AdminPanel(props) {
     const [chunkNo, setChunkNo] = useState(1);
     const [chunkAmount, setChunkAmount] = useState(0);
     const fetchAdminData = async () => {
-        console.log("id: 12112");
+        console.log(chunkNo);
+        console.log(forceRefresh)
         setLoading(true);
         const stored = localStorage.getItem('users_stored') ? JSON.parse(localStorage.getItem('users_stored'))[chunkNo - 1] : false;
         if(stored && !forceRefresh){
