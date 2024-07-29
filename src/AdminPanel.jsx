@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { MdOutlineClose, MdRefresh } from 'react-icons/md'
 import {FaArrowLeft, FaArrowRight} from 'react-icons/fa6'
-import indexedDB from 'utils/indexedDB.js'
+import indexedDB from '/utils/indexedDB.js'
 import axios from 'axios'
 import origin from '../config/origin.json'
 
