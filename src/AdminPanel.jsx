@@ -19,7 +19,7 @@ function AdminPanel(props) {
     const fetchAdminData = async () => {
         console.log("id: 12112");
         setLoading(true);
-        const stored = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored'))[chunkNo - 1] : false;
+        const stored = localStorage.getItem('users_stored') ? JSON.parse(localStorage.getItem('users_stored'))[chunkNo - 1] : false;
         if(stored && !forceRefresh){
             const data = await indexedDB.getData("AdminData", indexedDB.init, chunkNo);
             setUsers(data.users);
@@ -43,10 +43,10 @@ function AdminPanel(props) {
                 }
                 console.log(result);
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
-                const arr = localStorage.getItem('music_stored') ? JSON.parse(localStorage.getItem('music_stored')) : null;
+                const arr = localStorage.getItem('users_stored') ? JSON.parse(localStorage.getItem('users_stored')) : null;
                 const data = arr ? [...(arr.push(true))] : [true]
                 console.log(data);
-                localStorage.setItem('music_stored', JSON.stringify(data));
+                localStorage.setItem('users_stored', JSON.stringify(data));
                 setUsers(response.data.users.chunk);
                 setMusicCount(response.data.musicCount);
                 setLoading(false);
