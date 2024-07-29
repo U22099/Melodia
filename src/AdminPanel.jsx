@@ -117,16 +117,16 @@ function AdminPanel(props) {
             className="flex flex-col bg-black rounded-xl p-[20px] dialog md:w-[60vw] w-[95vw] justify-start items-start gap-[10px] h-[80vh] overflow-y-scroll overflow-x-hidden scrollbar py-[10px]">
             <div className="flex gap-[10px] justify-between p-[5px] pb-[0px] w-[100%]">
                 <div className="flex gap-[5px]">
-                    <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[1.8em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
+                    <FaArrowLeft className={(chunkNo === 1) ? "hidden" : "text-[2em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
                         setChunkNo(chunkNo - 1);
                     }}/>
-                    <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[1.8em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
+                    <FaArrowRight className={(chunkNo === chunkAmount) ? "hidden" : "text-[2em] fill-[var(--secondary-color)] bg-[var(--primary-color)] rounded p-[5px]"} onClick={(e) => {
                         setChunkNo(chunkNo + 1);
                     }}/>
                 </div>
                 <div className="flex gap-[5px]">
-                    <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[1.8em] fill-[var(--secondary-color)]  bg-[var(--primary-color)] rounded p-[5px]"} onClick={refreshState} />
-                    <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[1.8em]  bg-[var(--primary-color)] rounded p-[5px]" onClick={() => props.setShowAdminPanel(false)} />
+                    <MdRefresh className={(spinning ? "animate-spin-once " : "") + "cursor-pointer text-[2.2em] fill-[var(--secondary-color)]  bg-[var(--primary-color)] rounded p-[5px]"} onClick={refreshState} />
+                    <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer text-[2.2em]  bg-[var(--primary-color)] rounded p-[5px]" onClick={() => props.setShowAdminPanel(false)} />
                 </div>
             </div>
             <section>
