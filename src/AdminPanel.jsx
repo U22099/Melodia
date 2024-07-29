@@ -41,6 +41,7 @@ function AdminPanel(props) {
                     "users": response.data.users.chunk, 
                     "musicCount": response.data.musicCount
                 }
+                console.log(result);
                 indexedDB.saveData(result, "AdminData", indexedDB.init, chunkNo);
                 const arr = localStorage.getItem('music_stored');
                 const data = arr ? [...JSON.parse(arr).push(true)] : [true]
