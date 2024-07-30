@@ -59,6 +59,20 @@
     margin-top: 20px;
     cursor: pointer;
 }
+.active{
+    position: relative;
+}
+.active::after{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 5px;
+    background-color: var(--secondary-color);
+    top: 100%;
+    left: 38%;
+    border-radius: 10px;
+    transition: 1s;
+}
 #roll1{
     background-color: black;
     margin: 0px;
