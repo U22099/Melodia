@@ -54,6 +54,9 @@ const Footer = (props) => {
             audio.addEventListener('loadedmetadata', () => {
                 slider.max = audio.duration;
             });
+            audio.onend = () => {
+                audio.play();
+            }
             slider.onchange = () => {
                 audio.currentTime = slider.value;
                 audio.play();
