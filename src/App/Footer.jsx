@@ -55,7 +55,8 @@ const Footer = (props) => {
                 slider.max = audio.duration;
             });
             audio.onend = () => {
-                audio.play();
+                alert("Replay");
+                Load()
             }
             slider.onchange = () => {
                 audio.currentTime = slider.value;
