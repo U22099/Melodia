@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import { MdRefresh, MdOutlineClose } from "react-icons/md";
 import axios from "axios";
-import indexedDB from "../../utils/indexedDB.js";
-import ErrorDialog from "../../utils/ErrorDialog";
-import ConfirmDialog from "../../utils/ConfirmDialog";
-import SuccessDialog from "../../utils/SuccessDialog";
-import origin from "../../../config/origin.json";
+import indexedDB from "../../../utils/indexedDB.js";
+import Developers from './ExploreComponents/Developers';
+import MusicList from './ExploreComponents/MusicList';
+import ErrorDialog from "../../../utils/ErrorDialog";
+import ConfirmDialog from "../../../utils/ConfirmDialog";
+import SuccessDialog from "../../../utils/SuccessDialog";
+import origin from "../../../../config/origin.json";
 
 const Explore = () => {
     let id = "";
@@ -29,7 +31,33 @@ const Explore = () => {
         image: "Logo.jpg",
         uploader: "Daniel"
       },
+      {
+        title: "Lil Wayne || Mirror",
+        artist: "Lorem",
+        image: "Logo.jpg",
+        uploader: "Daniel"
+      },
+      {
+        title: "Lil Wayne || Mirror",
+        artist: "Lorem",
+        image: "Logo.jpg",
+        uploader: "Daniel"
+      },
   ]);
+  const [devData, setDevData] = useState([
+    {
+      username: "Daniel",
+      image: "image.JPG",
+      email: "nifemiolaniyi4@gmail.com",
+      role: "Developer"
+    },
+    {
+      username: "Swag",
+      image: "image.JPG",
+      email: "swaggarlicious@gmail.com",
+      role: "Designer"
+    },
+  ])
   const [outputData, setOutputData] = useState(music.slice());
   const filterOutput = () => {
 
@@ -107,48 +135,24 @@ const Explore = () => {
     }
   }, [refresh]);
   return (
-    <div>
-        <section className="p-[10px] pb-[20px] ">
-        {loading ? (
-          <div id="loader">
-            <p></p>
-          </div>
-        ) : (
-          <ol className="flex gap-[10px] overflow-auto overflow-y-hidden">
-            {outputData.map((x, i) => (
-              <li
-                key={i}
-                onClick={() => {
-                  const audio = document.getElementById("audio");
-                  audio?.pause();
-                  props.play(music, i);
-                }}
-                className="w-[150px]"
-              >
-                <div className="cursor-pointer p-[10px] rounded-[10px] flex flex-col gap-[5px] items-start">
-                  <img
-                    src={x.image}
-                    onDoubleClick={() => {
-                      id = x._id;
-                      console.log(id, x._id);
-                      setConfirm(true);
-                    }}
-                    alt="Music Picture"
-                    className="bg-[black] rounded-[15px] w-36 h-36 m-[0px]"
-                  />
-                  <div className="">
-                    <h1 className="font-extrabold md:text-[1.3em] font-serif m-[0px ml-[5px]">
-                      {x.title}
-                    </h1>
-                    <h1 className="text-gray-300 text-[0.7em] md:text-[1em] font-serif m-[0px ml-[5px]">
-                      Uploaded by {x.uploader}
-                    </h1>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ol>
-        )}
+    <div className="overflow-auto overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
+      <section>
+        <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
+          <h1>Recently uploaded</h1>
+        </header>
+        <MusicList loading={loading} outputData={outputData}/>
+      </section>
+      <section>
+        <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
+          <h1>Top Five</h1>
+        </header>
+        <MusicList loading={loading} outputData={outputData}/>
+      </section>
+      <section>
+        <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
+          <h1>Developers</h1>
+        </header>
+        <Developers loading={loading} devData={devData}/>
       </section>
     </div>
   )

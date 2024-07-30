@@ -1,15 +1,13 @@
-import Explore from './BodyComponents/Explore.jsx'
-import All from './BodyComponents/All.jsx'
+import Home from './BodyComponents/Home.jsx'
 
-
-const Body = (props) => {
+const Body = ({page}) => {
   
   return (
     <div>
-      {props.page === 1 ? <Explore/> : ''}
-      {props.page === 2 ? <Explore/> : ''}
-      {props.page === 3 ? <Explore/> : ''}
-      {props.page === 4 ? <Explore/> : ''}
+      {page === 1 ? <Home/> : ''}
+      {page === 2 ? 'Search' : ''}
+      {page === 3 ? 'Profile' : ''}
+      {page === 4 ? 'Upload' : ''}
     </div>
   );
 };

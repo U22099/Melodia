@@ -69,9 +69,9 @@
     height: 5px;
     background-color: var(--secondary-color);
     top: 100%;
-    left: 38%;
+    left: 30%;
     border-radius: 10px;
-    transition: 1s;
+    transition: all 1s ease;
 }
 #roll1{
     background-color: black;
@@ -221,6 +221,8 @@
         transform: rotate(360deg);
     }
 }
+
+
 @tailwind base;
 
 @tailwind components;
