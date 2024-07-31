@@ -11,7 +11,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <SkeletonTheme baseColor="#121212" highlightColor="black">
+      <SkeletonTheme baseColor="#313131" highlightColor="#525252" enableAnimation={true} duration={2}>
     <BrowserRouter basename='/Melodia'>
       <Routes>
         <Route path="/" element={<LogIn />} />

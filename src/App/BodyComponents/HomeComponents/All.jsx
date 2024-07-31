@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import MusicList from './AllComponents/MusicList'
 const All = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [outputData, setOutputData] = useState([
     {
       title: "Lil Wayne || Mirror",

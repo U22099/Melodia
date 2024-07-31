@@ -5,7 +5,7 @@ const MusicList = ({loading, outputData}) => {
   return (
     <section className="p-[10px] pb-[20px] mx-auto">
       {loading ? (
-        <MusicListSkeleton outputData={[0,1,2,3,4]}/>
+        <MusicListSkeleton outputData={"012345678910".split("")}/>
       ) : (
         <ol className="flex md:gap-[5px] flex-wrap justify-center w-fit mx-auto">
           {outputData.map((x, i) => (

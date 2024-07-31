@@ -13,12 +13,18 @@ import origin from "../../../../config/origin.json";
 const Explore = () => {
   let id = "";
   const [refresh, setRefresh] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [forceRefresh, setForceRefresh] = useState(false);
   const [spinning, setSpinning] = useState(false);
   const [success, setSuccess] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [music, setMusic] = useState([
+    {
+      title: "Lil Wayne || Mirror",
+      artist: "Lorem",
+      image: "Logo.jpg",
+      uploader: "Daniel",
+    },
     {
       title: "Lil Wayne || Mirror",
       artist: "Lorem",
@@ -141,7 +147,7 @@ const Explore = () => {
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
-          <h1>Top Five</h1>
+          <h1>Top Six</h1>
         </header>
         <MusicList loading={loading} outputData={outputData} />
       </section>

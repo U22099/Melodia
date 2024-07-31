@@ -14,14 +14,14 @@ const MusicListSkeleton = ({outputData}) => {
               >
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex flex-col gap-[5px] items-start">
                   <Skeleton
-                    className="bg-[black] rounded-[15px] w-36 h-36 m-[0px]"
+                    className="rounded-[15px] w-36 h-36 m-[0px]"
                   />
                   <div className="">
                     <h1 className="font-extrabold md:text-[1.3em] font-serif m-[0px ml-[5px]">
-                      <Skeleton />
+                      <Skeleton width="80px" height="20px" />
                     </h1>
                     <h1 className="text-gray-300 text-[0.7em] md:text-[1em] font-serif m-[0px ml-[5px]">
-                        <Skeleton />
+                        <Skeleton width="60px" height="10px"/>
                     </h1>
                   </div>
                 </div>
