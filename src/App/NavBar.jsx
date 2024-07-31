@@ -15,14 +15,13 @@ const NavBar = (props) => {
   // const [forceRefresh, setForceRefresh] = useState(false);
   // const [loading, setLoading] = useState(false);
   // const [text, setText] = useState("Save");
-  // const [errorText, setErrorText] = useState("");
-  // const [fileCount, setFileCount] = useState(0);
+  //
+  //
   // const [upload, setUpload] = useState({ state: null, msg: "" });
   // const [confirm, setConfirm] = useState(false);
   // const [showAdminPanel, setShowAdminPanel] = useState(false);
   // const [image, setImage] = useState("image.JPG");
-  // const email = useRef("");
-  // const username = useRef("");
+  //
   // const fetchUserData = async () => {
   //   setLoading(true);
   //   const stored = JSON.parse(localStorage.getItem("user_stored"));
@@ -100,11 +99,7 @@ const NavBar = (props) => {
   //     }
   //   }
   // };
-  // const handleImage = async (e) => {
-  //   const data = await toBase64(e.target.files[0]);
-  //   setImage(data);
-  // };
-  // const switchVisibility = (e) => {
+  // // const switchVisibility = (e) => {
   //   setMenu(!menu);
   //   e.target.style.border = menu ? "none" : "3px solid var(--secondary-color)";
   // };
@@ -258,31 +253,48 @@ const NavBar = (props) => {
   return (
     <>
       <div className="flex gap-[10px] items-center ml-[20px]">
-        <h1 className={(props.section === 1 ? "active ":"") + "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"} onClick={()=> {
-          props.setSection(1);
-        }}> Explore</h1>
-        <h1  className={(props.section === 2 ? "active ":"") + "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"} onClick={()=> {
-          props.setSection(2)
-        }}>All</h1>
+        <h1
+          className={
+            (props.section === 1 ? "active " : "") +
+            "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"
+          }
+          onClick={() => {
+            props.setSection(1);
+          }}
+        >
+          {" "}
+          Explore
+        </h1>
+        <h1
+          className={
+            (props.section === 2 ? "active " : "") +
+            "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"
+          }
+          onClick={() => {
+            props.setSection(2);
+          }}
+        >
+          All
+        </h1>
       </div>
       <div className="flex justify-end align-center items-center">
         <img
-          src='image.JPG'
+          src="image.JPG"
           alt="Profile Picture"
-          className=
-            "bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
+          className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
+          onClick={() => props.setPage(3)}
         />
-        
-          {props.isAdmin ? (
-            <p
-              className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]"
-              onClick={() => setShowAdminPanel(true)}
-            >
-              Admin Panel
-            </p>
-          ) : (
-            ""
-          )}
+
+        {/* {props.isAdmin ? (
+          <p
+            className="link text-[var(--secondary-color)] mt-[5px] text-[1.2em]"
+            onClick={() => setShowAdminPanel(true)}
+          >
+            Admin Panel
+          </p>
+        ) : (
+          ""
+        )} */}
       </div>
       {/* {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ""}{props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ""}
       {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}
