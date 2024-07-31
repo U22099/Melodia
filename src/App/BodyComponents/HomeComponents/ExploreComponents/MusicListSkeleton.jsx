@@ -14,6 +14,7 @@ const MusicListSkeleton = ({outputData}) => {
               >
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex flex-col gap-[5px] items-start">
                   <Skeleton
+                   borderRadius="15px"
                     className="rounded-[15px] w-36 h-36 m-[0px]"
                   />
                   <div className="">

@@ -9,10 +9,11 @@ const MusicListSkeleton = ({outputData}) => {
           {outputData.map((x, i) => (
             <li
               key={i}
-              className="min-w-[140px] md:min-w-[150px] max-w-[140px] md:max-w-[150px]"
+              className="min-w-[130px] md:min-w-[150px] max-w-[130px] md:max-w-[150px]"
             >
               <div className="cursor-pointer p-[10px] rounded-[10px] flex flex-col gap-[5px] items-start">
                 <Skeleton
+                borderRadius="15px"
                   className="rounded-[15px] w-36 h-36 m-[0px]"
                 />
                 <div className="">
