@@ -1,15 +1,14 @@
 import React from 'react'
+import DevelopersSkeleton from "./DevelopersSkeleton";
 
-const Developers = (props) => {
+const Developers = ({loading, devData}) => {
   return (
     <section className="p-[10px] pb-[20px] ">
-        {props.loading ? (
-          <div id="loader">
-            <p></p>
-          </div>
+        {loading ? (
+          <DevelopersSkeleton devData={[0,1]}/>
         ) : (
           <ol className="flex gap-[10px] overflow-auto overflow-y-hidden">
-            {props.devData.map((x, i) => (
+            {devData.map((x, i) => (
               <li
                 key={i}
                 onClick={() => {

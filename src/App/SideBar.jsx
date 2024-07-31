@@ -9,7 +9,7 @@ import logOut from "../utils/logOut.js";
 import ErrorDialog from "../utils/ErrorDialog.jsx";
 import { motion } from "framer-motion";
 
-const SideBar = (props) => {
+const SideBar = ({page, setPage, setErr, err}) => {
   const navigate = useNavigate();
   const container = {
     hidden: { opacity: 1, y: 40 },
@@ -44,7 +44,7 @@ const SideBar = (props) => {
             alt="logo"
             className="w-[50px] h-[50px] rounded "
             onClick={() => {
-              props.setPage(1);
+              setPage(1);
             }}
           />
           <h1 className="font-bold font-serif text-[2em] text-[var(--secondary-color)] hidden md:flex">
@@ -57,24 +57,24 @@ const SideBar = (props) => {
         >
           <GoHomeFill
             className={
-              (props.page === 1
+              (page === 1
                 ? "fill-[var(--secondary-color)] "
                 : "fill-gray-300 hover:fill-white ") +
               "cursor-pointer text-[1.5em] md:text-[2em] transition ease-in"
             }
             onClick={() => {
-              props.setPage(1);
+              setPage(1);
             }}
           />
           <h1
             className={
-              (props.page === 1
+              (page === 1
                 ? "text-[var(--secondary-color)]  "
                 : "text-gray-300 hover:text-white ") +
               "cursor-pointer font-bold font-serif text-[1.2em] hidden md:flex transition ease-in"
             }
             onClick={() => {
-              props.setPage(1);
+              setPage(1);
             }}
           >
             Home
@@ -86,24 +86,24 @@ const SideBar = (props) => {
         >
           <FaSearch
             className={
-              (props.page === 2
+              (page === 2
                 ? "fill-[var(--secondary-color)] "
                 : "fill-gray-300  hover:fill-white ") +
               "cursor-pointer text-[1.3em] md:text-[1.8em] transition ease-in"
             }
             onClick={() => {
-              props.setPage(2);
+              setPage(2);
             }}
           />
           <h1
             className={
-              (props.page === 2
+              (page === 2
                 ? "text-[var(--secondary-color)]  "
                 : "text-gray-300 hover:text-white ") +
               "cursor-pointer font-bold font-serif text-[1.2em] hidden md:flex transition ease-in"
             }
             onClick={() => {
-              props.setPage(2);
+              setPage(2);
             }}
           >
             Search
@@ -115,24 +115,24 @@ const SideBar = (props) => {
         >
           <FaUser
             className={
-              (props.page === 3
+              (page === 3
                 ? "fill-[var(--secondary-color)] "
                 : "fill-gray-300  hover:fill-white ") +
               "cursor-pointer text-[1.5em] md:text-[2em] transition ease-in"
             }
             onClick={() => {
-              props.setPage(3);
+              setPage(3);
             }}
           />
           <h1
             className={
-              (props.page === 3
+              (page === 3
                 ? "text-[var(--secondary-color)]  "
                 : "text-gray-300 hover:text-white ") +
               "cursor-pointer font-bold font-serif text-[1.2em] hidden md:flex transition ease-in"
             }
             onClick={() => {
-              props.setPage(3);
+              setPage(3);
             }}
           >
             Profile
@@ -144,24 +144,24 @@ const SideBar = (props) => {
         >
           <LuUpload
             className={
-              (props.page === 4
+              (page === 4
                 ? "stroke-[var(--secondary-color)] "
                 : "stroke-gray-300 hover:stoke-white ") +
               "cursor-pointer text-[1.5em] md:text-[2em] transition ease-in"
             }
             onClick={() => {
-              props.setPage(4);
+              setPage(4);
             }}
           />
           <h1
             className={
-              (props.page === 4
+              (page === 4
                 ? "text-[var(--secondary-color)]  "
                 : "text-gray-300 hover:text-white ") +
               "cursor-pointer font-bold font-serif text-[1.2em]  hidden md:flex transition ease-in"
             }
             onClick={() => {
-              props.setPage(4);
+              setPage(4);
             }}
           >
             Upload
@@ -177,17 +177,17 @@ const SideBar = (props) => {
         >
           <MdLogout
             className="cursor-pointer text-[1.5em] md:text-[2em] fill-gray-300 hover:fill-white transition ease-in"
-            onClick={() => logOut(props.setErr, navigate)}
+            onClick={() => logOut(setErr, navigate)}
           />
           <h1
             className="cursor-pointer bold font-serif text-[1.2em] text-gray-300 hover:text-white hidden md:flex transition ease-in"
-            onClick={() => logOut(props.setErr, navigate)}
+            onClick={() => logOut(setErr, navigate)}
           >
             Logout
           </h1>
         </motion.div>
       </div>
-      {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ""}
+      {err.occured ? <ErrorDialog msg={err.msg} /> : ""}
     </div>
   );
 };

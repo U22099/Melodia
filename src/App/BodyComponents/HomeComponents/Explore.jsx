@@ -3,15 +3,15 @@ import { FaSearch } from "react-icons/fa";
 import { MdRefresh, MdOutlineClose } from "react-icons/md";
 import axios from "axios";
 import indexedDB from "../../../utils/indexedDB.js";
-import Developers from './ExploreComponents/Developers';
-import MusicList from './ExploreComponents/MusicList';
+import Developers from "./ExploreComponents/Developers";
+import MusicList from "./ExploreComponents/MusicList";
 import ErrorDialog from "../../../utils/ErrorDialog";
 import ConfirmDialog from "../../../utils/ConfirmDialog";
 import SuccessDialog from "../../../utils/SuccessDialog";
 import origin from "../../../../config/origin.json";
 
 const Explore = () => {
-    let id = "";
+  let id = "";
   const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(false);
   const [forceRefresh, setForceRefresh] = useState(false);
@@ -23,47 +23,44 @@ const Explore = () => {
       title: "Lil Wayne || Mirror",
       artist: "Lorem",
       image: "Logo.jpg",
-      uploader: "Daniel"
+      uploader: "Daniel",
     },
     {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
+      title: "Lil Wayne || Mirror",
+      artist: "Lorem",
+      image: "Logo.jpg",
+      uploader: "Daniel",
+    },
+    {
+      title: "Lil Wayne || Mirror",
+      artist: "Lorem",
+      image: "Logo.jpg",
+      uploader: "Daniel",
+    },
+    {
+      title: "Lil Wayne || Mirror",
+      artist: "Lorem",
+      image: "Logo.jpg",
+      uploader: "Daniel",
+    },
   ]);
   const [devData, setDevData] = useState([
     {
       username: "Daniel",
       image: "image.JPG",
       email: "nifemiolaniyi4@gmail.com",
-      role: "Developer"
+      role: "Developer",
     },
     {
       username: "Swag",
       image: "image.JPG",
       email: "swaggarlicious@gmail.com",
-      role: "Designer"
+      role: "Designer",
     },
-  ])
+  ]);
   const [outputData, setOutputData] = useState(music.slice());
   const filterOutput = () => {
-
-    setOutputData(
-      music
-    );
+    setOutputData(music);
   };
   const refreshState = () => {
     setSpinning(true);
@@ -135,27 +132,27 @@ const Explore = () => {
     }
   }, [refresh]);
   return (
-    <div className="overflow-auto overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
+    <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
           <h1>Recently uploaded</h1>
         </header>
-        <MusicList loading={loading} outputData={outputData}/>
+        <MusicList loading={loading} outputData={outputData} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
           <h1>Top Five</h1>
         </header>
-        <MusicList loading={loading} outputData={outputData}/>
+        <MusicList loading={loading} outputData={outputData} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
           <h1>Developers</h1>
         </header>
-        <Developers loading={loading} devData={devData}/>
+        <Developers loading={loading} devData={devData} />
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Explore
+export default Explore;

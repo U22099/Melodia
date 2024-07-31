@@ -1,21 +1,20 @@
 import React from 'react'
+import MusicListSkeleton from "./MusicListSkeleton";
 
-const MusicList = (props) => {
+const MusicList = ({loading, outputData}) => {
   return (
     <section className="p-[10px] pb-[20px] ">
-        {props.loading ? (
-          <div id="loader">
-            <p></p>
-          </div>
+        {loading ? (
+          <MusicListSkeleton outputData={[0,1,2,3,4]}/>
         ) : (
           <ol className="flex gap-[10px] overflow-auto overflow-y-hidden">
-            {props.outputData.map((x, i) => (
+            {outputData.map((x, i) => (
               <li
                 key={i}
                 onClick={() => {
                   // const audio = document.getElementById("audio");
                   // audio?.pause();
-                  // props.play(music, i);
+                  // play(music, i);
                 }}
                 className="min-w-[150px]"
               >
