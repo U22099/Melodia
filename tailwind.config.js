@@ -10,7 +10,7 @@ export default {
         'spin-once': 'spin 0.5s linear'
       },
       fontFamily: {
-        serif: ['"Plus Jakarta Sans"']
+        custom: ['Plus\\ Jakarta\\ Sans', serif],
     },
     },
   },

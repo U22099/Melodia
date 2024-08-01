@@ -22,7 +22,7 @@ const Upload = () => {
       className="mt-[50px] md:w-[70%] mx-auto"
     >
       <div className="flex cursor-pointer flex-col">
-        <h1 className="font-bold font-serif ml-[10px] md:text-[1.5em]">Upload Music: </h1>
+        <h1 className="font-bold font-custom ml-[10px] md:text-[1.5em]">Upload Music: </h1>
         <label htmlFor="upload" className="cursor-pointer mt-[20px]">
           <input
             type="file"

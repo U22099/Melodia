@@ -135,7 +135,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
         <h1
           className={
             (section === 1 ? "active " : "") +
-            "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"
+            "cursor-pointer transition ease-in font-custom text-gray-300 hover:text-white"
           }
           onClick={() => {
             setSection(1);
@@ -147,7 +147,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
         <h1
           className={
             (section === 2 ? "active " : "") +
-            "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"
+            "cursor-pointer transition ease-in font-custom text-gray-300 hover:text-white"
           }
           onClick={() => {
             setSection(2);

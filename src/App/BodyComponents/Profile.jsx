@@ -73,9 +73,9 @@ const Profile = () => {
           {errorText}
         </p>
       </div>
-      <button onClick={update} className="btn w-[82%] md:w-[70%] font-serif h-[50px]">{text}</button>
+      <button onClick={update} className="btn w-[82%] md:w-[70%] font-custom h-[50px]">{text}</button>
       <button
-        className="btn font-serif h-[50px] w-[82%] md:w-[70%] bg-red-600"
+        className="btn font-custom h-[50px] w-[82%] md:w-[70%] bg-red-600"
         // onClick={() => {
         //   setConfirm(true);
         // }}
