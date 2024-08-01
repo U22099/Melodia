@@ -17,7 +17,6 @@ const Explore = () => {
   const retrieveStoredData = async (storageName, dbName, route, callback) => {
     setLoading(true);
     const stored = JSON.parse(localStorage.getItem(storageName));
-    console.log("stored11");
     if (stored) {
       const data = await indexedDB.getData(dbName, indexedDB.init);
       callback(data)
