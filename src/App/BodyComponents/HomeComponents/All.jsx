@@ -87,8 +87,8 @@ const All = () => {
           // onClick={refreshState}
         /> */}
       </section>
-      <section className="mx-auto">
-        <MusicList loading={loading} outputData={outputData} className="mx-auto"/>
+      <section className="mx-auto w-[100%]">
+        <MusicList loading={loading} outputData={outputData}/>
       </section>
       {/* {success ? <SuccessDialog msg="Music deleted successfully" /> : ""}
       {confirm ? (

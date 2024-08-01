@@ -6,11 +6,11 @@ import { motion } from "framer-motion";
 import { Context } from "../../App.jsx";
 
 const Home = () => {
-  const [section, setSection, setPage] = useContext(Context);
+  const [section, setSection, setMenu, menu] = useContext(Context);
   return (
     <div className="">
       <header className="grid grid-cols-[2fr_1fr] p-[10px]">
-        <NavBar setSection={setSection} section={section} setPage={setPage} />
+        <NavBar setSection={setSection} section={section} setMenu={setMenu} menu={menu} />
       </header>
       <motion.main
         initial={{

@@ -3,11 +3,11 @@ import MusicListSkeleton from "./MusicListSkeleton";
 
 const MusicList = ({ loading, outputData }) => {
   return (
-    <section className="p-[10px] pb-[20px] mx-auto">
+    <section className="p-[10px] pb-[20px] w-[100%] mx-auto">
       {loading ? (
         <MusicListSkeleton outputData={"012345678910".split("")} />
       ) : (
-        <ol className="flex md:gap-[5px] flex-wrap justify-center w-fit mx-auto">
+        <ol className="flex md:gap-[5px] flex-wrap justify-center w-[100%] mx-auto">
           {outputData.map((x, i) => (
             <li
               key={i}
@@ -16,7 +16,7 @@ const MusicList = ({ loading, outputData }) => {
                 // audio?.pause();
                 // props.play(music, i);
               }}
-              className="min-w-[140px] md:min-w-[150px] max-w-[140px] md:max-w-[150px]"
+              className="min-w-[120px] md:min-w-[150px] max-w-[170px] md:max-w-[200px]"
             >
               <div className="cursor-pointer p-[10px] rounded-[10px] flex flex-col gap-[5px] items-start">
                 <img

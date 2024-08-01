@@ -3,11 +3,11 @@ import DevelopersSkeleton from "./DevelopersSkeleton";
 
 const Developers = ({loading, devData}) => {
   return (
-    <section className="p-[10px] pb-[20px] ">
+    <section className="p-[8px] pb-[32px] ">
         {loading ? (
-          <DevelopersSkeleton devData={[0,1]}/>
+          <DevelopersSkeleton devData={devData}/>
         ) : (
-          <ol className="flex gap-[10px] overflow-auto overflow-y-hidden">
+          <ol className="flex gap-[8px] overflow-auto overflow-y-hidden">
             {devData.map((x, i) => (
               <li
                 key={i}

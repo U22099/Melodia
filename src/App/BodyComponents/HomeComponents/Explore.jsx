@@ -58,6 +58,9 @@ const Explore = () => {
     }
   };*/
   useEffect(() => {
+    setRecentMusic("012345".split(""));
+    setTopMusic("012345".split(""));
+    setDevData("01".split(""));
     retrieveStoredData('recent_music_stored', 'RecentMusicData', 'recent', setRecentMusic);
     retrieveStoredData('top_music_stored', 'TopMusicData', 'top', setTopMusic);
     retrieveStoredData('dev_data_stored', 'DevData', 'dev', setDevData);

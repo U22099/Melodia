@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./App/SideBar";
 import Body from "./App/Body";
 import Footer from "./App/Footer";
+import {motion} from 'framer-motion'
 
 export const Context = React.createContext();
 
@@ -10,6 +11,7 @@ const App = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAdmin, setIsAdmin] = useState();
   const [file, setFile] = useState();
+  const [menu, setMenu] = useState(false);
   const [page, setPage] = useState(1);
   const [section, setSection] = useState(1);
   const [x, setX] = useState();
@@ -19,13 +21,20 @@ const App = () => {
     setIsPlaying(true);
   };
   return (
-    <div className="grid h-[100vh] w-[100vw] grid-cols-[1fr_5fr] md:grid-cols-[1fr_3fr]">
-      <section className="bg-[var(--primary-color)] ">
-        <SideBar setErr={setErr} err={err} setPage={setPage} page={page} />
-      </section>
+    <div className={(menu ? "grid-cols-[1fr_5fr] " : "") +"grid h-[100vh] w-[100vw] md:grid-cols-[1fr_3fr]"}>
+      <motion.section 
+      key={menu}
+    initial={{ x: -50}}
+    animate={{ x: 0}}
+    transition={{
+        type: "spring"
+    }}
+      className={(menu ? "" : "hidden ") +  "bg-[var(--primary-color)] "}>
+        <SideBar key={menu} setErr={setErr} err={err} setPage={setPage} page={page} />
+      </motion.section>
       <section className="flex flex-col overflow-hidden gap-[20px] h-[100vh] mt-[0px] my-[10px] ">
         <main className="">
-          <Context.Provider value={[section, setSection, setPage]}>
+          <Context.Provider value={[section, setSection, setMenu, menu]}>
             <Body
               play={play}
               err={err}

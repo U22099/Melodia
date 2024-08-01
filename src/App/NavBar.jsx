@@ -8,7 +8,7 @@ import axios from "axios";
 // import toBase64 from "./../utils/Base64.js";
 // import origin from "../../config/origin.json";
 
-const NavBar = ({ section, setSection, setPage }) => {
+const NavBar = ({ section, setSection, setMenu, menu }) => {
   const [loading, setLoading, image, setImage, email, username] = useContext(Context);
   // const navigate = useNavigate();
   // const [menu, setMenu] = useState(false);
@@ -164,7 +164,10 @@ const NavBar = ({ section, setSection, setPage }) => {
             src={image}
             alt="Profile Picture"
             className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
-            onClick={() => setPage(3)}
+            onClick={() => {
+              console.log("done")
+               setMenu(!menu)
+            }}
           />
         )}
 
