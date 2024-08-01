@@ -65,7 +65,7 @@ const Search = () => {
           onChange={filterOutput}
         />
         <FaSearch
-          className="fill-gray-300 cursor-pointer text-[1.4em] md:text-[1.7em] absolute left-[80%] md:left-[90%]"
+          className="fill-gray-300 cursor-pointer text-[1.4em] md:text-[1.7em] absolute top-[50%] transform translate-y-[-50%] left-[80%] md:left-[90%]"
           id="searchIcon"
         />
       </section>
