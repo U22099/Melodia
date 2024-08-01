@@ -131,7 +131,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
   // }, []);
   return (
     <>
-      <div className="flex gap-[10px] items-center ml-[20px]">
+      <div className="flex gap-[8px] items-center ml-[8px]">
         <h1
           className={
             (section === 1 ? "active " : "") +

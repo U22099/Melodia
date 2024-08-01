@@ -68,19 +68,19 @@ const Explore = () => {
   return (
     <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
       <section>
-        <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
+        <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-[Roboto]">
           <h1>Recently uploaded</h1>
         </header>
         <MusicList loading={loading} outputData={recentMusic} />
       </section>
       <section>
-        <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
+        <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-[Roboto]">
           <h1>Top Six</h1>
         </header>
         <MusicList loading={loading} outputData={topMusic} />
       </section>
       <section>
-        <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
+        <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-[Roboto]">
           <h1>Developers</h1>
         </header>
         <Developers loading={loading} devData={devData} />

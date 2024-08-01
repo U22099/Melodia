@@ -3,7 +3,7 @@ import DevelopersSkeleton from "./DevelopersSkeleton";
 
 const Developers = ({loading, devData}) => {
   return (
-    <section className="p-[8px] pb-[32px] ">
+    <section className="p-[8px] pl-[]">
         {loading ? (
           <DevelopersSkeleton devData={devData}/>
         ) : (

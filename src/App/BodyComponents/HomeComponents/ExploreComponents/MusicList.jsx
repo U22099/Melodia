@@ -3,7 +3,7 @@ import MusicListSkeleton from "./MusicListSkeleton";
 
 const MusicList = ({loading, outputData}) => {
   return (
-    <section className="p-[0px] pb-[0px] ">
+    <section className="p-[8px] pl-[0px] ">
         {loading ? (
           <MusicListSkeleton outputData={outputData}/>
         ) : (

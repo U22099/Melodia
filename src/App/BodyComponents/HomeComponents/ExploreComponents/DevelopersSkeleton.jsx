@@ -4,7 +4,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const DevelopersSkeleton = ({ devData }) => {
   return (
-    <section className="p-[10px] pb-[20px] ">
+    <section className="p-[8px] pl-[0px]">
       <ol className="flex gap-[10px] overflow-auto overflow-y-hidden">
         {devData.map((x, i) => (
           <li key={i} className="min-w-[250px]">

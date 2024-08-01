@@ -3,7 +3,7 @@ import MusicListSkeleton from "./MusicListSkeleton";
 
 const MusicList = ({ loading, outputData }) => {
   return (
-    <section className="p-[10px] pb-[20px] w-[100%] mx-auto">
+    <section className="p-[8px] pl-[0px] w-[100%] mx-auto">
       {loading ? (
         <MusicListSkeleton outputData={"012345678910".split("")} />
       ) : (
@@ -16,7 +16,7 @@ const MusicList = ({ loading, outputData }) => {
                 // audio?.pause();
                 // props.play(music, i);
               }}
-              className="min-w-[120px] md:min-w-[150px] max-w-[170px] md:max-w-[200px]"
+              className="min-w-[120px] md:min-w-[150px] max-w-[150px] md:max-w-[200px]"
             >
               <div className="cursor-pointer p-[10px] rounded-[10px] flex flex-col gap-[5px] items-start">
                 <img

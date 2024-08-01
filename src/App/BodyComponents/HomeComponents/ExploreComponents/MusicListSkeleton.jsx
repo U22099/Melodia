@@ -4,11 +4,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const MusicListSkeleton = ({ outputData }) => {
   return (
-    <section className="p-[10px] pb-[20px] ">
-      <ol className="flex gap-[10px] overflow-auto overflow-y-hidden">
+    <section className="p-[8px] pl-[0px]">
+      <ol className="flex gap-[8px] overflow-auto overflow-y-hidden">
         {outputData.map((x, i) => (
-          <li key={i} className="min-w-[150px]">
-            <div className="cursor-pointer p-[10px] flex flex-col gap-[5px] items-start">
+          <li key={i} className="min-w-[150px] ">
+            <div className="cursor-pointer p-[8px] flex flex-col gap-[5px] items-start">
               <Skeleton inline className="rounded-[15px] w-36 h-36 m-[0px]" />
               <div className="">
                 <h1 className="font-extrabold md:text-[1.3em] font-serif m-[0px] ml-[5px]">

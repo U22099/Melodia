@@ -8,7 +8,10 @@ export default {
     extend: {
       animation: {
         'spin-once': 'spin 0.5s linear'
-      }
+      },
+      fontFamily: {
+        serif: ['"Plus Jakarta Sans"']
+    },
     },
   },
   plugins: [],
