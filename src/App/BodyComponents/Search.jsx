@@ -56,20 +56,20 @@ const Search = () => {
         delay: 0.5,
       }}
     >
-      <section className="flex justify-center items-center mt-[20px] relative">
+      <section className="flex justify-center items-center mt-[20px] relative overflow-hidden">
         <input
           type="text"
           placeholder="Search..."
           id="input"
-          className="input font-serif mx-auto md:w-[90%] rounded-[20p]"
+          className="input font-serif mx-auto md:w-[90%] rounded-[20p] mb-[16px]"
           onChange={filterOutput}
         />
         <FaSearch
-          className="fill-gray-300 cursor-pointer text-[1.7em] absolute left-[80%] md:left-[90%]"
+          className="fill-gray-300 cursor-pointer text-[1.4em] md:text-[1.7em] absolute left-[80%] md:left-[90%]"
           id="searchIcon"
         />
       </section>
-      <section>
+      <section className="max-h-[80vh] overflow-auto overflow-x-hidden">
         <MusicList loading={loading} outputData={outputData} />
       </section>
     </motion.div>
