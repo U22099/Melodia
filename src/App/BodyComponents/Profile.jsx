@@ -9,7 +9,7 @@ const Profile = () => {
   const [text, setText] = useState("Save");
   const [errorText, setErrorText] = useState("");
   const navigate = useNavigate();
-  const [loading, setLoading, image, setImage, email, setEmail, username, setUsername, updateUserData] =
+  const [loading, setLoading, image, setImage, email, setEmail, username, setUsername, updateUserData, recentMusic, topMusic, devData] =
     useContext(Context);
   const handleImage = async (e) => {
     const data = await toBase64(e.target.files[0]);
