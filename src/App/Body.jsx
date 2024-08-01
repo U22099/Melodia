@@ -4,7 +4,7 @@ import Profile from "./BodyComponents/Profile.jsx";
 import Upload from "./BodyComponents/Upload.jsx";
 import fetchUserData from "../utils/fetchUserData.js";
 import updateUserData from "../utils/updateUserData.js";
-import retrieveStoredData from '../utils/fetchTop'
+import retrieveStoredData from '../utils/fetchTopAndRecentMusic.js';
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorDialog from "../utils/ErrorDialog";
