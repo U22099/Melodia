@@ -1,4 +1,6 @@
 import origin from '../../config/origin.json'
+import axios from 'axios'
+
 const logOut = async (showErr, navigate) => {
     try {
       const url = origin.default.origin + "/logout";
