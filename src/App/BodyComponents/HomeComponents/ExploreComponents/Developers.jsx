@@ -18,7 +18,7 @@ const Developers = ({loading, devData}) => {
                 }}
                 className="min-w-[250px]"
               >
-                <div className="cursor-pointer p-[10px] rounded-[10px] flex  gap-[5px] items-center justify-center">
+                <div className="cursor-pointer p-[8px] rounded-[10px] flex  gap-[8px] items-center justify-center">
                   <img
                     src={x.image}
                     onDoubleClick={() => {
