@@ -158,14 +158,15 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
       </div>
       <div className="flex justify-end align-center items-center">
         {loading ? (
-          <Skeleton className="rounded-full w-12 h-12 cursor-pointer" />
+          <Skeleton className="rounded-full w-12 h-12 cursor-pointer" onClick={() => {
+               setMenu(!menu)
+            }}/>
         ) : (
           <img
             src={image}
             alt="Profile Picture"
             className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
             onClick={() => {
-              console.log("done")
                setMenu(!menu)
             }}
           />
