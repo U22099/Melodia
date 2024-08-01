@@ -1,4 +1,5 @@
 import { useState, useRef, useContext } from "react";
+import {useNavigate} from 'react-router-dom'
 import { motion } from "framer-motion";
 import toBase64 from "../../utils/Base64.js";
 import { Context } from "../Body.jsx";
@@ -7,13 +8,16 @@ import Skeleton from 'react-loading-skeleton'
 const Profile = () => {
   const [text, setText] = useState("Save");
   const [errorText, setErrorText] = useState("");
-  const [loading, setLoading, image, setImage, email, username] =
+  const navigate = useNavigate();
+  const [loading, setLoading, image, setImage, email, setEmail, username, setUsername, updateUserData] =
     useContext(Context);
-
   const handleImage = async (e) => {
     const data = await toBase64(e.target.files[0]);
     setImage(data);
   };
+  const update = async () => {
+    await updateUserData(navigate,username, email, image, setText, text, setErrorText, setLoading);
+  }
   return (
     <motion.div
       initial={{
@@ -49,18 +53,16 @@ const Profile = () => {
       <div>
         <input
           type="text"
-          ref={username}
-          defaultValue={username.current}
-          onChange={(e) => (username.current = e.target.value)}
+          defaultValue={username}
+          onChange={(e) => (setUsername(e.target.value))}
           className="bg-[var(--primary-color)] rounded-[5px] p-[8px_10px] mx-auto text-[1.3em] text-[white] w-[82%] md:w-[70%]"
         />
       </div>
       <div>
         <input
           type="text"
-          ref={email}
-          defaultValue={email.current}
-          onChange={(e) => (email.current = e.target.value)}
+          defaultValue={email}
+          onChange={(e) => (setEmail(target.value))}
           className="bg-[var(--primary-color)] rounded-[5px] p-[8px_10px] mx-auto text-[1.3em] text-[white] w-[82%] md:w-[70%]"
         />
         <p
@@ -71,7 +73,7 @@ const Profile = () => {
           {errorText}
         </p>
       </div>
-      <button className="btn w-[82%] md:w-[70%] h-[50px]">{text}</button>
+      <button onClick={update} className="btn w-[82%] md:w-[70%] h-[50px]">{text}</button>
       <button
         className="btn w-[82%] md:w-[70%] bg-red-600"
         // onClick={() => {

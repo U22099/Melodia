@@ -5,8 +5,8 @@ import indexedDB from './indexedDB';
 const fetchUserData = async (
   setLoading,
   setImage,
-  email,
-  username,
+  setEmail,
+  setUsername,
   navigate
 ) => {
   setLoading(true);
@@ -15,8 +15,8 @@ const fetchUserData = async (
     //&& !forceRefresh) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
     setImage(data.image);
-    email.current = data.email;
-    username.current = data.username;
+    setEmail(data.email)
+    setUsername(data.username);
     // if (data.isAdmin) {
     //   props.setIsAdmin(true);
     // }
@@ -35,8 +35,8 @@ const fetchUserData = async (
       indexedDB.saveData(response.data, "UserData", indexedDB.init);
       localStorage.setItem("user_stored", true);
       setImage(response.data.image);
-      email.current = response.data.email;
-      username.current = response.data.username;
+      setEmail(response.data.email)
+      setUsername(response.data.username);
       // if (response.data.isAdmin) {
       //   props.setIsAdmin(true);
       // }
@@ -62,7 +62,7 @@ const fetchUserData = async (
     }
   }
 };
-const refresh = async (navigate) => {
+export const refresh = async (navigate) => {
   try {
     const url = origin.default.origin + "/refresh";
     const refreshToken = localStorage.getItem("refreshToken");

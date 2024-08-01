@@ -6,13 +6,10 @@ import axios from "axios";
 // import AdminPanel from "../AdminPanel";
 // import indexedDB from "../utils/indexedDB.js";
 // import toBase64 from "./../utils/Base64.js";
-// import ErrorDialog from "../utils/ErrorDialog";
-// import SuccessDialog from "../utils/SuccessDialog";
-// import ConfirmDialog from "../utils/ConfirmDialog";
 // import origin from "../../config/origin.json";
 
 const NavBar = ({ section, setSection, setPage }) => {
-  const [image, loading] = useContext(Context);
+  const [loading, setLoading, image, setImage, email, username] = useContext(Context);
   // const navigate = useNavigate();
   // const [menu, setMenu] = useState(false);
   // const [forceRefresh, setForceRefresh] = useState(false);
@@ -25,127 +22,6 @@ const NavBar = ({ section, setSection, setPage }) => {
   // const [showAdminPanel, setShowAdminPanel] = useState(false);
   // const [image, setImage] = useState("image.JPG");
   //
-  // const fetchUserData = async () => {
-  //   setLoading(true);
-  //   const stored = JSON.parse(localStorage.getItem("user_stored"));
-  //   if (stored && !forceRefresh) {
-  //     const data = await indexedDB.getData("UserData", indexedDB.init);
-  //     setImage(data.image);
-  //     email.current = data.email;
-  //     username.current = data.username;
-  //     if (data.isAdmin) {
-  //       props.setIsAdmin(true);
-  //     }
-  //     setForceRefresh(true);
-  //     setLoading(false);
-  //   } else {
-  //     try {
-  //       const url = origin.default.origin + "/user";
-  //       const accessToken = localStorage.getItem("accessToken");
-  //       const response = await axios.get(url, {
-  //         withCredentials: true,
-  //         headers: {
-  //           Authorization: "Bearer " + accessToken,
-  //         },
-  //       });
-  //       indexedDB.saveData(response.data, "UserData", indexedDB.init);
-  //       localStorage.setItem("user_stored", true);
-  //       setImage(response.data.image);
-  //       email.current = response.data.email;
-  //       username.current = response.data.username;
-  //       if (response.data.isAdmin) {
-  //         props.setIsAdmin(true);
-  //       }
-  //       setLoading(false);
-  //     } catch (err) {
-  //       console.log(err);
-  //       if ([401, 403].includes(err.response.status)) {
-  //         const res = await refresh();
-  //         if (res.status === 200) {
-  //           localStorage.setItem("accessToken", res.data.accessToken);
-  //           fetchUserData();
-  //         } else {
-  //           localStorage.removeItem("accessToken");
-  //           localStorage.removeItem("refreshToken");
-  //           navigate("/", { replace: true });
-  //         }
-  //       } else {
-  //         props.setErr({ occured: true, msg: err.message });
-  //       }
-  //       if (err.message.includes("Network")) {
-  //         fetchUserData();
-  //       }
-  //     }
-  //   }
-  // };
-  // const refresh = async () => {
-  //   try {
-  //     const url = origin.default.origin + "/refresh";
-  //     const refreshToken = localStorage.getItem("refreshToken");
-  //     const response = await axios.post(
-  //       url,
-  //       {},
-  //       {
-  //         withCredentials: true,
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: "Bearer " + refreshToken,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200) return response;
-  //   } catch (err) {
-  //     if (err.response.status === 403 || err.response.status === 401) {
-  //       localStorage.removeItem("accessToken");
-  //       localStorage.removeItem("refreshToken");
-  //       navigate("/", { replace: true });
-  //     }
-  //   }
-  // };
-  // // const switchVisibility = (e) => {
-  //   setMenu(!menu);
-  //   e.target.style.border = menu ? "none" : "3px solid var(--secondary-color)";
-  // };
-  // const updateUserData = async () => {
-  //   if (username && email && image) {
-  //     try {
-  //       setText(<a id="roll1"></a>);
-  //       const DATA = {
-  //         username: username.current,
-  //         email: email.current,
-  //         image: image,
-  //       };
-  //       const url = origin.default.origin + "/user";
-  //       const accessToken = localStorage.getItem("accessToken");
-  //       const response = await axios.put(url, DATA, {
-  //         withCredentials: true,
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization: "Bearer " + accessToken,
-  //         },
-  //       });
-  //       indexedDB.saveData(
-  //         {
-  //           username: username.current,
-  //           email: email.current,
-  //           image: image,
-  //           otherData: otherData,
-  //         },
-  //         "UserData",
-  //         indexedDB.init
-  //       );
-  //       localStorage.setItem("store1", true);
-  //       setText("Save");
-  //     } catch (err) {
-  //       if ([401, 402, 403, 404].includes(err.response.status)) {
-  //         const res = await refresh();
-  //         if (res.status === 200) updateUserData();
-  //       } else {
-  //         setErrorText(err.response.data.message);
-  //       }
-  //     }
-  //   }
-  // };
 
   // const uploadMusic = async () => {
   //   try {
@@ -303,17 +179,7 @@ const NavBar = ({ section, setSection, setPage }) => {
           ""
         )} */}
       </div>
-      {/* {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ""}{props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ""}
-      {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}
-      {confirm ? (
-        <ConfirmDialog
-          callback={deleteUser}
-          var2={setConfirm}
-          msg="Are you sure about this, buddy?"
-        />
-      ) : (
-        ""
-      )}
+      {/*
       {showAdminPanel ? (
         <AdminPanel
           setShowAdminPanel={setShowAdminPanel}

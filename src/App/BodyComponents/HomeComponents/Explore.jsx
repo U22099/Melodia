@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
-import { MdRefresh, MdOutlineClose } from "react-icons/md";
 import axios from "axios";
 import indexedDB from "../../../utils/indexedDB.js";
 import Developers from "./ExploreComponents/Developers";
@@ -12,100 +10,37 @@ import origin from "../../../../config/origin.json";
 
 const Explore = () => {
   let id = "";
-  const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [forceRefresh, setForceRefresh] = useState(false);
-  const [spinning, setSpinning] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [confirm, setConfirm] = useState(false);
-  const [music, setMusic] = useState([
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-  ]);
-  const [devData, setDevData] = useState([
-    {
-      username: "Daniel",
-      image: "image.JPG",
-      email: "nifemiolaniyi4@gmail.com",
-      role: "Developer",
-    },
-    {
-      username: "Swag",
-      image: "image.JPG",
-      email: "swaggarlicious@gmail.com",
-      role: "Designer",
-    },
-  ]);
-  const [outputData, setOutputData] = useState(music.slice());
-  const filterOutput = () => {
-    setOutputData(music);
-  };
-  const refreshState = () => {
-    setSpinning(true);
-    setForceRefresh(true);
-    setRefresh(!refresh);
-  };
-  const retrieveStoredData = async () => {
+  const [recentMusic, setRecentMusic] = useState([]);
+  const [topMusic, setTopMusic] = useState([]);
+  const [devData, setDevData] = useState([]);
+  const retrieveStoredData = async (storageName, dbName, route, callback) => {
     setLoading(true);
-    const stored = JSON.parse(localStorage.getItem("music_stored"));
+    const stored = JSON.parse(localStorage.getItem(storageName));
     console.log("stored");
     if (stored) {
-      setOutputData([]);
-      const data = await indexedDB.getData("MusicData", indexedDB.init);
-      setMusic(data);
-      console.log(data);
-      setForceRefresh(true);
+      const data = await indexedDB.getData(dbName, indexedDB.init);
+      callback(data)
       setLoading(false);
     } else {
-      await fetchMusic();
+      await fetchMusic(storageName, dbName, route, callback);
     }
   };
-  const fetchMusic = async () => {
+  const fetchMusic = async (storageName, dbName, route, callback) => {
     try {
-      setOutputData([]);
-      const url = origin.default.origin + "/musicapi";
+      const url = origin.default.origin + "/musicapi/"+route;
       const response = await axios.get(url, { withCredentials: true });
-      const data = response.data.music.sort((a, b) =>
-        a.title.localeCompare(b.title)
-      );
-      indexedDB.saveData(response.data.music, "MusicData", indexedDB.init);
-      localStorage.setItem("music_stored", true);
-      setMusic(data);
+      const data = response.data.music;
+      indexedDB.saveData(data, dbName, indexedDB.init);
+      localStorage.setItem(storageName, true);
+      callback(data);
       console.log(response.data.music);
       setLoading(false);
     } catch (err) {
       console.log(err.message);
-      props.setErr({ occured: true, msg: err.message });
     }
   };
+  /*
   const deleteMusic = async () => {
     if (props.isAdmin) {
       try {
@@ -122,34 +57,25 @@ const Explore = () => {
         props.setErr({ occured: true, msg: err.message });
       }
     }
-  };
+  };*/
   useEffect(() => {
-    setOutputData(music.slice());
-    filterOutput();
-    setTimeout(() => {
-      setSpinning(false);
-    }, 1000);
-  }, [music]);
-  useEffect(() => {
-    if (forceRefresh) {
-      //fetchMusic();
-    } else {
-      //retrieveStoredData();
-    }
-  }, [refresh]);
+    retrieveStoredData('recentMusic_stored', 'RecentMusicData', 'recent', setRecentMusic);
+    retrieveStoredData('topMusic_stored', 'TopMusicData', 'top', setTopMusic);
+    retrieveStoredData('dev_stored', 'DevData', 'dev', setdevData);
+  }, []);
   return (
     <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
           <h1>Recently uploaded</h1>
         </header>
-        <MusicList loading={loading} outputData={outputData} />
+        <MusicList loading={loading} outputData={recentMusic} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
           <h1>Top Six</h1>
         </header>
-        <MusicList loading={loading} outputData={outputData} />
+        <MusicList loading={loading} outputData={topMusic} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[10px] font-[Roboto]">
