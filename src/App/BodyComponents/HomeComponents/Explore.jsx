@@ -17,7 +17,7 @@ const Explore = () => {
   const retrieveStoredData = async (storageName, dbName, route, callback) => {
     setLoading(true);
     const stored = JSON.parse(localStorage.getItem(storageName));
-    console.log("stored");
+    console.log("stored11");
     if (stored) {
       const data = await indexedDB.getData(dbName, indexedDB.init);
       callback(data)
@@ -59,9 +59,9 @@ const Explore = () => {
     }
   };*/
   useEffect(() => {
-    retrieveStoredData('recentMusic_stored', 'RecentMusicData', 'recent', setRecentMusic);
-    retrieveStoredData('topMusic_stored', 'TopMusicData', 'top', setTopMusic);
-    retrieveStoredData('dev_stored', 'DevData', 'dev', setdevData);
+    retrieveStoredData('recent_music_stored', 'RecentMusicData', 'recent', setRecentMusic);
+    retrieveStoredData('top_music_stored', 'TopMusicData', 'top', setTopMusic);
+    retrieveStoredData('dev_data_stored', 'DevData', 'dev', setDevData);
   }, []);
   return (
     <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
