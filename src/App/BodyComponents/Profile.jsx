@@ -1,13 +1,15 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import { motion } from "framer-motion";
 import toBase64 from "../../utils/Base64.js";
+import { Context } from "../Body.jsx";
+import Skeleton from 'react-loading-skeleton'
 
 const Profile = () => {
   const [text, setText] = useState("Save");
   const [errorText, setErrorText] = useState("");
-  const [image, setImage] = useState("image.JPG");
-  const email = useRef("");
-  const username = useRef("");
+  const [loading, setLoading, image, setImage, email, username] =
+    useContext(Context);
+
   const handleImage = async (e) => {
     const data = await toBase64(e.target.files[0]);
     setImage(data);
@@ -27,8 +29,9 @@ const Profile = () => {
         type: "spring",
         delay: 0.5,
       }}
-      className="grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] p-[20px] rounded-[10px] text-center items-center"
+      className="grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] p-[20px] rounded-[10px] text-center items-center w-[100%] md:w-[70%] mx-auto"
     >
+      {loading ? <Skeleton className="bg-[var(--primary-color)] rounded-full md:w-48 md:h-48 w-40 h-40 mx-auto"/> :
       <label htmlFor="inputImage">
         <input
           type="file"
@@ -40,9 +43,9 @@ const Profile = () => {
         <img
           src={image}
           alt="Profile Picture"
-          className="bg-[var(--primary-color)] rounded-full w-40 h-40 mx-auto"
+          className="bg-[var(--primary-color)] rounded-full md:w-48 md:h-48 w-40 h-40 mx-auto"
         />
-      </label>
+      </label>}
       <div>
         <input
           type="text"
@@ -68,7 +71,7 @@ const Profile = () => {
           {errorText}
         </p>
       </div>
-      <button className="btn w-[82%] md:w-[70%]">{text}</button>
+      <button className="btn w-[82%] md:w-[70%] h-[50px]">{text}</button>
       <button
         className="btn w-[82%] md:w-[70%] bg-red-600"
         // onClick={() => {

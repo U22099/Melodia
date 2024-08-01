@@ -61,7 +61,7 @@ const Search = () => {
           type="text"
           placeholder="Search..."
           id="input"
-          className="input mx-auto md:w-[90%]"
+          className="input mx-auto md:w-[90%] rounded-[3]"
           onChange={filterOutput}
         />
         <FaSearch

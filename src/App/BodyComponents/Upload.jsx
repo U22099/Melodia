@@ -19,10 +19,10 @@ const Upload = () => {
         type: "spring",
         delay: 0.5,
       }}
-      className="mt-[50px]"
+      className="mt-[50px] md:w-[70%] mx-auto"
     >
       <div className="flex cursor-pointer flex-col">
-        <h1 className="font-bold font-serif ml-[10px]">Upload Music: </h1>
+        <h1 className="font-bold font-serif ml-[10px] md:text-[1.5em]">Upload Music: </h1>
         <label htmlFor="upload" className="cursor-pointer mt-[20px]">
           <input
             type="file"
@@ -42,7 +42,7 @@ const Upload = () => {
             <p className="text-[var(--secondary-color)] bold">{fileCount}</p>
           </div>
         </label>
-        <button className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] ">
+        <button className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] h-[50px]">
           Upload
         </button>
       </div>

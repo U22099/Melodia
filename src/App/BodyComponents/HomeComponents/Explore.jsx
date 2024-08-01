@@ -13,7 +13,7 @@ import origin from "../../../../config/origin.json";
 const Explore = () => {
   let id = "";
   const [refresh, setRefresh] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [forceRefresh, setForceRefresh] = useState(false);
   const [spinning, setSpinning] = useState(false);
   const [success, setSuccess] = useState(false);

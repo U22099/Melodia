@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useContext } from "react";
+import { Context } from "./Body";
+import Skeleton from "react-loading-skeleton";
 // import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 // import AdminPanel from "../AdminPanel";
@@ -9,7 +11,8 @@ import axios from "axios";
 // import ConfirmDialog from "../utils/ConfirmDialog";
 // import origin from "../../config/origin.json";
 
-const NavBar = (props) => {
+const NavBar = ({ section, setSection, setPage }) => {
+  const [image, loading] = useContext(Context);
   // const navigate = useNavigate();
   // const [menu, setMenu] = useState(false);
   // const [forceRefresh, setForceRefresh] = useState(false);
@@ -255,11 +258,11 @@ const NavBar = (props) => {
       <div className="flex gap-[10px] items-center ml-[20px]">
         <h1
           className={
-            (props.section === 1 ? "active " : "") +
+            (section === 1 ? "active " : "") +
             "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"
           }
           onClick={() => {
-            props.setSection(1);
+            setSection(1);
           }}
         >
           {" "}
@@ -267,23 +270,27 @@ const NavBar = (props) => {
         </h1>
         <h1
           className={
-            (props.section === 2 ? "active " : "") +
+            (section === 2 ? "active " : "") +
             "cursor-pointer transition ease-in font-[Roboto] text-gray-300 hover:text-white"
           }
           onClick={() => {
-            props.setSection(2);
+            setSection(2);
           }}
         >
           All
         </h1>
       </div>
       <div className="flex justify-end align-center items-center">
-        <img
-          src="image.JPG"
-          alt="Profile Picture"
-          className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
-          onClick={() => props.setPage(3)}
-        />
+        {loading ? (
+          <Skeleton className="rounded-full w-12 h-12 cursor-pointer" />
+        ) : (
+          <img
+            src={image}
+            alt="Profile Picture"
+            className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
+            onClick={() => setPage(3)}
+          />
+        )}
 
         {/* {props.isAdmin ? (
           <p
