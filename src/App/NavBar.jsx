@@ -9,8 +9,7 @@ import axios from "axios";
 // import origin from "../../config/origin.json";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
-  const [loading, setLoading, image, setImage, email, username] =
-    useContext(Context);
+  const { loading, image } = useContext(Context);
   // const navigate = useNavigate();
   // const [menu, setMenu] = useState(false);
   // const [forceRefresh, setForceRefresh] = useState(false);
@@ -132,7 +131,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
   // }, []);
   return (
     <>
-      <div className="flex gap-[8px] items-center ml-[8px]">
+      <div className="flex gap-[8px] items-center ml-[16px]">
         <h1
           className={
             (section === 1 ? "active " : "") +

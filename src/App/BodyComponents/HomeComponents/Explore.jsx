@@ -1,14 +1,14 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import Developers from "./ExploreComponents/Developers";
-import {Context} from "../../Body"
+import { Context } from "../../Body";
 import MusicList from "./ExploreComponents/MusicList";
 import ErrorDialog from "../../../utils/ErrorDialog";
 import ConfirmDialog from "../../../utils/ConfirmDialog";
 import SuccessDialog from "../../../utils/SuccessDialog";
 const Explore = () => {
   let id = "";
-  const [loading, setLoading, image, setImage, email, setEmail, username, setUsername, updateUserData, recentMusic, topMusic, devData] = useContext(Context);
+  const { loading, recentMusic, topMusic, devData } = useContext(Context);
   /*
   const deleteMusic = async () => {
     if (props.isAdmin) {

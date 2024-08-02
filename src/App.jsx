@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./App/SideBar";
 import Body from "./App/Body";
 import Footer from "./App/Footer";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 export const Context = React.createContext();
 
@@ -21,20 +21,34 @@ const App = () => {
     setIsPlaying(true);
   };
   return (
-    <div className={(menu ? "grid-cols-[1fr_5fr] " : "") +"grid h-[100vh] w-[100vw] md:grid-cols-[1fr_3fr]"}>
-      <motion.section 
-      key={menu}
-    initial={{ x: -50}}
-    animate={{ x: 0}}
-    transition={{
-        type: "spring"
-    }}
-      className={(menu ? "" : "hidden ") +  "md:block md:bg-[var(--primary-color)] "}>
-        <SideBar key={menu} setErr={setErr} err={err} setPage={setPage} page={page} />
+    <div
+      className={
+        (menu ? "grid-cols-[1fr_5fr] " : "") +
+        "grid h-[100vh] w-[100vw] md:grid-cols-[1fr_3fr]"
+      }
+    >
+      <motion.section
+        key={menu}
+        initial={{ x: -50 }}
+        animate={{ x: 0 }}
+        transition={{
+          type: "spring",
+        }}
+        className={
+          (menu ? "" : "hidden ") + "md:block md:bg-[var(--primary-color)] "
+        }
+      >
+        <SideBar
+          key={menu}
+          setErr={setErr}
+          err={err}
+          setPage={setPage}
+          page={page}
+        />
       </motion.section>
       <section className="flex flex-col overflow-hidden gap-[20px] h-[100vh] mt-[0px] my-[10px] ">
         <main className="">
-          <Context.Provider value={[section, setSection, setMenu, menu]}>
+          <Context.Provider value={{ section, setSection, setMenu, menu }}>
             <Body
               play={play}
               err={err}

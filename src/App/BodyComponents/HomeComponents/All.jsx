@@ -1,81 +1,10 @@
-  import {useState} from 'react'
-import MusicList from './AllComponents/MusicList'
+import { useState, useContext } from "react";
+import MusicList from "./AllComponents/MusicList";
+import { Context } from "../../Body";
+
 const All = () => {
-  const [loading, setLoading] = useState(false);
-  const [outputData, setOutputData] = useState([
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel"
-    },
-    {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-          title: "Lil Wayne || Mirror",
-          artist: "Lorem",
-          image: "Logo.jpg",
-          uploader: "Daniel"
-        },
-        {
-          title: "Lil Wayne || Mirror",
-          artist: "Lorem",
-          image: "Logo.jpg",
-          uploader: "Daniel"
-        },
-        {
-          title: "Lil Wayne || Mirror",
-          artist: "Lorem",
-          image: "Logo.jpg",
-          uploader: "Daniel"
-        },
-        {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel"
-    },
-    {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      },
-      {
-        title: "Lil Wayne || Mirror",
-        artist: "Lorem",
-        image: "Logo.jpg",
-        uploader: "Daniel"
-      }
-  ])
+  let id = "";
+  const { loading, music } = useContext(Context);
   return (
     <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
       <section className="flex justify-end p-[10px] pb-[0px] md:w-[90%] mx-auto">
@@ -88,7 +17,7 @@ const All = () => {
         /> */}
       </section>
       <section className="mx-auto w-[100%]">
-        <MusicList loading={loading} outputData={outputData}/>
+        <MusicList loading={loading} outputData={music} />
       </section>
       {/* {success ? <SuccessDialog msg="Music deleted successfully" /> : ""}
       {confirm ? (
@@ -106,7 +35,7 @@ const All = () => {
         ""
       )} */}
     </div>
-  )
-}
+  );
+};
 
-export default All
+export default All;
