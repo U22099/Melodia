@@ -9,7 +9,8 @@ import axios from "axios";
 // import origin from "../../config/origin.json";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
-  const [loading, setLoading, image, setImage, email, username] = useContext(Context);
+  const [loading, setLoading, image, setImage, email, username] =
+    useContext(Context);
   // const navigate = useNavigate();
   // const [menu, setMenu] = useState(false);
   // const [forceRefresh, setForceRefresh] = useState(false);
@@ -158,16 +159,19 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
       </div>
       <div className="flex justify-end align-center items-center">
         {loading ? (
-          <Skeleton className="rounded-full w-12 h-12 cursor-pointer" onClick={() => {
-               setMenu(!menu)
-            }}/>
+          <Skeleton
+            className="rounded-full w-12 h-12 cursor-pointer"
+            onClick={() => {
+              setMenu(!menu);
+            }}
+          />
         ) : (
           <img
             src={image}
             alt="Profile Picture"
             className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
             onClick={() => {
-               setMenu(!menu)
+              setMenu(!menu);
             }}
           />
         )}
