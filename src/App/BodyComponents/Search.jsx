@@ -1,37 +1,13 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useContext } from "react";
+import { Context } from "./Body";
 import MusicList from "../BodyComponents/HomeComponents/AllComponents/MusicList";
 
 const Search = () => {
-  const [loading, setLoading] = useState(false);
+  const { loading, music } = useContext(Context);
   const [outputData, setOutputData] = useState([]);
-  const [music, setMusic] = useState([
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-    {
-      title: "Lil Wayne || Mirror",
-      artist: "Lorem",
-      image: "Logo.jpg",
-      uploader: "Daniel",
-    },
-  ]);
   const filterOutput = (e = document.getElementById("input")) => {
     setOutputData(
       music.filter(

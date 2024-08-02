@@ -28,7 +28,7 @@ const fetchMusic = async (setLoading, storageName, dbName, route, callback) => {
     localStorage.setItem(storageName, true);
     callback(data);
     console.log(response.data.music);
-    setLoading(false);
+    if (response.status === 200) setLoading(false);
   } catch (err) {
     console.log(err.message);
   }

@@ -41,7 +41,7 @@ const fetchUserData = async (
       // if (response.data.isAdmin) {
       //   props.setIsAdmin(true);
       // }
-      setLoading(false);
+      if (response.status === 200) setLoading(false);
     } catch (err) {
       console.log(err);
       if ([401, 403].includes(err.response.status)) {

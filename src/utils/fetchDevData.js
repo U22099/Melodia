@@ -32,7 +32,7 @@ const fetchDevData = async (
       localStorage.setItem(storageName, true);
       callback(data);
       console.log(response.data.admin);
-      setLoading(false);
+      if (response.status === 200) setLoading(false);
     } catch (err) {
       console.log(err.message);
       if ([401, 403].includes(err.response.status)) {
