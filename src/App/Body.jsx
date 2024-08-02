@@ -17,6 +17,7 @@ export const Context = React.createContext();
 
 const Body = ({ page }) => {
   const navigate = useNavigate();
+  const [refresh, setRefresh] = useState(false);
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("image.JPG");
   const [email, setEmail] = useState();
@@ -50,7 +51,7 @@ const Body = ({ page }) => {
       navigate
     );
     fetchMusic(setLoading, "music_stored", "MusicData", "/musicapi", setMusic);
-  }, []);
+  }, [refresh]);
 
   return (
     <Context.Provider
@@ -69,6 +70,8 @@ const Body = ({ page }) => {
         devData,
         setMusic,
         music,
+        setRefresh,
+        refresh
       }}
     >
       <div className="ml-[16px]">

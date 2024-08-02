@@ -9,7 +9,7 @@ import axios from "axios";
 // import origin from "../../config/origin.json";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
-  const { loading, image } = useContext(Context);
+  const { loading, image, setRefresh, refresh,} = useContext(Context);
   // const navigate = useNavigate();
   // const [menu, setMenu] = useState(false);
   // const [forceRefresh, setForceRefresh] = useState(false);
@@ -171,6 +171,9 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
             className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
             onClick={() => {
               setMenu(!menu);
+            }}
+            onDoubleClick={() => {
+              setRefresh(!refresh);
             }}
           />
         )}
