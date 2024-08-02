@@ -29,7 +29,7 @@ const App = () => {
     transition={{
         type: "spring"
     }}
-      className={(menu ? "" : "hidden ") +  "md:visible md:bg-[var(--primary-color)] "}>
+      className={(menu ? "" : "hidden ") +  "md:block md:bg-[var(--primary-color)] "}>
         <SideBar key={menu} setErr={setErr} err={err} setPage={setPage} page={page} />
       </motion.section>
       <section className="flex flex-col overflow-hidden gap-[20px] h-[100vh] mt-[0px] my-[10px] ">
