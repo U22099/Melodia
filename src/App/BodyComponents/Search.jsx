@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import { Context } from "./Body";
+import { Context } from "../Body";
 import MusicList from "../BodyComponents/HomeComponents/AllComponents/MusicList";
 
 const Search = () => {
