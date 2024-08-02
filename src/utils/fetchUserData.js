@@ -4,6 +4,8 @@ import indexedDB from "./indexedDB";
 import refresh from "./refresh.js";
 
 const fetchUserData = async (
+  refresh,
+  setRefresh,
   setLoading,
   setImage,
   setEmail,
@@ -12,7 +14,7 @@ const fetchUserData = async (
 ) => {
   setLoading(true);
   const stored = JSON.parse(localStorage.getItem("user_stored"));
-  if (stored) {
+  if (stored&&refresh.first) {
     //&& !forceRefresh) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
     setImage(data.image);
@@ -22,6 +24,7 @@ const fetchUserData = async (
     //   props.setIsAdmin(true);
     // }
     // setForceRefresh(true);
+    setRefresh({refresh: true, first: false});
     setLoading(false);
   } else {
     try {
@@ -48,7 +51,13 @@ const fetchUserData = async (
         const res = await refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
-          fetchUserData();
+          fetchUserData(refresh,
+  setRefresh,
+  setLoading,
+  setImage,
+  setEmail,
+  setUsername,
+  navigate);
         } else {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
@@ -58,7 +67,13 @@ const fetchUserData = async (
         // props.setErr({ occured: true, msg: err.message });
       }
       if (err.message.includes("Network")) {
-        fetchUserData();
+        fetchUserData(refresh,
+  setRefresh,
+  setLoading,
+  setImage,
+  setEmail,
+  setUsername,
+  navigate);
       }
     }
   }

@@ -17,7 +17,7 @@ export const Context = React.createContext();
 
 const Body = ({ page }) => {
   const navigate = useNavigate();
-  const [refresh, setRefresh] = useState(false);
+  const [refresh, setRefresh] = useState({refresh: false, first: true});
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("image.JPG");
   const [email, setEmail] = useState();
@@ -27,8 +27,10 @@ const Body = ({ page }) => {
   const [topMusic, setTopMusic] = useState("012345".split(""));
   const [devData, setDevData] = useState("01".split(""));
   useEffect(() => {
-    fetchUserData(setLoading, setImage, setEmail, setUsername, navigate);
+    fetchUserData(refresh, setRefresh, setLoading, setImage, setEmail, setUsername, navigate);
     retrieveStoredData(
+      refresh, 
+      setRefresh,
       setLoading,
       "recent_music_stored",
       "RecentMusicData",
@@ -36,6 +38,8 @@ const Body = ({ page }) => {
       setRecentMusic
     );
     retrieveStoredData(
+      refresh, 
+      setRefresh,
       setLoading,
       "top_music_stored",
       "TopMusicData",
@@ -43,6 +47,8 @@ const Body = ({ page }) => {
       setTopMusic
     );
     fetchDevData(
+      refresh, 
+      setRefresh,
       setLoading,
       "dev_data_stored",
       "DevData",
@@ -50,7 +56,7 @@ const Body = ({ page }) => {
       setDevData,
       navigate
     );
-    fetchMusic(setLoading, "music_stored", "MusicData", "/musicapi", setMusic);
+    fetchMusic(refresh, setRefresh, setLoading, "music_stored", "MusicData", "/musicapi", setMusic);
   }, [refresh]);
 
   return (

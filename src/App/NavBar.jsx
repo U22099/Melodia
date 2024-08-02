@@ -173,7 +173,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
               setMenu(!menu);
             }}
             onDoubleClick={() => {
-              setRefresh(!refresh);
+              setRefresh({refresh: !refresh, first: false});
             }}
           />
         )}
