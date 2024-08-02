@@ -30,10 +30,16 @@ const MusicList = ({ loading, outputData }) => {
                   className="bg-[black] rounded-[15px] w-36 h-36 m-[0px]"
                 />
                 <div className="">
-                  <h1 className="font-extrabold md:text-[1.3em] font-custom m-[0px ml-[5px]">
+                  <h1
+                    className={
+                      (x.title.length > 20 ? "truncate max-w-[200px] " : "") +
+                      "font-extrabold md:text-[1.3em] font-custom m-[0px] ml-[8px]"
+                    }
+                    title={x.title}
+                  >
                     {x.title}
                   </h1>
-                  <h1 className="text-gray-300 text-[0.7em] md:text-[1em] font-custom m-[0px ml-[5px]">
+                  <h1 className="text-gray-300 text-[0.7em] md:text-[1em] font-custom m-[0px] ml-[8px] ">
                     Uploaded by {x.uploader}
                   </h1>
                 </div>
