@@ -32,7 +32,7 @@ const MusicList = ({ loading, outputData }) => {
                 <div className="">
                   <h1
                     className={
-                      (x.title?.length > 20 ? "truncate max-w-[200px] " : "") +
+                      (x.title?.length > 20 ? "truncate max-w-[144px] " : "") +
                       "font-extrabold md:text-[1.3em] font-custom m-[0px] ml-[8px]"
                     }
                     title={x.title}
