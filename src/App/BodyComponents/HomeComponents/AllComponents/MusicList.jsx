@@ -8,7 +8,7 @@ const MusicList = ({ loading, outputData }) => {
         <MusicListSkeleton outputData={"012345678910".split("")} />
       ) : (
         <ol className="flex md:gap-[5px] flex-wrap justify-center w-[100%] mx-auto">
-          {outputData.map((x, i) => (
+          {outputData.sort((a,b) => a.title.localeCompare(b.title))map((x, i) => (
             <li
               key={i}
               onClick={() => {
