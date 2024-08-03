@@ -11,13 +11,11 @@
   "tasks": {
     "deploy": {
       "name": "deploy",
-      "command": "npm run deploy",
-      "runAtStart": false
+      "command": "npm run deploy"
     },
     "predeploy": {
       "name": "predeploy",
-      "command": "npm run predeploy",
-      "runAtStart": false
+      "command": "npm run predeploy"
     },
     "dev": {
       "name": "dev",
@@ -29,18 +27,15 @@
     },
     "build": {
       "name": "build",
-      "command": "npm run build",
-      "runAtStart": false
+      "command": "npm run build"
     },
     "lint": {
       "name": "lint",
-      "command": "npm run lint",
-      "runAtStart": false
+      "command": "npm run lint"
     },
     "preview": {
       "name": "preview",
-      "command": "npm run preview",
-      "runAtStart": false
+      "command": "npm run preview"
     }
   }
 }

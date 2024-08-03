@@ -17,7 +17,7 @@ export const Context = React.createContext();
 
 const Body = ({ page }) => {
   const navigate = useNavigate();
-  const [refresh, setRefresh] = useState({refresh: false, first: true});
+  const [refresh, setRefresh] = useState({ refresh: false, first: true });
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("image.JPG");
   const [email, setEmail] = useState();
@@ -27,9 +27,17 @@ const Body = ({ page }) => {
   const [topMusic, setTopMusic] = useState("012345".split(""));
   const [devData, setDevData] = useState("01".split(""));
   useEffect(() => {
-    fetchUserData(refresh, setRefresh, setLoading, setImage, setEmail, setUsername, navigate);
+    fetchUserData(
+      refresh,
+      setRefresh,
+      setLoading,
+      setImage,
+      setEmail,
+      setUsername,
+      navigate
+    );
     retrieveStoredData(
-      refresh, 
+      refresh,
       setRefresh,
       setLoading,
       "recent_music_stored",
@@ -38,7 +46,7 @@ const Body = ({ page }) => {
       setRecentMusic
     );
     retrieveStoredData(
-      refresh, 
+      refresh,
       setRefresh,
       setLoading,
       "top_music_stored",
@@ -47,7 +55,7 @@ const Body = ({ page }) => {
       setTopMusic
     );
     fetchDevData(
-      refresh, 
+      refresh,
       setRefresh,
       setLoading,
       "dev_data_stored",
@@ -56,8 +64,16 @@ const Body = ({ page }) => {
       setDevData,
       navigate
     );
-    fetchMusic(refresh, setRefresh, setLoading, "music_stored", "MusicData", "/musicapi", setMusic);
-  }, [refresh]);
+    fetchMusic(
+      refresh,
+      setRefresh,
+      setLoading,
+      "music_stored",
+      "MusicData",
+      "/musicapi",
+      setMusic
+    );
+  }, [refresh.refresh]);
 
   return (
     <Context.Provider
@@ -77,7 +93,7 @@ const Body = ({ page }) => {
         setMusic,
         music,
         setRefresh,
-        refresh
+        refresh,
       }}
     >
       <div className="ml-[16px]">

@@ -4,7 +4,7 @@ import refresh from "./refresh.js";
 import axios from "axios";
 
 const fetchDevData = async (
-  refresh, 
+  refresh,
   setRefresh,
   setLoading,
   storageName,
@@ -15,11 +15,12 @@ const fetchDevData = async (
 ) => {
   setLoading(true);
   const stored = JSON.parse(localStorage.getItem(storageName));
-  if (stored&&refresh.first) {
+  console.log(stored, refresh);
+  if (stored && refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
     callback(data);
     setLoading(false);
-    setRefresh({refresh: true, first: false});
+    setRefresh({ refresh: true, first: false });
   } else {
     try {
       const url = origin.default.origin + route;
