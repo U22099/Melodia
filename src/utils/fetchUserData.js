@@ -51,6 +51,7 @@ const fetchUserData = async (
         const res = await refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
+          console.log(res.data.accessToken);
           fetchUserData(
               refresh,
               setRefresh,
