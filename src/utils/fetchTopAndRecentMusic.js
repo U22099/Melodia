@@ -20,9 +20,15 @@ const retrieveStoredData = async (
     setLoading(false);
   } else {
     await fetchMusic(setLoading, storageName, dbName, route, callback);
+    setRefresh({refresh: true, first: false});
+    setLoading(false);
   }
 };
-const fetchMusic = async (setLoading, storageName, dbName, route, callback) => {
+const fetchMusic = async ( setLoading,
+  storageName,
+  dbName,
+  route,
+  callback) => {
   try {
     const url = origin.default.origin + route;
     const response = await axios.get(url, { withCredentials: true });
