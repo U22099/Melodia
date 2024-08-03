@@ -33,13 +33,13 @@ const Explore = () => {
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Recently uploaded</h1>
         </header>
-        <MusicList loading={loading} outputData={recentMusic} />
+        <MusicList loading={loading} outputData={recentMusic} play={play} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Top Six</h1>
         </header>
-        <MusicList loading={loading} outputData={topMusic} />
+        <MusicList loading={loading} outputData={topMusic} play={play} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">

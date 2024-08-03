@@ -6,13 +6,13 @@ import ErrorDialog from '../utils/ErrorDialog'
 import origin from '../../config/origin.json'
 import axios from 'axios'
 
-const Footer = (props) => {
+const Footer = ({isPlaying, file, x, setX, setErr}) => {
     const [loaded, setLoaded] = useState();
     const [pause, setPause] = useState();
     const [src, setSrc] = useState();
-    const fetchMusicDataById = async (_id) => {
+    const fetchMusicDataById = async (_id, setSrc, setErr) => {
         try {
-            if(!props.file[props.x].data){
+            if(!file[x].data){
                 const url = origin.default.origin + '/musicapi/data';
                 const response = await axios.post(url, { "_id": _id },
                     {
@@ -21,15 +21,15 @@ const Footer = (props) => {
                             "Content-Type": "application/json"
                         }
                     });
-                props.file[props.x].data = response.data.music.data;
-                indexedDB.saveData(props.file, "MusicData", indexedDB.init);
-                localStorage.setItem('store2', true);
+                file[x].data = response.data.music.data;
+                indexedDB.saveData(file, "MusicData", indexedDB.init);
+                localStorage.setItem('music_stored', true);
                 setSrc(response.data.music.data);
             } else {
-                setSrc(props.file[props.x].data);
+                setSrc(file[x].data);
             }
         } catch (err) {
-            props.setErr({ occured: true, msg: err.message });
+            setErr({ occured: true, msg: err.message });
         }
     }
     const Play = () => {
@@ -68,11 +68,11 @@ const Footer = (props) => {
         }
     }
     useEffect(() => {
-        if (props.isPlaying) {
+        if (isPlaying) {
             setLoaded(false);
-            fetchMusicDataById(props.file[props.x]._id);
+            fetchMusicDataById(file[x]._id);
         }
-    }, [props.x]);
+    }, [x]);
     useEffect(() => {
         src ? setLoaded(true) : "";
     }, [src]);
@@ -81,41 +81,47 @@ const Footer = (props) => {
             Load();
         }
     }, [loaded]);
-    if (props.isPlaying) {
+    if (isPlaying) {
         if (loaded) {
             return (
-                <div className="cursor-pointer p-[10px] rounded-[10px] flex gap-[20px] items-center">
-                    <img src={props.file[props.x].image} alt="Music Picture" className="bg-[black] rounded-full w-24 h-24" />
+                <div className="cursor-pointer p-[8px] rounded-[8px] flex gap-[16px] items-center">
+                    <img src={file[x].image} alt="Music Picture" className="bg-[black] rounded w-24 h-24" />
                     <div className="w-[80%]">
                         <div className="flex justify-end p-[5px] pb-[0px] w-[100%]">
-                            <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => props.setIsPlaying(false)} />
+                            <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => setIsPlaying(false)} />
                         </div>
-                        <h1 className="bold md:text-[2.2em] font-[serif]">{props.file[props.x].title}</h1>
+                        <h1 className={
+                      (x.title?.length > 20 ? "truncate max-w-[144px] " : "") +
+                      "font-extrabold md:text-[1.3em] font-custom m-[0px] ml-[8px]"
+                    }
+                    title={x.title}
+                  >
+                    {x.title}</h1>
                         <audio id="audio" hidden autoPlay>
-                            <source src={src} key={props.file[props.x]._id} type="audio/mpeg" />
+                            <source src={src} key={file[x]._id} type="audio/mpeg" />
                         </audio>
                         <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
                         <div className="flex flex-wrap justify-between w-[70%] mx-auto">
                             <FaBackwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
-                                if (props.x === 0) {
-                                    props.setX(0);
+                                if (x === 0) {
+                                    setX(0);
                                 } else {
-                                    props.setX(props.x - 1);
+                                    setX(x - 1);
                                 }
                                 Play();
                             }} />
                             {pause ? <FaPlay onClick={Play} className="text-[2em] text-[var(--secondary-color)]" /> : <FaPause onClick={Pause} className="text-[2em] text-[var(--secondary-color)]" />}
                             <FaForwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
-                                if (props.x === props.file.length - 1) {
-                                    props.setX(0);
+                                if (x === file.length - 1) {
+                                    setX(0);
                                 } else {
-                                    props.setX(props.x + 1);
+                                    setX(x + 1);
                                 }
                                 Play();
                             }} />
                         </div>
                     </div>
-                    {props.err.occured ? <ErrorDialog msg={props.err.msg} /> : ''}
+                    {err.occured ? <ErrorDialog msg={err.msg} /> : ''}
                 </div>
             )
         } else {

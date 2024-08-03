@@ -1,3 +1,4 @@
+import Footer from './Footer'
 import Home from "./BodyComponents/Home.jsx";
 import Search from "./BodyComponents/Search.jsx";
 import Profile from "./BodyComponents/Profile.jsx";
@@ -17,6 +18,7 @@ export const Context = React.createContext();
 
 const Body = ({ page }) => {
   const navigate = useNavigate();
+  const [err, setErr] = useState({ occured: false, msg: '' });
   const [refresh, setRefresh] = useState({ refresh: false, first: true });
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("image.JPG");
@@ -26,54 +28,62 @@ const Body = ({ page }) => {
   const [recentMusic, setRecentMusic] = useState("012345".split(""));
   const [topMusic, setTopMusic] = useState("012345".split(""));
   const [devData, setDevData] = useState("01".split(""));
-  useEffect(() => {
-    fetchUserData(
-      refresh,
-      setRefresh,
-      setLoading,
-      setImage,
-      setEmail,
-      setUsername,
-      navigate
-    );
-    retrieveStoredData(
-      refresh,
-      setRefresh,
-      setLoading,
-      "recent_music_stored",
-      "RecentMusicData",
-      "/musicapi/recent",
-      setRecentMusic
-    );
-    retrieveStoredData(
-      refresh,
-      setRefresh,
-      setLoading,
-      "top_music_stored",
-      "TopMusicData",
-      "/musicapi/top",
-      setTopMusic
-    );
-    fetchDevData(
-      refresh,
-      setRefresh,
-      setLoading,
-      "dev_data_stored",
-      "DevData",
-      "/user/dev",
-      setDevData,
-      navigate
-    );
-    fetchMusic(
-      refresh,
-      setRefresh,
-      setLoading,
-      "music_stored",
-      "MusicData",
-      "/musicapi",
-      setMusic
-    );
-  }, [refresh.refresh]);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [file, setFile] = useState();
+  const [x, setX] = useState();
+  const play = (file, x) => {
+    setX(x);
+    setFile(file);
+    setIsPlaying(true);
+  };
+  // useEffect(() => {
+  //   fetchUserData(
+  //     refresh,
+  //     setRefresh,
+  //     setLoading,
+  //     setImage,
+  //     setEmail,
+  //     setUsername,
+  //     navigate
+  //   );
+  //   retrieveStoredData(
+  //     refresh,
+  //     setRefresh,
+  //     setLoading,
+  //     "recent_music_stored",
+  //     "RecentMusicData",
+  //     "/musicapi/recent",
+  //     setRecentMusic
+  //   );
+  //   retrieveStoredData(
+  //     refresh,
+  //     setRefresh,
+  //     setLoading,
+  //     "top_music_stored",
+  //     "TopMusicData",
+  //     "/musicapi/top",
+  //     setTopMusic
+  //   );
+  //   fetchDevData(
+  //     refresh,
+  //     setRefresh,
+  //     setLoading,
+  //     "dev_data_stored",
+  //     "DevData",
+  //     "/user/dev",
+  //     setDevData,
+  //     navigate
+  //   );
+  //   fetchMusic(
+  //     refresh,
+  //     setRefresh,
+  //     setLoading,
+  //     "music_stored",
+  //     "MusicData",
+  //     "/musicapi",
+  //     setMusic
+  //   );
+  // }, [refresh.refresh]);
 
   return (
     <Context.Provider
@@ -101,10 +111,11 @@ const Body = ({ page }) => {
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
         {page === 4 ? <Upload /> : ""}
+        <Footer isPlaying={isPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr}/>
       </div>
 
-      {/*
       {err.occured ? <ErrorDialog msg={err.msg} /> : ""}
+      {/*
       {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}
       {confirm ? (
         <ConfirmDialog
