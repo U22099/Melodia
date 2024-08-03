@@ -30,6 +30,7 @@ const fetchUserData = async (
     try {
       const url = origin.default.origin + "/user";
       const accessToken = localStorage.getItem("accessToken");
+      console.log(accessToken);
       const response = await axios.get(url, {
         withCredentials: true,
         headers: {
