@@ -51,13 +51,15 @@ const fetchUserData = async (
         const res = await refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
-          fetchUserData(refresh,
-  setRefresh,
-  setLoading,
-  setImage,
-  setEmail,
-  setUsername,
-  navigate);
+          fetchUserData(
+              refresh,
+              setRefresh,
+              setLoading,
+              setImage,
+              setEmail,
+              setUsername,
+              navigate    
+          );
         } else {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
@@ -67,13 +69,15 @@ const fetchUserData = async (
         // props.setErr({ occured: true, msg: err.message });
       }
       if (err.message.includes("Network")) {
-        fetchUserData(refresh,
-  setRefresh,
-  setLoading,
-  setImage,
-  setEmail,
-  setUsername,
-  navigate);
+       fetchUserData(
+              refresh,
+              setRefresh,
+              setLoading,
+              setImage,
+              setEmail,
+              setUsername,
+              navigate    
+          );
       }
     }
   }
