@@ -127,9 +127,9 @@
   outline: none;
   -webkit-appearance: none;
   appearance: none;
-  width: 100%;
+  width: 85%;
   height: 10px;
-  background: var(--primary-color);
+  background: black;
   border-radius: 20px;
 }
 #range::-webkit-slider-thumb {
@@ -143,6 +143,29 @@
   border: none;
 }
 #range:focus {
+  outline: none;
+}
+#vol {
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8px;
+  height: 85%;
+  transform: rotate(180deg);
+  background: black;
+  border-radius: 20px;
+}
+#vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--secondary-color);
+  border: none;
+}
+#vol:focus {
   outline: none;
 }
 .borderAnim {

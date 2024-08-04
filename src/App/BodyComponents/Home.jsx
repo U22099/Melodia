@@ -8,7 +8,7 @@ import { Context } from "../../App.jsx";
 const Home = () => {
   const { section, setSection, setMenu, menu } = useContext(Context);
   return (
-    <div className="">
+    <div>
       <header className="grid grid-cols-[2fr_1fr] pl-[0px] p-[8px]">
         <NavBar
           setSection={setSection}

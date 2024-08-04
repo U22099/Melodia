@@ -8,18 +8,10 @@ export const Context = React.createContext();
 
 const App = () => {
   const [err, setErr] = useState({ occured: false, msg: "" });
-  const [isPlaying, setIsPlaying] = useState(false);
   const [isAdmin, setIsAdmin] = useState();
-  const [file, setFile] = useState();
   const [menu, setMenu] = useState(false);
   const [page, setPage] = useState(1);
   const [section, setSection] = useState(1);
-  const [x, setX] = useState();
-  const play = (file, x) => {
-    setX(x);
-    setFile(file);
-    setIsPlaying(true);
-  };
   return (
     <div
       className={
@@ -43,6 +35,7 @@ const App = () => {
           setErr={setErr}
           err={err}
           setPage={setPage}
+          isAdmin={isAdmin}
           page={page}
         />
       </motion.section>
@@ -50,7 +43,6 @@ const App = () => {
         <main className="">
           <Context.Provider value={{ section, setSection, setMenu, menu }}>
             <Body
-              play={play}
               err={err}
               setErr={setErr}
               isAdmin={isAdmin}
@@ -58,17 +50,6 @@ const App = () => {
             />
           </Context.Provider>
         </main>
-        <footer className="bg-black rounded-[10px] fixed bottom-[0%] left-[50%] transfrom translate-x-[-50%] w-[100%] md:w-[90%]">
-          <Footer
-            file={file}
-            isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying}
-            x={x}
-            setX={setX}
-            err={err}
-            setErr={setErr}
-          />
-        </footer>
       </section>
     </div>
   );

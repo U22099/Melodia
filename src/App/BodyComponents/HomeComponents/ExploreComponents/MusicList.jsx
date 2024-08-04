@@ -14,7 +14,7 @@ const MusicList = ({ loading, outputData, play }) => {
               onClick={() => {
                 const audio = document.getElementById("audio");
                 audio?.pause();
-                play(music, i);
+                play(outputData, i);
               }}
               className="min-w-[150px]"
             >

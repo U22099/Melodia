@@ -1,62 +1,49 @@
 import { useState, useEffect } from 'react'
-import { FaPlay, FaPause, FaForwardStep, FaBackwardStep } from 'react-icons/fa6'
+import { FaPlay, FaPause, FaForwardStep, FaBackwardStep, FaRepeat } from 'react-icons/fa6'
+import {PiRepeatOnceBold} from 'react-icons/pi'
 import { MdOutlineClose } from 'react-icons/md'
-import indexedDB from '../utils/indexedDB.js'
-import ErrorDialog from '../utils/ErrorDialog'
-import origin from '../../config/origin.json'
-import axios from 'axios'
+import fetchMusicDataById from '../utils/fetchMusicDataById.js'
 
-const Footer = ({isPlaying, file, x, setX, setErr}) => {
-    const [loaded, setLoaded] = useState();
-    const [pause, setPause] = useState();
-    const [src, setSrc] = useState();
-    const fetchMusicDataById = async (_id, setSrc, setErr) => {
-        try {
-            if(!file[x].data){
-                const url = origin.default.origin + '/musicapi/data';
-                const response = await axios.post(url, { "_id": _id },
-                    {
-                        withCredentials: true,
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    });
-                file[x].data = response.data.music.data;
-                indexedDB.saveData(file, "MusicData", indexedDB.init);
-                localStorage.setItem('music_stored', true);
-                setSrc(response.data.music.data);
-            } else {
-                setSrc(file[x].data);
-            }
-        } catch (err) {
-            setErr({ occured: true, msg: err.message });
-        }
-    }
+const Footer = ({isPlaying, setIsPlaying,  file, x, setX, setErr}) => {
+    const [text, setText] = useState();
+    const [loaded, setLoaded] = useState(false);
+    const [pause, setPause] = useState(false);
+    const [src, setSrc] = useState("");
+    let audio;
     const Play = () => {
         setPause(false);
-        const audio = document.getElementById("audio");
         audio.play();
     }
     const Pause = () => {
         setPause(true);
-        const audio = document.getElementById("audio");
         audio.pause();
     }
     const Load = () => {
         if(loaded){
             setPause(false);
-            const audio = document.getElementById("audio");
+            audio = new Audio(src);
             const slider = document.getElementById("range");
-            audio.src = src;
-            audio.load();
-            audio.play();
+            const volume = document.getElementById("vol");
             slider.value = 0;
+            volume.value = 75;
+            audio.load();
             audio.addEventListener('loadedmetadata', () => {
+                audio.loop = loop_one;
+                audio.autoplay = true;
+                audio.play();
                 slider.max = audio.duration;
             });
-            audio.onend = () => {
-                alert("Replay");
-                Load()
+            audio.addEventListener('ended', () => {
+                if(loop_all){
+                    if (x === file.length - 1) {
+                        setX(0);
+                    } else {
+                        setX(x + 1);
+                    }
+                }
+            });
+            volume.onchange = () => {
+                audio.volume = volume.value/100;
             }
             slider.onchange = () => {
                 audio.currentTime = slider.value;
@@ -70,39 +57,49 @@ const Footer = ({isPlaying, file, x, setX, setErr}) => {
     useEffect(() => {
         if (isPlaying) {
             setLoaded(false);
-            fetchMusicDataById(file[x]._id);
+            fetchMusicDataById(file, x, file[x]._id, setSrc, setErr);
         }
     }, [x]);
     useEffect(() => {
         src ? setLoaded(true) : "";
     }, [src]);
     useEffect(() => {
+        let interval = '';
         if(loaded){
+            clearInterval(interval);
             Load();
+        } else {
+            let x = 0;
+            interval = setInterval(()=>{
+            const arr = ['.','..','...'];
+            if(x === 3){
+                setText('Loading');
+                x = 0
+            } else {
+                setText('Loading'+arr[x]);
+                x++;
+            }
+            }, 500);   
         }
     }, [loaded]);
     if (isPlaying) {
         if (loaded) {
             return (
-                <div className="cursor-pointer p-[8px] rounded-[8px] flex gap-[16px] items-center">
-                    <img src={file[x].image} alt="Music Picture" className="bg-[black] rounded w-24 h-24" />
+                <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] flex gap-[16px] items-center fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
+                    <img src={file[x].image} alt="Music Picture" className="bg-[black] rounded-lg w-24 h-24" />
                     <div className="w-[80%]">
-                        <div className="flex justify-end p-[5px] pb-[0px] w-[100%]">
-                            <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => setIsPlaying(false)} />
-                        </div>
+                        
                         <h1 className={
-                      (x.title?.length > 20 ? "truncate max-w-[144px] " : "") +
+                      (file[x].title?.length > 60 ? "truncate max-w-[85%] " : "") +
                       "font-extrabold md:text-[1.3em] font-custom m-[0px] ml-[8px]"
                     }
-                    title={x.title}
+                    title={file[x].title}
                   >
-                    {x.title}</h1>
-                        <audio id="audio" hidden autoPlay>
-                            <source src={src} key={file[x]._id} type="audio/mpeg" />
-                        </audio>
-                        <input type="range" name="range" id="range" min={0} defaultValue={0} className="w-[100%] bg-[var(--secondary-color)]" />
-                        <div className="flex flex-wrap justify-between w-[70%] mx-auto">
-                            <FaBackwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
+                    {file[x].title}</h1>
+                        <input type="range" name="range" id="range" min={0} defaultValue={0}/>
+                        <div className="flex justify-start gap-[16px] items-center w-[85%]">
+                            <FaRepeat className="text-[1.4em] text-[var(--secondary-color)]"/>
+                            <FaBackwardStep className="text-[1.5em] text-[var(--secondary-color)]" onClick={() => {
                                 if (x === 0) {
                                     setX(0);
                                 } else {
@@ -110,8 +107,8 @@ const Footer = ({isPlaying, file, x, setX, setErr}) => {
                                 }
                                 Play();
                             }} />
-                            {pause ? <FaPlay onClick={Play} className="text-[2em] text-[var(--secondary-color)]" /> : <FaPause onClick={Pause} className="text-[2em] text-[var(--secondary-color)]" />}
-                            <FaForwardStep className="text-[2em] text-[var(--secondary-color)]" onClick={() => {
+                            {pause ? <FaPlay onClick={Play} className="text-[2em] p-[16px] rounded-full bg-[var(--secondary-color)]" /> : <FaPause onClick={Pause} className="text-[2em] p-[16px] rounded-full bg-[var(--secondary-color)]" />}
+                            <FaForwardStep className="text-[1.5em] text-[var(--secondary-color)]" onClick={() => {
                                 if (x === file.length - 1) {
                                     setX(0);
                                 } else {
@@ -119,15 +116,23 @@ const Footer = ({isPlaying, file, x, setX, setErr}) => {
                                 }
                                 Play();
                             }} />
+                            <PiRepeatOnceBold className="text-[1.4em] text-[var(--secondary-color)]"/>
                         </div>
                     </div>
-                    {err.occured ? <ErrorDialog msg={err.msg} /> : ''}
+                    <div className="flex flex-col h-[100%] gap-[8px]">
+                    <div className="flex justify-end items-start p-[5px] pb-[0px] w-[100%]">
+                            <MdOutlineClose className="fill-[var(--secondary-color)] cursor-pointer md:text-[2em]" onClick={() => setIsPlaying(false)} />
+                        </div>
+                        <div className="h-[100%] flex justify-start w-[100%] items-start">
+                        <input type="range" name="range" id="vol" min={0} max={100} defaultValue={75}/>
+                        </div>
+                    </div>
                 </div>
             )
         } else {
             return (
                 <div className="cursor-pointer p-[10px] rounded-[10px] flex justify-center items-center">
-                    <p id="roll2"></p>
+                    <h1 className="text-[var(--secondary-color)] text-[1.5em] font-serif">{text}</h1>
                 </div>
             );
         }

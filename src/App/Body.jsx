@@ -16,16 +16,15 @@ import ConfirmDialog from "../utils/ConfirmDialog";
 
 export const Context = React.createContext();
 
-const Body = ({ page }) => {
+const Body = ({ page, setErr, err }) => {
   const navigate = useNavigate();
-  const [err, setErr] = useState({ occured: false, msg: '' });
   const [refresh, setRefresh] = useState({ refresh: false, first: true });
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("image.JPG");
   const [email, setEmail] = useState();
   const [username, setUsername] = useState();
   const [music, setMusic] = useState("012345678910".split(""));
-  const [recentMusic, setRecentMusic] = useState("012345".split(""));
+  const [recentMusic, setRecentMusic] = useState([{title: "Lil-Wayne || Mirror", image: "Logo.jpg", uploader: "Daniel", _id: 1, data: "data:audio/mpeg4"}]);
   const [topMusic, setTopMusic] = useState("012345".split(""));
   const [devData, setDevData] = useState("01".split(""));
   const [isPlaying, setIsPlaying] = useState(false);
@@ -104,6 +103,7 @@ const Body = ({ page }) => {
         music,
         setRefresh,
         refresh,
+        play
       }}
     >
       <div className="ml-[16px]">
@@ -111,7 +111,7 @@ const Body = ({ page }) => {
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
         {page === 4 ? <Upload /> : ""}
-        <Footer isPlaying={isPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr}/>
+        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr}/>
       </div>
 
       {err.occured ? <ErrorDialog msg={err.msg} /> : ""}

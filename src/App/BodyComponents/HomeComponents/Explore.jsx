@@ -8,7 +8,7 @@ import ConfirmDialog from "../../../utils/ConfirmDialog";
 import SuccessDialog from "../../../utils/SuccessDialog";
 const Explore = () => {
   let id = "";
-  const { loading, recentMusic, topMusic, devData } = useContext(Context);
+  const { loading, recentMusic, topMusic, devData, play } = useContext(Context);
   /*
   const deleteMusic = async () => {
     if (props.isAdmin) {
