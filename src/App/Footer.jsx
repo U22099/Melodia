@@ -39,21 +39,6 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
         audio.autoplay = true;
         audio.play();
         slider.max = audio.duration;
-        audio.addEventListener("ended", () => {
-        console.log("Ended");
-        console.log(loop_all);
-        console.log(loop_one)
-        if (loop_all) {
-          console.log("help")
-          if (x === file.length - 1) {
-            setX(0);
-          } else {
-            setX(x + 1);
-          }
-        } else if(loop_one){
-          setX(x);
-        }
-      });
       });
       volume.onchange = () => {
         audio.volume = volume.value / 100;
@@ -98,25 +83,22 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
   }, [loaded]);
   useEffect(()=>{
     audio?.addEventListener("ended", () => {
-        console.log("Looper");
-        console.log(loop_all);
-        console.log(loop_one)
         if (loop_all) {
-          console.log("help")
           if (x === file.length - 1) {
             setX(0);
           } else {
             setX(x + 1);
           }
         } else if(loop_one){
-          setX(x);
+            setLoaded(false);
+            fetchMusicDataById(file, x, file[x]._id, setSrc, setErr);
         }
       });
 }, [loop_all, loop_one])
   if (isPlaying) {
     if (loaded) {
       return (
-        <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
+        <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] absolute top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
           <img
             src={file[x].image}
             alt="Music Picture"
@@ -190,7 +172,11 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
             <div className="flex justify-end items-start p-[5px] pb-[0px] w-[100%]">
               <MdOutlineClose
                 className="text-[1.3em] fill-[var(--secondary-color)] cursor-pointer md:text-[2em]"
-                onClick={() => setIsPlaying(false)}
+                onClick={() => {
+                  audio?.pause(); 
+                  setIsPlaying(false);
+                  }
+               }
               />
             </div>
           </div>
@@ -198,7 +184,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
       );
     } else {
       return (
-        <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-center items-center">
+        <div className="h-[60px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-center items-center">
           <h1 className="flex mx-auto text-[var(--secondary-color)] text-[1.5em] font-serif">
             {text}
           </h1>
