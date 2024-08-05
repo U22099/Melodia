@@ -7,7 +7,6 @@ import ErrorDialog from "../../../utils/ErrorDialog";
 import ConfirmDialog from "../../../utils/ConfirmDialog";
 import SuccessDialog from "../../../utils/SuccessDialog";
 const Explore = () => {
-  let id = "";
   const { loading, recentMusic, topMusic, devData, play, audio } = useContext(Context);
   /*
   const deleteMusic = async () => {
