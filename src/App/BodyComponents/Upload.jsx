@@ -45,6 +45,7 @@ const Upload = () => {
         <button className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] h-[50px]">
           Upload
         </button>
+        <p>STILL IN DEV MODE!!</p>
       </div>
     </motion.div>
   );
