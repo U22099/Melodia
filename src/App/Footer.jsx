@@ -36,6 +36,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
       slider.value = 0;
       volume.value = 75;
       audio.load();
+      audio.play();
       audio.addEventListener("loadedmetadata", () => {
         audio.loop = loop_one;
         audio.autoplay = true;
