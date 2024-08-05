@@ -18,7 +18,6 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr }) => {
   const [loaded, setLoaded] = useState(false);
   const [pause, setPause] = useState(false);
   const [src, setSrc] = useState("");
-  let audio;
   const Play = () => {
     setPause(false);
     audio.play();
@@ -30,7 +29,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr }) => {
   const Load = () => {
     if (loaded) {
       setPause(false);
-      audio = new Audio(src);
+      const audio = new Audio(src);
       const slider = document.getElementById("range");
       const volume = document.getElementById("vol");
       slider.value = 0;
