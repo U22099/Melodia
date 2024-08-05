@@ -13,7 +13,7 @@ const MusicList = ({ loading, outputData, audio, play}) => {
               key={i}
               onClick={() => {
                 audio?.pause();
-                play(music, i);
+                play(outputData, i);
               }}
               className="min-w-[120px] md:min-w-[150px] max-w-[150px] md:max-w-[200px]"
             >

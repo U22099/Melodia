@@ -41,7 +41,10 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
         slider.max = audio.duration;
         audio.addEventListener("ended", () => {
         console.log("Ended");
+        console.log(loop_all);
+        console.log(loop_one)
         if (loop_all) {
+          console.log("help")
           if (x === file.length - 1) {
             setX(0);
           } else {
@@ -93,6 +96,23 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
       }, 500);
     }
   }, [loaded]);
+  useEffect(()=>{
+    audio?.addEventListener("ended", () => {
+        console.log("Looper");
+        console.log(loop_all);
+        console.log(loop_one)
+        if (loop_all) {
+          console.log("help")
+          if (x === file.length - 1) {
+            setX(0);
+          } else {
+            setX(x + 1);
+          }
+        } else if(loop_one){
+          setX(x);
+        }
+      });
+}, [loop_all, loop_one])
   if (isPlaying) {
     if (loaded) {
       return (
@@ -121,6 +141,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
               <FaBackwardStep
                 className="text-[1.5em] active:fill-[var(--secondary-color)]"
                 onClick={() => {
+                  audio?.pause();
                   if (x === 0) {
                     setX(0);
                   } else {
@@ -143,6 +164,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
               <FaForwardStep
                 className="text-[1.5em] active:fill-[var(--secondary-color)]"
                 onClick={() => {
+                  audio?.pause();
                   if (x === file.length - 1) {
                     setX(0);
                   } else {
@@ -176,8 +198,8 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
       );
     } else {
       return (
-        <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
-          <h1 className="text-[var(--secondary-color)] text-[1.5em] font-serif">
+        <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-center items-center">
+          <h1 className="flex mx-auto text-[var(--secondary-color)] text-[1.5em] font-serif">
             {text}
           </h1>
         </div>
