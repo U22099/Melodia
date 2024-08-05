@@ -36,13 +36,16 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
       slider.value = 0;
       volume.value = 75;
       audio.load();
-      audio.play();
+      audio.autoplay = true
       audio.addEventListener("loadedmetadata", () => {
         audio.loop = loop_one;
-        audio.autoplay = true;
         audio.play();
         slider.max = audio.duration;
       });
+      audio.addEventListener("touchstart", ()=>{
+        audio.play();
+        audio.removeEventListener("touchstart", this); ha
+      })
       volume.onchange = () => {
         audio.volume = volume.value / 100;
       };
@@ -59,7 +62,11 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
   useEffect(() => {
     if (isPlaying) {
       setLoaded(false);
-      fetchMusicDataById(file, x, file[x]._id, setSrc, setErr);
+      try{
+        fetchMusicDataById(file, x, file[x]._id, setSrc, setErr);
+      } catch (err){
+        setIsPlaying(false)
+      }
     }
   }, [x]);
   useEffect(() => {

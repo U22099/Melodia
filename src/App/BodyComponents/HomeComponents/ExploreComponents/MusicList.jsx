@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import MusicListSkeleton from "./MusicListSkeleton";
 
 const MusicList = ({ loading, outputData, play, audio}) => {

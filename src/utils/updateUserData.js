@@ -2,7 +2,7 @@ import refresh from './fetchUserData.js'
 import axios from 'axios'
 import indexedDB from './indexedDB.js'
 
-  const updateUserData = async (navigate, username, email, image, setText, text, setErrorText, setLoading) => {
+  const updateUserData = async (navigate, username, email, image, setText, text, setErrorText, setUpdating) => {
      if (username && email && image) {
        try {
          let x = 0;
@@ -16,7 +16,7 @@ import indexedDB from './indexedDB.js'
              x++;
            }
          }, 500);
-         setLoading(true);
+         setUpdating(true);
          const DATA = {
            username: username,
            email: email,
@@ -47,12 +47,13 @@ import indexedDB from './indexedDB.js'
          setTimeout(()=>{
            setText('Save')
          }, 2000)
-         setLoading(false);
+         setUpdating(false);
        } catch (err) {
          if ([401, 402, 403, 404].includes(err.response.status)) {
            const res = await refresh(navigate);
            if (res.status === 200) updateUserData();
          } else {
+           setUpdating(false);
            setErrorText(err.response.data.message);
          }
        }

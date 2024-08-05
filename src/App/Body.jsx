@@ -125,7 +125,8 @@ const Body = ({ page, setErr, err }) => {
         <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr} audio={audio} setAudio={setAudio}/>
       </div>
 
-      {err.occured ? <ErrorDialog msg={err.msg} /> : ""}
+      {err.occured ? <ErrorDialog msg={err.msg} setErr={setErr}/> : ""}
+      {()=>{err.occured ? setLoading(false) : ""}}
       {/*
       {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}*/}
       {confirm.ask ? (
