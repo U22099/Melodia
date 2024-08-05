@@ -4,7 +4,7 @@ import { Context } from "../../Body";
 
 const All = () => {
   let id = "";
-  const { loading, music, play } = useContext(Context);
+  const { loading, music, play, audio } = useContext(Context);
   return (
     <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
       <section className="flex justify-end p-[10px] pb-[0px] md:w-[90%] mx-auto">
@@ -17,7 +17,7 @@ const All = () => {
         /> */}
       </section>
       <section className="mx-auto w-[100%]">
-        <MusicList loading={loading} outputData={music} play={play} />
+        <MusicList loading={loading} outputData={music} play={play} audio={audio}/>
       </section>
       {/* {success ? <SuccessDialog msg="Music deleted successfully" /> : ""}
       {confirm ? (

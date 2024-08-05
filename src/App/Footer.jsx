@@ -10,9 +10,8 @@ import { PiRepeatOnceBold } from "react-icons/pi";
 import { MdOutlineClose } from "react-icons/md";
 import fetchMusicDataById from "../utils/fetchMusicDataById.js";
 
-const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr }) => {
+const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudio }) => {
   const [text, setText] = useState();
-  const [audio, setAudio] = useState();
   const [loop_all, setLoop_all] = useState(false);
   const [loop_one, setLoop_one] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -40,8 +39,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr }) => {
         audio.autoplay = true;
         audio.play();
         slider.max = audio.duration;
-      });
-      audio.addEventListener("ended", () => {
+        audio.addEventListener("ended", () => {
         console.log("Ended");
         if (loop_all) {
           if (x === file.length - 1) {
@@ -52,6 +50,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr }) => {
         } else if(loop_one){
           setX(x);
         }
+      });
       });
       volume.onchange = () => {
         audio.volume = volume.value / 100;

@@ -1,7 +1,7 @@
 import React from "react";
 import MusicListSkeleton from "./MusicListSkeleton";
 
-const MusicList = ({ loading, outputData }) => {
+const MusicList = ({ loading, outputData, audio, play}) => {
   return (
     <section className="p-[8px] pl-[0px] w-[100%] mx-auto">
       {loading ? (
@@ -12,7 +12,6 @@ const MusicList = ({ loading, outputData }) => {
             <li
               key={i}
               onClick={() => {
-                const audio = document.getElementById("audio");
                 audio?.pause();
                 play(music, i);
               }}

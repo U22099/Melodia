@@ -32,6 +32,7 @@ const Body = ({ page, setErr, err }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [file, setFile] = useState();
   const [x, setX] = useState();
+  const [audio, setAudio] = useState();
   const play = (file, x) => {
     setX(x);
     setFile(file);
@@ -112,6 +113,7 @@ const Body = ({ page, setErr, err }) => {
         setRefresh,
         refresh,
         play,
+        audio,
         setConfirm
       }}
     >
@@ -120,7 +122,7 @@ const Body = ({ page, setErr, err }) => {
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
         {page === 4 ? <Upload /> : ""}
-        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr}/>
+        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr} audio={audio} setAudio={setAudio}/>
       </div>
 
       {err.occured ? <ErrorDialog msg={err.msg} /> : ""}
