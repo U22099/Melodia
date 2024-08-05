@@ -5,7 +5,7 @@ import { Context } from "../Body";
 import MusicList from "../BodyComponents/HomeComponents/AllComponents/MusicList";
 
 const Search = () => {
-  const { loading, music } = useContext(Context);
+  const { loading, music, play, audio } = useContext(Context);
   const [outputData, setOutputData] = useState([]);
   const filterOutput = (e = document.getElementById("input")) => {
     setOutputData(
@@ -40,12 +40,12 @@ const Search = () => {
           onChange={filterOutput}
         />
         <FaSearch
-          className="fill-gray-300 cursor-pointer text-[1.4em] md:text-[1.7em] absolute left-[80%] md:left-[90%]"
+          className="fill-gray-300 cursor-pointer text-[1.4em] md:text-[1.7em] absolute top-[20%] left-[80%] md:left-[90%]"
           id="searchIcon"
         />
       </section>
       <section className="max-h-[85vh] overflow-auto overflow-x-hidden">
-        <MusicList loading={loading} outputData={outputData} />
+        <MusicList loading={loading} outputData={outputData} play={play} audio={audio}/>
       </section>
     </motion.div>
   );

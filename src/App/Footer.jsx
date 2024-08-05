@@ -9,6 +9,7 @@ import {
 import { PiRepeatOnceBold } from "react-icons/pi";
 import { MdOutlineClose } from "react-icons/md";
 import fetchMusicDataById from "../utils/fetchMusicDataById.js";
+import {motion} from 'framer-motion'
 
 const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudio }) => {
   const [text, setText] = useState();
@@ -98,7 +99,18 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
   if (isPlaying) {
     if (loaded) {
       return (
-        <div className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
+        <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        duration: 1,
+        type: "spring",
+        delay: 0.5,
+      }} className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
           <img
             src={file[x].image}
             alt="Music Picture"
@@ -180,15 +192,26 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
               />
             </div>
           </div>
-        </div>
+        </motion.div>
       );
     } else {
       return (
-        <div className="h-[60px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-center items-center">
+        <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        duration: 1,
+        type: "spring",
+        delay: 0.5,
+      }} className="h-[60px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-center items-center">
           <h1 className="flex mx-auto text-[var(--secondary-color)] text-[1.5em] font-serif">
             {text}
           </h1>
-        </div>
+        </motion.div>
       );
     }
   } else {
