@@ -3,7 +3,6 @@ import MusicList from "./AllComponents/MusicList";
 import { Context } from "../../Body";
 
 const All = () => {
-  let id = "";
   const { loading, music, play, audio } = useContext(Context);
   return (
     <div className="overflow-auto overflow-x-hidden max-h-[85vh] w-[100%]">
