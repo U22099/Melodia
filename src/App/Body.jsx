@@ -117,7 +117,7 @@ const Body = ({ page, setErr, err }) => {
         setConfirm
       }}
     >
-      <div className="ml-[16px] relative">
+      <div className="ml-[16px]">
         {page === 1 ? <Home /> : ""}
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
