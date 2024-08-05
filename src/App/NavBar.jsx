@@ -10,19 +10,6 @@ import axios from "axios";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
   const { loading, image, setRefresh, refresh,} = useContext(Context);
-  // const navigate = useNavigate();
-  // const [menu, setMenu] = useState(false);
-  // const [forceRefresh, setForceRefresh] = useState(false);
-  // const [loading, setLoading] = useState(false);
-  // const [text, setText] = useState("Save");
-  //
-  //
-  // const [upload, setUpload] = useState({ state: null, msg: "" });
-  // const [confirm, setConfirm] = useState(false);
-  // const [showAdminPanel, setShowAdminPanel] = useState(false);
-  // const [image, setImage] = useState("image.JPG");
-  //
-
   // const uploadMusic = async () => {
   //   try {
   //     setUpload({ state: false, msg: "" });
@@ -95,36 +82,6 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
   //       },
   //     });
   //   });
-  // };
-  // const deleteUser = async () => {
-  //   try {
-  //     const url = origin.default.origin + "/user";
-  //     const accessToken = localStorage.getItem("accessToken");
-  //     const response = await axios.delete(url, {
-  //       withCredentials: true,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Bearer " + accessToken,
-  //       },
-  //     });
-  //     if (response.status === 200) {
-  //       await logOut();
-  //       console.log("Deleted User Successfully");
-  //       navigate("/", { replace: true });
-  //     }
-  //   } catch (err) {
-  //     if ([401, 403].includes(err.response.status)) {
-  //       const res = await refresh();
-  //       if (res.status === 200) {
-  //         localStorage.setItem("accessToken", res.data.accessToken);
-  //         deleteUser();
-  //       } else {
-  //         navigate("/", { replace: true });
-  //       }
-  //     } else {
-  //       props.setErr({ occured: true, msg: err.message });
-  //     }
-  //   }
   // };
   // useEffect(() => {
   //   //fetchUserData();

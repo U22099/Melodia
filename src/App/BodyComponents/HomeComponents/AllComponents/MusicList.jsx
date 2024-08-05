@@ -8,13 +8,13 @@ const MusicList = ({ loading, outputData }) => {
         <MusicListSkeleton outputData={"012345678910".split("")} />
       ) : (
         <ol className="flex md:gap-[5px] flex-wrap justify-center w-[100%] mx-auto">
-         {outputData.sort((a,b) => a.title.localeCompare(b.title)).map((x, i) => (
+         {outputData?.sort((a,b) => a.title.localeCompare(b.title)).map((x, i) => (
             <li
               key={i}
               onClick={() => {
-                // const audio = document.getElementById("audio");
-                // audio?.pause();
-                // props.play(music, i);
+                const audio = document.getElementById("audio");
+                audio?.pause();
+                play(music, i);
               }}
               className="min-w-[120px] md:min-w-[150px] max-w-[150px] md:max-w-[200px]"
             >

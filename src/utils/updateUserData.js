@@ -2,7 +2,7 @@ import refresh from './fetchUserData.js'
 import axios from 'axios'
 import indexedDB from './indexedDB.js'
 
-  const updateUserData = async (navigate,username, email, image,  setText, text, setErrorText, setLoading) => {
+  const updateUserData = async (navigate, username, email, image, setText, text, setErrorText, setLoading) => {
      if (username && email && image) {
        try {
          let x = 0;
@@ -41,7 +41,7 @@ import indexedDB from './indexedDB.js'
           "UserData",
           indexedDB.init
        );
-         localStorage.setItem("store1", true);
+         localStorage.setItem("user_stored", true);
          clearInterval(myInterval);
          setText("Done");
          setTimeout(()=>{

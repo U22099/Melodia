@@ -7,7 +7,7 @@ function ConfirmDialog(props) {
     function ans(x) {
         setShow(false);
         props.var2(false);
-        x ? props.callback() : "";
+        x ? props.callback({ask: true, result: true}) : "";
     }
     if (show) {
         return (

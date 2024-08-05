@@ -127,19 +127,21 @@
   outline: none;
   -webkit-appearance: none;
   appearance: none;
-  width: 85%;
+  width: 230px;
   height: 10px;
   background: black;
   border-radius: 20px;
+  overflow: hidden;
 }
 #range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 18px;
   height: 18px;
-  border-radius: 50%;
-  cursor: pointer;
   background: var(--secondary-color);
+  border-radius: 20px;
+  box-shadow: -400px 0px 0px 390px var(--secondary-color);
+  cursor: pointer;
   border: none;
 }
 #range:focus {
@@ -149,20 +151,21 @@
   outline: none;
   -webkit-appearance: none;
   appearance: none;
-  width: 8px;
-  height: 85%;
-  transform: rotate(180deg);
+  width: 100px;
+  overflow: hidden;
+  height: 8px;
   background: black;
   border-radius: 20px;
 }
 #vol::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  cursor: pointer;
+  width: 12px;
+  height: 12px;
   background: var(--secondary-color);
+  border-radius: 20px;
+  box-shadow: -150px 0px 0px 140px var(--secondary-color);
+  cursor: pointer;
   border: none;
 }
 #vol:focus {

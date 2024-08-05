@@ -19,6 +19,7 @@ const Profile = () => {
     username,
     setUsername,
     updateUserData,
+    setConfirm
   } = useContext(Context);
   const handleImage = async (e) => {
     const data = await toBase64(e.target.files[0]);
@@ -102,9 +103,9 @@ const Profile = () => {
       </button>
       <button
         className="btn font-custom h-[50px] w-[82%] md:w-[70%] bg-red-600"
-        // onClick={() => {
-        //   setConfirm(true);
-        // }}
+        onClick={() => {
+          setConfirm({ask: true, result: false});
+        }}
       >
         Delete my account
       </button>
