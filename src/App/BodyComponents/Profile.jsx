@@ -7,6 +7,7 @@ import Skeleton from "react-loading-skeleton";
 
 const Profile = () => {
   const [text, setText] = useState("Save");
+  const [updating, setUpdating] = useState(false);
   const [errorText, setErrorText] = useState("");
   const navigate = useNavigate();
   const {
@@ -34,7 +35,7 @@ const Profile = () => {
       setText,
       text,
       setErrorText,
-      setLoading
+      setUpdating
     );
   };
   return (
@@ -54,7 +55,7 @@ const Profile = () => {
       }}
       className="grid grid-rows-[3fr_repeat(3,1fr)] gap-[10px] p-[20px] rounded-[10px] text-center items-center w-[100%] md:w-[70%] mx-auto"
     >
-      {loading ? (
+      {(loading || updating) ? (
         <Skeleton className="bg-[var(--primary-color)] rounded-full md:w-48 md:h-48 w-40 h-40 mx-auto" />
       ) : (
         <label htmlFor="inputImage">

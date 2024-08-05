@@ -9,10 +9,10 @@ import indexedDB from './indexedDB.js'
          const myInterval = setInterval(()=>{
            const arr = ['.','..','...'];
            if(x === 3){
-             setText('Loading');
+             setText('Updating');
              x = 0
            } else {
-             setText('Loading'+arr[x]);
+             setText('Updating'+arr[x]);
              x++;
            }
          }, 500);

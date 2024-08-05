@@ -12,6 +12,7 @@ import fetchMusicDataById from "../utils/fetchMusicDataById.js";
 
 const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudio }) => {
   const [text, setText] = useState();
+  const [replay, setReplay] = useState(false);
   const [loop_all, setLoop_all] = useState(false);
   const [loop_one, setLoop_one] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -80,7 +81,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
         }
       }, 500);
     }
-  }, [loaded]);
+  }, [loaded, replay]);
   useEffect(()=>{
     audio?.addEventListener("ended", () => {
         if (loop_all) {
@@ -90,8 +91,7 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
             setX(x + 1);
           }
         } else if(loop_one){
-            setLoaded(false);
-            fetchMusicDataById(file, x, file[x]._id, setSrc, setErr);
+            setReplay(!replay);
         }
       });
 }, [loop_all, loop_one])
