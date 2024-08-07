@@ -35,18 +35,13 @@ const Body = ({ page, setErr, err }) => {
   const [file, setFile] = useState();
   const [pause, setPause] = useState(false);
   const [audio, setAudio] = useState(new Audio());
-  const [x, setX] = useState(0);
-  const [index, setIndex] = useState(0);
+  const X = useRef(0);
+  const Index = useRef(0);
   
   const play = async (index, x) => {
     setLoaded(false);
-    setX(x);
-    setIndex(index)
-    console.log(
-      {
-        x: x,
-        index: index
-      })
+    X.current = x;
+    Index.current = index;
     const OBJ = [recentMusic, topMusic, music, setRecentMusic, setMusic]
     setFile(OBJ[index]);
     setIsPlaying(true);
@@ -144,7 +139,7 @@ const Body = ({ page, setErr, err }) => {
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
         {page === 4 ? <Upload setErr={setErr} username={username}/> : ""}
-        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} file={file} play={play} setErr={setErr} audio={audio} loaded={loaded} play={play} setPause={setPause} pause={pause} index={index} setIndex={setIndex} x={x} setX={setX}/>
+        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} file={file} setErr={setErr} audio={audio} loaded={loaded} play={play} setPause={setPause} pause={pause} index={Index} x={X}/>
       </div>
 
       {err.occured ? <ErrorDialog msg={err.msg} setErr={setErr}/> : ""}

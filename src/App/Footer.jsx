@@ -10,7 +10,7 @@ import { PiRepeatOnceBold } from "react-icons/pi";
 import { MdOutlineClose } from "react-icons/md";
 import {motion} from 'framer-motion'
 
-const Footer = ({ isPlaying, setIsPlaying, loaded, file, x, setErr, audio, play, setPause, pause, index, setX, setIndex}) => {
+const Footer = ({ isPlaying, setIsPlaying, loaded, file, x, setErr, audio, play, setPause, pause, index}) => {
   const [text, setText] = useState();
   const [loop_all, setLoop_all] = useState(false);
   const [loop_one, setLoop_one] = useState(false);
@@ -43,15 +43,15 @@ const Footer = ({ isPlaying, setIsPlaying, loaded, file, x, setErr, audio, play,
     audio?.addEventListener("ended", () => {
       audio.pause();
         if (loop_all) {
-          if (x=== file.length - 1) {
-            play(index, 0);
+          if (x.current === file.length - 1) {
+            play(index.current, 0);
             Play();
           } else {
-            play(index, x+1);
+            play(index.current, x.current+1);
             Play();
           }
         } else if(loop_one){
-            play(index, x);
+            play(index.current, x.current);
             Play();
         }
       });
@@ -65,8 +65,7 @@ useEffect(()=>{
       audio.load();
       audio.autoplay = true
       audio.addEventListener("loadedmetadata", () => {
-        //audio.loop = loop_one;
-        slider.max = audio.duration;
+        slider.max= audio.duration;
       });
       volume.onchange = () => {
         audio.volume = volume.value / 100;
@@ -96,16 +95,16 @@ useEffect(()=>{
         delay: 0.5,
       }} className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
           <img
-            src={file[x].image}
+            src={file[x.current].image}
             alt="Music Picture"
             className="bg-[black] rounded-lg w-16 h-16 md:w-24 md:h-24"
           />
           <div className="w-[80%] flex flex-col items-center gap-[8px] mx-auto">
             <h1
               className="max-w-[230px] md:max-w-[350px] truncate font-extrabold md:text-[1.3em] font-custom m-[0px] ml-[8px]"
-              title={file[x].title}
+              title={file[x.current].title}
             >
-              {file[x].title}
+              {file[x.current].title}
             </h1>
             <input
               type="range"
@@ -120,11 +119,11 @@ useEffect(()=>{
                 className="text-[1.5em] active:fill-[var(--secondary-color)]"
                 onClick={async () => {
                   audio?.pause();
-                  if (x=== 0) {
-                    await play(index, 0);
+                  if (x.current === 0) {
+                    await play(index.current, 0);
                     Play();
                   } else {
-                    await play(index, x-1);
+                    await play(index.current, x.current-1);
                     Play();
                   }
                 }}
@@ -144,14 +143,13 @@ useEffect(()=>{
                 className="text-[1.5em] active:fill-[var(--secondary-color)]"
                 onClick={async () => {
                   audio?.pause();
-                  if (x=== file.length - 1) {
-                    await play(index, 0);
+                  if (x.current === file.length - 1) {
+                    await play(index.current, 0);
                     Play();
                   } else {
-                    await play(index, x+1);
+                    await play(index.current, x.current+1);
                     Play();
                   }
-                  console.log(index, x)
                 }}
               />
               <PiRepeatOnceBold className={(loop_one ? "fill-[var(--secondary-color)] " : "") + "text-[1.3em]"} onClick={()=> {setLoop_one(!loop_one); setLoop_all(false);}} />
