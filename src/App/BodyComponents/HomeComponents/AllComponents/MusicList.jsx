@@ -1,7 +1,7 @@
 import React from "react";
 import MusicListSkeleton from "./MusicListSkeleton";
 
-const MusicList = ({ loading, outputData, audio, play}) => {
+const MusicList = ({ loading, outputData, audio, play, index}) => {
   return (
     <section className="p-[8px] pl-[0px] w-[100%] mx-auto">
       {loading ? (
@@ -11,9 +11,10 @@ const MusicList = ({ loading, outputData, audio, play}) => {
          {outputData?.sort((a,b) => a.title.localeCompare(b.title)).map((x, i) => (
             <li
               key={i}
-              onClick={() => {
-                audio?.pause();
-                play(outputData, i);
+              onClick={ async () => {
+                  audio?.pause();
+                  await play(index, i);
+                  audio?.play();
               }}
               className="min-w-[120px] md:min-w-[150px] max-w-[150px] md:max-w-[200px]"
             >

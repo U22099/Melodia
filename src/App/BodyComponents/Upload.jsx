@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useState, useRef} from "react";
 import { motion } from "framer-motion";
+import uploadMusic from "../../utils/uploadMusic.js"
 
-const Upload = () => {
+
+const Upload = ({setErr, username}) => {
   const [fileCount, setFileCount] = useState(0);
   const [upload, setUpload] = useState({ state: null, msg: "" });
+  const fileRef = useRef();
+  
+  const uploadFile = async () => {
+    await uploadMusic(setUpload, fileRef, username, setFileCount, setErr);
+  }
   return (
     <motion.div
       initial={{
@@ -25,6 +32,7 @@ const Upload = () => {
         <h1 className="font-bold font-custom ml-[10px] md:text-[1.5em]">Upload Music: </h1>
         <label htmlFor="upload" className="cursor-pointer mt-[20px]">
           <input
+            ref={fileRef}
             type="file"
             accept=".mp3"
             id="upload"
@@ -42,7 +50,7 @@ const Upload = () => {
             <p className="text-[var(--secondary-color)] bold">{fileCount}</p>
           </div>
         </label>
-        <button className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] h-[50px]">
+        <button className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] h-[50px]" onClick={uploadFile}>
           Upload
         </button>
         <p>STILL IN DEV MODE!!</p>

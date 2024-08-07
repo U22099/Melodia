@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+ import { useState, useContext } from "react";
 import axios from "axios";
 import Developers from "./ExploreComponents/Developers";
 import { Context } from "../../Body";
@@ -32,13 +32,13 @@ const Explore = () => {
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Recently uploaded</h1>
         </header>
-        <MusicList loading={loading} outputData={recentMusic} play={play} audio={audio}/>
+        <MusicList loading={loading} outputData={recentMusic} play={play} index={0} audio={audio} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Top Six</h1>
         </header>
-        <MusicList loading={loading} outputData={topMusic} play={play} audio={audio}/>
+        <MusicList loading={loading} outputData={topMusic} play={play} index={1} audio={audio}/>
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">

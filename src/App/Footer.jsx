@@ -8,17 +8,12 @@ import {
 } from "react-icons/fa6";
 import { PiRepeatOnceBold } from "react-icons/pi";
 import { MdOutlineClose } from "react-icons/md";
-import fetchMusicDataById from "../utils/fetchMusicDataById.js";
 import {motion} from 'framer-motion'
 
-const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudio }) => {
+const Footer = ({ isPlaying, setIsPlaying, loaded, file, x, setErr, audio, play, setPause, pause, index, setX, setIndex}) => {
   const [text, setText] = useState();
-  const [replay, setReplay] = useState(false);
   const [loop_all, setLoop_all] = useState(false);
   const [loop_one, setLoop_one] = useState(false);
-  const [loaded, setLoaded] = useState(false);
-  const [pause, setPause] = useState(false);
-  const [src, setSrc] = useState("");
   const Play = () => {
     setPause(false);
     audio.play();
@@ -27,57 +22,10 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
     setPause(true);
     audio.pause();
   };
-  const Load = () => {
-    if (loaded) {
-      setPause(false);
-      const audio = new Audio(src);
-      const slider = document.getElementById("range");
-      const volume = document.getElementById("vol");
-      slider.value = 0;
-      volume.value = 75;
-      audio.load();
-      audio.autoplay = true
-      audio.addEventListener("loadedmetadata", () => {
-        audio.loop = loop_one;
-        audio.play();
-        slider.max = audio.duration;
-      });
-      audio.addEventListener("touchstart", ()=>{
-        audio.play();
-        audio.removeEventListener("touchstart", this); ha
-      })
-      volume.onchange = () => {
-        audio.volume = volume.value / 100;
-      };
-      slider.onchange = () => {
-        audio.currentTime = slider.value;
-        audio.play();
-      };
-      setInterval(() => {
-        slider.value = audio.currentTime;
-      }, 100);
-    setAudio(audio);
-    }
-  };
-  useEffect(() => {
-    if (isPlaying) {
-      setLoaded(false);
-      try{
-        fetchMusicDataById(file, x, file[x]._id, setSrc, setErr);
-      } catch (err){
-        setIsPlaying(false)
-      }
-    }
-  }, [x]);
-  useEffect(() => {
-    src ? setLoaded(true) : "";
-  }, [src]);
   useEffect(() => {
     let interval = "";
-    if (loaded) {
-      clearInterval(interval);
-      Load();
-    } else {
+    if (!loaded) {
+      audio.pause();
       let x = 0;
       interval = setInterval(() => {
         const arr = [".", "..", "..."];
@@ -90,20 +38,48 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
         }
       }, 500);
     }
-  }, [loaded, replay]);
+  }, [loaded]);
   useEffect(()=>{
     audio?.addEventListener("ended", () => {
+      audio.pause();
         if (loop_all) {
-          if (x === file.length - 1) {
-            setX(0);
+          if (x=== file.length - 1) {
+            play(index, 0);
+            Play();
           } else {
-            setX(x + 1);
+            play(index, x+1);
+            Play();
           }
         } else if(loop_one){
-            setReplay(!replay);
+            play(index, x);
+            Play();
         }
       });
 }, [loop_all, loop_one])
+useEffect(()=>{
+  if(loaded){
+    const slider = document.getElementById("range")
+      const volume = document.getElementById("vol")
+      slider.value = 0;
+      volume.value = 75;
+      audio.load();
+      audio.autoplay = true
+      audio.addEventListener("loadedmetadata", () => {
+        //audio.loop = loop_one;
+        slider.max = audio.duration;
+      });
+      volume.onchange = () => {
+        audio.volume = volume.value / 100;
+      };
+      slider.onchange = () => {
+        audio.currentTime = slider.value;
+        audio.play();
+      };
+      setInterval(() => {
+        slider.value = audio.currentTime;
+      }, 100);
+  }
+},[loaded])
   if (isPlaying) {
     if (loaded) {
       return (
@@ -139,17 +115,18 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
               defaultValue={0}
             />
             <div className="flex justify-center gap-[16px] items-center w-[85%]">
-              <FaRepeat className={(loop_all ? "fill-[var(--secondary-color)] " : "") + "text-[1.3em]"} onClick={()=> {setLoop_all(!loop_all); setLoop_one(false);}}/>
+              <FaRepeat className={(loop_all ? "fill-[var(--secondary-color)] " : "") + "text-[1.2em]"} onClick={()=> {setLoop_all(!loop_all); setLoop_one(false);}}/>
               <FaBackwardStep
                 className="text-[1.5em] active:fill-[var(--secondary-color)]"
-                onClick={() => {
+                onClick={async () => {
                   audio?.pause();
-                  if (x === 0) {
-                    setX(0);
+                  if (x=== 0) {
+                    await play(index, 0);
+                    Play();
                   } else {
-                    setX(x - 1);
+                    await play(index, x-1);
+                    Play();
                   }
-                  Play();
                 }}
               />
               {pause ? (
@@ -165,14 +142,16 @@ const Footer = ({ isPlaying, setIsPlaying, file, x, setX, setErr, audio, setAudi
               )}
               <FaForwardStep
                 className="text-[1.5em] active:fill-[var(--secondary-color)]"
-                onClick={() => {
+                onClick={async () => {
                   audio?.pause();
-                  if (x === file.length - 1) {
-                    setX(0);
+                  if (x=== file.length - 1) {
+                    await play(index, 0);
+                    Play();
                   } else {
-                    setX(x + 1);
+                    await play(index, x+1);
+                    Play();
                   }
-                  Play();
+                  console.log(index, x)
                 }}
               />
               <PiRepeatOnceBold className={(loop_one ? "fill-[var(--secondary-color)] " : "") + "text-[1.3em]"} onClick={()=> {setLoop_one(!loop_one); setLoop_all(false);}} />

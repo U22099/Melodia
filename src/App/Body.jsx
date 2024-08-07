@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorDialog from "../utils/ErrorDialog";
 import SuccessDialog from "../utils/SuccessDialog";
 import ConfirmDialog from "../utils/ConfirmDialog";
+import fetchMusicDataById from "../utils/fetchMusicDataById.js";
 
 export const Context = React.createContext();
 
@@ -30,13 +31,34 @@ const Body = ({ page, setErr, err }) => {
   const [topMusic, setTopMusic] = useState("012345".split(""));
   const [devData, setDevData] = useState("01".split(""));
   const [isPlaying, setIsPlaying] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [file, setFile] = useState();
-  const [x, setX] = useState();
-  const [audio, setAudio] = useState();
-  const play = (file, x) => {
+  const [pause, setPause] = useState(false);
+  const [audio, setAudio] = useState(new Audio());
+  const [x, setX] = useState(0);
+  const [index, setIndex] = useState(0);
+  
+  const play = async (index, x) => {
+    setLoaded(false);
     setX(x);
-    setFile(file);
+    setIndex(index)
+    console.log(
+      {
+        x: x,
+        index: index
+      })
+    const OBJ = [recentMusic, topMusic, music, setRecentMusic, setMusic]
+    setFile(OBJ[index]);
     setIsPlaying(true);
+    try{
+        const src = await fetchMusicDataById(OBJ[index], x, OBJ[index][x]._id, setErr, OBJ[index + 3]);
+        src&&setLoaded(true);
+        src&&setPause(false);
+        audio.src = src
+      } catch (err){
+        setIsPlaying(false)
+        console.log(err, " erruuug");
+   }
   };
   useEffect(() => {
     fetchUserData(
@@ -121,12 +143,11 @@ const Body = ({ page, setErr, err }) => {
         {page === 1 ? <Home /> : ""}
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
-        {page === 4 ? <Upload /> : ""}
-        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} x={x} setX={setX} file={file} play={play} setErr={setErr} audio={audio} setAudio={setAudio}/>
+        {page === 4 ? <Upload setErr={setErr} username={username}/> : ""}
+        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} file={file} play={play} setErr={setErr} audio={audio} loaded={loaded} play={play} setPause={setPause} pause={pause} index={index} setIndex={setIndex} x={x} setX={setX}/>
       </div>
 
       {err.occured ? <ErrorDialog msg={err.msg} setErr={setErr}/> : ""}
-      {()=>{err.occured ? setLoading(false) : ""}}
       {/*
       {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}*/}
       {confirm.ask ? (
