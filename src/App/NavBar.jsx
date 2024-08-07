@@ -1,10 +1,17 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "./Body";
 import Skeleton from "react-loading-skeleton";
 import axios from "axios";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
   const { loading, image, setRefresh, refresh,} = useContext(Context);
+  useEffect(()=>{
+    if(loading){
+      setMenu(true);
+    } else {
+      setMenu(false)
+    }
+  },[loading])
   return (
     <>
       <div className="flex gap-[8px] items-center ml-[16px]">
@@ -32,11 +39,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
           All
         </h1>
       </div>
-      <div className="flex justify-end align-center items-center"
-       onClick={loading ? () => {
-              setMenu(!menu);
-            } : ""}
-          />
+      <div className="flex justify-end align-center items-center"/>
        >
         {loading ? (
           <Skeleton
