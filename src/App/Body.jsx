@@ -23,6 +23,10 @@ const Body = ({ page, setErr, err }) => {
   const [refresh, setRefresh] = useState({ refresh: false, first: true });
   const [confirm, setConfirm] = useState({ask: false, result: false});
   const [loading, setLoading] = useState(false);
+  const [loadingA, setLoadingA] = useState(false);
+  const [loadingB, setLoadingB] = useState(false);
+  const [loadingC, setLoadingC] = useState(false);
+  const [loadingD, setLoadingD] = useState(false);
   const [image, setImage] = useState("image.JPG");
   const [email, setEmail] = useState();
   const [username, setUsername] = useState();
@@ -68,7 +72,7 @@ const Body = ({ page, setErr, err }) => {
     retrieveStoredData(
       refresh,
       setRefresh,
-      setLoading,
+      setLoadingA,
       "recent_music_stored",
       "RecentMusicData",
       "/musicapi/recent",
@@ -77,7 +81,7 @@ const Body = ({ page, setErr, err }) => {
     retrieveStoredData(
       refresh,
       setRefresh,
-      setLoading,
+      setLoadingB,
       "top_music_stored",
       "TopMusicData",
       "/musicapi/top",
@@ -86,7 +90,7 @@ const Body = ({ page, setErr, err }) => {
     fetchDevData(
       refresh,
       setRefresh,
-      setLoading,
+      setLoadingC,
       "dev_data_stored",
       "DevData",
       "/user/dev",
@@ -96,7 +100,7 @@ const Body = ({ page, setErr, err }) => {
     fetchMusic(
       refresh,
       setRefresh,
-      setLoading,
+      setLoadingD,
       "music_stored",
       "MusicData",
       "/musicapi",
@@ -114,7 +118,11 @@ const Body = ({ page, setErr, err }) => {
     <Context.Provider
       value={{
         loading,
-        setLoading,
+
+        loadingA,
+        loadingB,
+        loadingC,
+        loadingD,
         image,
         setImage,
         email,

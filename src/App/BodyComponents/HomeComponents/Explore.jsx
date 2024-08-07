@@ -7,7 +7,7 @@ import ErrorDialog from "../../../utils/ErrorDialog";
 import ConfirmDialog from "../../../utils/ConfirmDialog";
 import SuccessDialog from "../../../utils/SuccessDialog";
 const Explore = () => {
-  const { loading, recentMusic, topMusic, devData, play, audio } = useContext(Context);
+  const { loadingA, loadingB, loadingC, recentMusic, topMusic, devData, play, audio } = useContext(Context);
   /*
   const deleteMusic = async () => {
     if (props.isAdmin) {
@@ -32,19 +32,19 @@ const Explore = () => {
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Recently uploaded</h1>
         </header>
-        <MusicList loading={loading} outputData={recentMusic} play={play} index={0} audio={audio} />
+        <MusicList loading={loadingA} outputData={recentMusic} play={play} index={0} audio={audio} />
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Top Six</h1>
         </header>
-        <MusicList loading={loading} outputData={topMusic} play={play} index={1} audio={audio}/>
+        <MusicList loading={loadingB} outputData={topMusic} play={play} index={1} audio={audio}/>
       </section>
       <section>
         <header className="md:text-[1.5em] text-[1.2em] ml-[8px] font-custom">
           <h1>Developers</h1>
         </header>
-        <Developers loading={loading} devData={devData} />
+        <Developers loading={loadingC} devData={devData} />
       </section>
     </div>
   );
