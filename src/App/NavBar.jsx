@@ -32,7 +32,12 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
           All
         </h1>
       </div>
-      <div className="flex justify-end align-center items-center">
+      <div className="flex justify-end align-center items-center"
+       onClick={loading ? () => {
+              setMenu(!menu);
+            } : ""}
+          />
+       >
         {loading ? (
           <Skeleton
             className="rounded-full w-12 h-12 cursor-pointer"
