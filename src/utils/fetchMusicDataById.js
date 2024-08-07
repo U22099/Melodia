@@ -13,8 +13,8 @@ const fetchMusicDataById = async (file, x, _id, setErr, setFile) => {
                         "Content-Type": "application/json"
                     }
                 });
-            indexedDB.saveData({...file, data: response.data.music.data}, "MusicData", indexedDB.init);
-            setFile({...file, data: response.data.music.data});
+            indexedDB.saveData([...file, {...file[x], data: response.data.music.data}], "MusicData", indexedDB.init);
+            setFile([...file, {...file[x], data: response.data.music.data}]);
             localStorage.setItem('music_stored', true);
             return response.data.music.data
         } else {
