@@ -4,14 +4,14 @@ import Skeleton from "react-loading-skeleton";
 import axios from "axios";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
-  const { loading, image, setRefresh, refresh,} = useContext(Context);
-  useEffect(()=>{
-    if(loading){
+  const { loading, image, setRefresh, refresh } = useContext(Context);
+  useEffect(() => {
+    if (loading) {
       setMenu(true);
     } else {
-      setMenu(false)
+      setMenu(false);
     }
-  },[loading])
+  }, [loading]);
   return (
     <>
       <div className="flex gap-[8px] items-center ml-[16px]">
@@ -39,15 +39,9 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
           All
         </h1>
       </div>
-      <div className="flex justify-end align-center items-center"/>
-       >
+      <div className="flex justify-end align-center items-center">
         {loading ? (
-          <Skeleton
-            className="rounded-full w-12 h-12 cursor-pointer"
-            onClick={() => {
-              setMenu(!menu);
-            }}
-          />
+          <Skeleton className="rounded-full w-12 h-12 cursor-pointer" />
         ) : (
           <img
             src={image}
@@ -57,10 +51,10 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
               setMenu(!menu);
             }}
             onDoubleClick={() => {
-              setRefresh({refresh: !refresh, first: false});
+              setRefresh({ refresh: !refresh, first: false });
             }}
           />
-          )}
+        )}
       </div>
     </>
   );
