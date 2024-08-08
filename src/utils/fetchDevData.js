@@ -39,7 +39,7 @@ const fetchDevData = async (
       if (response.status === 200) setLoading(false);
     } catch (err) {
       console.log(err.message);
-      if ([401, 403].includes(err.response.status)) {
+      if (err.response && [401, 403].includes(err.response.status)) {
         const res = await refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
@@ -60,6 +60,7 @@ const fetchDevData = async (
         }
       } else {
         // props.setErr({ occured: true, msg: err.message });
+        console.log(err);
       }
       if (err.message.includes("Network")) {
         fetchDevData();

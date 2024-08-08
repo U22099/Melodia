@@ -1,16 +1,16 @@
-import { useState, useRef} from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import uploadMusic from "../../utils/uploadMusic.js"
+import uploadMusic from "../../utils/uploadMusic.js";
+import SuccessDialog from "../../utils/SuccessDialog";
 
-
-const Upload = ({setErr, username}) => {
+const Upload = ({ setErr, username }) => {
   const [fileCount, setFileCount] = useState(0);
-  const [upload, setUpload] = useState({ state: null, msg: "" });
+  const [upload, setUpload] = useState({ state: null, msg: "", show: false });
   const fileRef = useRef();
-  
+
   const uploadFile = async () => {
     await uploadMusic(setUpload, fileRef, username, setFileCount, setErr);
-  }
+  };
   return (
     <motion.div
       initial={{
@@ -29,7 +29,9 @@ const Upload = ({setErr, username}) => {
       className="mt-[50px] md:w-[70%] mx-auto"
     >
       <div className="flex cursor-pointer flex-col">
-        <h1 className="font-bold font-custom ml-[10px] md:text-[1.5em]">Upload Music: </h1>
+        <h1 className="font-bold font-custom ml-[10px] md:text-[1.5em]">
+          Upload Music:{" "}
+        </h1>
         <label htmlFor="upload" className="cursor-pointer mt-[20px]">
           <input
             ref={fileRef}
@@ -50,11 +52,14 @@ const Upload = ({setErr, username}) => {
             <p className="text-[var(--secondary-color)] bold">{fileCount}</p>
           </div>
         </label>
-        <button className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] h-[50px]" onClick={uploadFile}>
+        <button
+          className="btn bg-none font-extrabold mt-[20px] w-[80%] md:w-[70%] h-[50px]"
+          onClick={uploadFile}
+        >
           Upload
         </button>
-        <p>STILL IN DEV MODE!!</p>
       </div>
+      {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}
     </motion.div>
   );
 };

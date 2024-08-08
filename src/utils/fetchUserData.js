@@ -14,7 +14,7 @@ const fetchUserData = async (
 ) => {
   setLoading(true);
   const stored = JSON.parse(localStorage.getItem("user_stored"));
-  if (stored&&refresh.first) {
+  if (stored && refresh.first) {
     //&& !forceRefresh) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
     setImage(data.image);
@@ -24,7 +24,7 @@ const fetchUserData = async (
     //   props.setIsAdmin(true);
     // }
     // setForceRefresh(true);
-    setRefresh({refresh: true, first: false});
+    setRefresh({ refresh: true, first: false });
     setLoading(false);
   } else {
     try {
@@ -47,19 +47,19 @@ const fetchUserData = async (
       if (response.status === 200) setLoading(false);
     } catch (err) {
       console.log(err);
-      if ([401, 403].includes(err.response.status)) {
+      if (err.response && [401, 403].includes(err.response.status)) {
         const res = await refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
           console.log(res.data.accessToken);
           fetchUserData(
-              refresh,
-              setRefresh,
-              setLoading,
-              setImage,
-              setEmail,
-              setUsername,
-              navigate    
+            refresh,
+            setRefresh,
+            setLoading,
+            setImage,
+            setEmail,
+            setUsername,
+            navigate
           );
         } else {
           localStorage.removeItem("accessToken");
@@ -68,17 +68,18 @@ const fetchUserData = async (
         }
       } else {
         // props.setErr({ occured: true, msg: err.message });
+        console.log(err);
       }
       if (err.message.includes("Network")) {
-       fetchUserData(
-              refresh,
-              setRefresh,
-              setLoading,
-              setImage,
-              setEmail,
-              setUsername,
-              navigate    
-          );
+        fetchUserData(
+          refresh,
+          setRefresh,
+          setLoading,
+          setImage,
+          setEmail,
+          setUsername,
+          navigate
+        );
       }
     }
   }

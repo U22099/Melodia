@@ -12,7 +12,6 @@ import retrieveStoredData from "../utils/fetchTopAndRecentMusic.js";
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorDialog from "../utils/ErrorDialog";
-import SuccessDialog from "../utils/SuccessDialog";
 import ConfirmDialog from "../utils/ConfirmDialog";
 import fetchMusicDataById from "../utils/fetchMusicDataById.js";
 
@@ -174,8 +173,6 @@ const Body = ({ page, setErr, err }) => {
       </div>
 
       {err.occured ? <ErrorDialog msg={err.msg} setErr={setErr} /> : ""}
-      {/*
-      {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}*/}
       {confirm.ask ? (
         <ConfirmDialog
           callback={setConfirm}
