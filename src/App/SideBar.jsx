@@ -9,7 +9,7 @@ import logOut from "../utils/logOut.js";
 import ErrorDialog from "../utils/ErrorDialog.jsx";
 import { motion } from "framer-motion";
 
-const SideBar = ({key, page, setPage, setErr, err}) => {
+const SideBar = ({ key, page, setPage, setErr, err }) => {
   const navigate = useNavigate();
   const container = {
     hidden: { opacity: 1, y: 40 },
@@ -33,11 +33,15 @@ const SideBar = ({key, page, setPage, setErr, err}) => {
     },
   };
   return (
-    <motion.div 
-    className="flex flex-col justify-between py-[20px] h-[100vh]">
-      <motion.div key={key} variants={container} initial="hidden" animate="visible">
-        <motion.header
+    <motion.div className="flex flex-col justify-between py-[20px] h-[90vh]">
+      <motion.div
         key={key}
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.header
+          key={key}
           variants={item}
           className="cursor-pointer flex justify-center items-center md:justify-start md:p-[0px_20px] md:gap-[20px]"
         >
@@ -54,7 +58,7 @@ const SideBar = ({key, page, setPage, setErr, err}) => {
           </h1>
         </motion.header>
         <motion.div
-        key={key}
+          key={key}
           variants={item}
           className="flex justify-center items-center md:justify-start md:p-[0px_20px] md:gap-[20px] mx-auto mt-[20px]"
         >
@@ -84,7 +88,7 @@ const SideBar = ({key, page, setPage, setErr, err}) => {
           </h1>
         </motion.div>
         <motion.div
-        key={key}
+          key={key}
           variants={item}
           className="flex justify-center items-center md:justify-start md:p-[0px_20px] md:gap-[20px] mx-auto mt-[20px] "
         >
@@ -114,7 +118,7 @@ const SideBar = ({key, page, setPage, setErr, err}) => {
           </h1>
         </motion.div>
         <motion.div
-        key={key}
+          key={key}
           variants={item}
           className="flex justify-center items-center md:justify-start md:p-[0px_20px] md:gap-[20px] mx-auto mt-[20px] "
         >
@@ -144,7 +148,7 @@ const SideBar = ({key, page, setPage, setErr, err}) => {
           </h1>
         </motion.div>
         <motion.div
-        key={key}
+          key={key}
           variants={item}
           className="flex justify-center items-center md:justify-start md:p-[0px_20px] md:gap-[20px] mx-auto mt-[20px] "
         >
@@ -176,7 +180,7 @@ const SideBar = ({key, page, setPage, setErr, err}) => {
       </motion.div>
       <div>
         <motion.div
-        key={key}
+          key={key}
           initial={{ x: -20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ type: "spring", duration: 1, delay: 0.5 }}

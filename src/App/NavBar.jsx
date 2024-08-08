@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Context } from "./Body";
 import Skeleton from "react-loading-skeleton";
-import axios from "axios";
 
 const NavBar = ({ section, setSection, setMenu, menu }) => {
   const { loading, image, setRefresh, refresh } = useContext(Context);

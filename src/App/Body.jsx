@@ -1,4 +1,4 @@
-import Footer from './Footer'
+import Footer from "./Footer";
 import Home from "./BodyComponents/Home.jsx";
 import Search from "./BodyComponents/Search.jsx";
 import Profile from "./BodyComponents/Profile.jsx";
@@ -21,7 +21,7 @@ export const Context = React.createContext();
 const Body = ({ page, setErr, err }) => {
   const navigate = useNavigate();
   const [refresh, setRefresh] = useState({ refresh: false, first: true });
-  const [confirm, setConfirm] = useState({ask: false, result: false});
+  const [confirm, setConfirm] = useState({ ask: false, result: false });
   const [loading, setLoading] = useState(false);
   const [loadingA, setLoadingA] = useState(false);
   const [loadingB, setLoadingB] = useState(false);
@@ -41,23 +41,36 @@ const Body = ({ page, setErr, err }) => {
   const [audio, setAudio] = useState(new Audio());
   const X = useRef(0);
   const Index = useRef(0);
-  
+
   const play = async (index, x) => {
     setLoaded(false);
     X.current = x;
     Index.current = index;
-    const OBJ = [recentMusic, topMusic, music, setRecentMusic, setMusic]
+    const OBJ = [
+      recentMusic,
+      topMusic,
+      music,
+      setRecentMusic,
+      setTopMusic,
+      setMusic,
+    ];
     setFile(OBJ[index]);
     setIsPlaying(true);
-    try{
-        const src = await fetchMusicDataById(OBJ[index], x, OBJ[index][x]._id, setErr, OBJ[index + 3]);
-        src&&setLoaded(true);
-        src&&setPause(false);
-        audio.src = src
-      } catch (err){
-        setIsPlaying(false)
-        console.log(err, " erruuug");
-   }
+    try {
+      const src = await fetchMusicDataById(
+        OBJ[index],
+        x,
+        OBJ[index][x]._id,
+        setErr,
+        OBJ[index + 3]
+      );
+      src && setLoaded(true);
+      src && setPause(false);
+      audio.src = src;
+    } catch (err) {
+      setIsPlaying(false);
+      console.log(err, " erruuug");
+    }
   };
   useEffect(() => {
     fetchUserData(
@@ -106,19 +119,17 @@ const Body = ({ page, setErr, err }) => {
       "/musicapi",
       setMusic
     );
-  }, [refresh.refresh])
+  }, [refresh.refresh]);
   useEffect(() => {
-    if(confirm.result){
+    if (confirm.result) {
       deleteUser(setErr, navigate);
     }
-  }, [confirm.result])
-    
+  }, [confirm.result]);
 
   return (
     <Context.Provider
       value={{
         loading,
-
         loadingA,
         loadingB,
         loadingC,
@@ -139,18 +150,30 @@ const Body = ({ page, setErr, err }) => {
         refresh,
         play,
         audio,
-        setConfirm
+        setConfirm,
       }}
     >
       <div className="ml-[16px]">
         {page === 1 ? <Home /> : ""}
         {page === 2 ? <Search /> : ""}
         {page === 3 ? <Profile /> : ""}
-        {page === 4 ? <Upload setErr={setErr} username={username}/> : ""}
-        <Footer isPlaying={isPlaying} setIsPlaying={setIsPlaying} file={file} setErr={setErr} audio={audio} loaded={loaded} play={play} setPause={setPause} pause={pause} index={Index} x={X}/>
+        {page === 4 ? <Upload setErr={setErr} username={username} /> : ""}
+        <Footer
+          isPlaying={isPlaying}
+          setIsPlaying={setIsPlaying}
+          file={file}
+          setErr={setErr}
+          audio={audio}
+          loaded={loaded}
+          play={play}
+          setPause={setPause}
+          pause={pause}
+          index={Index}
+          x={X}
+        />
       </div>
 
-      {err.occured ? <ErrorDialog msg={err.msg} setErr={setErr}/> : ""}
+      {err.occured ? <ErrorDialog msg={err.msg} setErr={setErr} /> : ""}
       {/*
       {upload.show ? <SuccessDialog msg={upload.msg} /> : ""}*/}
       {confirm.ask ? (
