@@ -33,7 +33,7 @@ const SideBar = ({ key, page, setPage, setErr, err }) => {
     },
   };
   return (
-    <motion.div className="flex flex-col justify-between py-[20px] h-[90vh]">
+    <motion.div className="flex flex-col justify-between py-[20px] h-[100vh]">
       <motion.div
         key={key}
         variants={container}
