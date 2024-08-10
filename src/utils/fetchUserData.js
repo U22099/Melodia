@@ -15,8 +15,8 @@ const fetchUserData = async (
   setLoading(true);
   const stored = JSON.parse(localStorage.getItem("user_stored"));
   if (stored && refresh.first) {
-    //&& !forceRefresh) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
+    console.log(`Data from ${dbName} `);
     setImage(data.image);
     setEmail(data.email);
     setUsername(data.username);

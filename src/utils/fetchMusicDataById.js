@@ -2,7 +2,7 @@ import axios from 'axios'
 import indexedDB from './indexedDB.js'
 import origin from '../../config/origin.json'
 
-const fetchMusicDataById = async (file, x, _id, setErr, setFile) => {
+const fetchMusicDataById = async (file, x, _id, setErr, setFile, storageName, dbName) => {
     try {
         if(!file[x].data){
             const url = origin.default.origin + '/musicapi/data';
@@ -20,9 +20,9 @@ const fetchMusicDataById = async (file, x, _id, setErr, setFile) => {
                     return music;
                 }
             });
-            indexedDB.saveData(newFile, "MusicData", indexedDB.init);
+            indexedDB.saveData(newFile, dbName, indexedDB.init);
             setFile(newFile);
-            localStorage.setItem('music_stored', true);
+            localStorage.setItem(storageName, true);
             return response.data.music.data
         } else {
             return file[x].data

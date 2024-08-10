@@ -1,7 +1,7 @@
   import React from "react";
 import MusicListSkeleton from "./MusicListSkeleton";
 
-const MusicList = ({ loading, outputData, play, audio, index}) => {
+const MusicList = ({ loading, outputData, play, audio, index, storageName, dbName}) => {
   return (
     <section className="p-[8px] pl-[0px] ">
       {loading ? (
@@ -13,7 +13,7 @@ const MusicList = ({ loading, outputData, play, audio, index}) => {
               key={i}
               onClick={ async () => {
                   audio?.pause();
-                  await play(index, i);
+                  await play(index, i, storageName, dbName);
                   audio?.play();
               }}
               className="min-w-[150px]"

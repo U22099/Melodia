@@ -41,7 +41,7 @@ const Body = ({ page, setErr, err }) => {
   const X = useRef(0);
   const Index = useRef(0);
 
-  const play = async (index, x) => {
+  const play = async (index, x, storageName, dbName) => {
     setLoaded(false);
     X.current = x;
     Index.current = index;
@@ -61,7 +61,9 @@ const Body = ({ page, setErr, err }) => {
         x,
         OBJ[index][x]._id,
         setErr,
-        OBJ[index + 3]
+        OBJ[index + 3],
+        storageName,
+        dbName
       );
       src && setLoaded(true);
       src && setPause(false);

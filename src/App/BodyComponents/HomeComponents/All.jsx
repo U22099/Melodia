@@ -16,7 +16,7 @@ const All = () => {
         /> */}
       </section>
       <section className="mx-auto w-[100%]">
-        <MusicList loading={loadingD} outputData={music} play={play} index={2} audio={audio}/>
+        <MusicList loading={loadingD} outputData={music} play={play} index={2} audio={audio} storageName="music_stored" dbName="MusicData"/>
       </section>
       {/* {success ? <SuccessDialog msg="Music deleted successfully" /> : ""}
       {confirm ? (

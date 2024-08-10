@@ -7,6 +7,7 @@ const fetchMusic = async (refresh, setRefresh, setLoading, storageName, dbName, 
   const stored = JSON.parse(localStorage.getItem(storageName));
   if (stored&&refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
+    console.log(`Data from ${dbName} `);
     callback(data);
     setRefresh({refresh: true, first: false});
     setLoading(false);
