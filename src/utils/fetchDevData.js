@@ -1,6 +1,6 @@
 import origin from "../../config/origin.json";
 import indexedDB from "./indexedDB.js";
-import refresh from "./refresh.js";
+import Refresh from "./refresh.js";
 import axios from "axios";
 
 const fetchDevData = async (
@@ -40,7 +40,7 @@ const fetchDevData = async (
     } catch (err) {
       console.log(err.message);
       if (err.response && [401, 403].includes(err.response.status)) {
-        const res = await refresh(navigate);
+        const res = await Refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
           fetchDevData(

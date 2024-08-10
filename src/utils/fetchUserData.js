@@ -1,7 +1,7 @@
 import axios from "axios";
 import origin from "../../config/origin.json";
 import indexedDB from "./indexedDB";
-import refresh from "./refresh.js";
+import Refresh from "./refresh.js";
 
 const fetchUserData = async (
   refresh,
@@ -16,7 +16,7 @@ const fetchUserData = async (
   const stored = JSON.parse(localStorage.getItem("user_stored"));
   if (stored && refresh.first) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
-    console.log(`Data from ${dbName} `);
+    console.log(`Data from ${"UserData"} `);
     setImage(data.image);
     setEmail(data.email);
     setUsername(data.username);
@@ -48,7 +48,7 @@ const fetchUserData = async (
     } catch (err) {
       console.log(err);
       if (err.response && [401, 403].includes(err.response.status)) {
-        const res = await refresh(navigate);
+        const res = await Refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
           console.log(res.data.accessToken);
