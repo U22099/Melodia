@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Context } from "../Body";
-import MusicList from "../BodyComponents/HomeComponents/AllComponents/MusicList";
+import MusicList from "./SearchComponent/MusicList";
 
 const Search = () => {
   const { loadingD, music, play, audio } = useContext(Context);
@@ -52,6 +52,7 @@ const Search = () => {
           index={2}
           audio={audio}
           dbName="MusicData"
+          music={music}
         />
       </section>
     </motion.div>
