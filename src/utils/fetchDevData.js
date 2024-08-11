@@ -5,7 +5,6 @@ import axios from "axios";
 
 const fetchDevData = async (
   refresh,
-  setRefresh,
   setLoading,
   storageName,
   dbName,
@@ -20,7 +19,6 @@ const fetchDevData = async (
     const data = await indexedDB.getData(dbName, indexedDB.init);
     callback(data);
     setLoading(false);
-    setRefresh({ refresh: true, first: false });
   } else {
     try {
       const url = origin.default.origin + route;
@@ -45,7 +43,6 @@ const fetchDevData = async (
           localStorage.setItem("accessToken", res.data.accessToken);
           fetchDevData(
             refresh,
-            setRefresh,
             setLoading,
             storageName,
             dbName,

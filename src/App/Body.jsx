@@ -41,7 +41,7 @@ const Body = ({ page, setErr, err }) => {
   const X = useRef(0);
   const Index = useRef(0);
 
-  const play = async (index, x, storageName, dbName) => {
+  const play = async (index, x, dbName) => {
     setLoaded(false);
     X.current = x;
     Index.current = index;
@@ -62,7 +62,6 @@ const Body = ({ page, setErr, err }) => {
         OBJ[index][x]._id,
         setErr,
         OBJ[index + 3],
-        storageName,
         dbName,
         music
       );
@@ -71,13 +70,12 @@ const Body = ({ page, setErr, err }) => {
       audio.src = src;
     } catch (err) {
       setIsPlaying(false);
-      console.log(err, " erruuug");
     }
   };
   useEffect(() => {
+    console.log("Called");
     fetchUserData(
       refresh,
-      setRefresh,
       setLoading,
       setImage,
       setEmail,
@@ -86,7 +84,6 @@ const Body = ({ page, setErr, err }) => {
     );
     retrieveStoredData(
       refresh,
-      setRefresh,
       setLoadingA,
       "recent_music_stored",
       "RecentMusicData",
@@ -95,7 +92,6 @@ const Body = ({ page, setErr, err }) => {
     );
     retrieveStoredData(
       refresh,
-      setRefresh,
       setLoadingB,
       "top_music_stored",
       "TopMusicData",
@@ -104,7 +100,6 @@ const Body = ({ page, setErr, err }) => {
     );
     fetchDevData(
       refresh,
-      setRefresh,
       setLoadingC,
       "dev_data_stored",
       "DevData",
@@ -114,7 +109,6 @@ const Body = ({ page, setErr, err }) => {
     );
     fetchMusic(
       refresh,
-      setRefresh,
       setLoadingD,
       "music_stored",
       "MusicData",

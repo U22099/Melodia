@@ -2,14 +2,20 @@ import origin from "../../config/origin.json";
 import indexedDB from "./indexedDB.js";
 import axios from "axios";
 
-const fetchMusic = async (refresh, setRefresh, setLoading, storageName, dbName, route, callback) => {
+const fetchMusic = async (
+  refresh,
+  setLoading,
+  storageName,
+  dbName,
+  route,
+  callback
+) => {
   setLoading(true);
   const stored = JSON.parse(localStorage.getItem(storageName));
-  if (stored&&refresh.first) {
+  if (stored && refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
     console.log(`Data from ${dbName} `);
     callback(data);
-    setRefresh({refresh: true, first: false});
     setLoading(false);
   } else {
     try {

@@ -4,7 +4,6 @@ import axios from "axios";
 
 const retrieveStoredData = async (
   refresh,
-  setRefresh,
   setLoading,
   storageName,
   dbName,
@@ -13,23 +12,17 @@ const retrieveStoredData = async (
 ) => {
   setLoading(true);
   const stored = JSON.parse(localStorage.getItem(storageName));
-  if (stored&&refresh.first) {
+  if (stored && refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
-    console.log(`Data from ${dbName} `)
+    console.log(`Data from ${dbName} `);
     callback(data);
-    setRefresh({refresh: true, first: false});
     setLoading(false);
   } else {
     await fetchMusic(setLoading, storageName, dbName, route, callback);
-    setRefresh({refresh: true, first: false});
     setLoading(false);
   }
 };
-const fetchMusic = async ( setLoading,
-  storageName,
-  dbName,
-  route,
-  callback) => {
+const fetchMusic = async (setLoading, storageName, dbName, route, callback) => {
   try {
     const url = origin.default.origin + route;
     const response = await axios.get(url, { withCredentials: true });

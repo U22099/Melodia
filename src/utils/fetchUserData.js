@@ -5,7 +5,6 @@ import Refresh from "./refresh.js";
 
 const fetchUserData = async (
   refresh,
-  setRefresh,
   setLoading,
   setImage,
   setEmail,
@@ -24,7 +23,6 @@ const fetchUserData = async (
     //   props.setIsAdmin(true);
     // }
     // setForceRefresh(true);
-    setRefresh({ refresh: true, first: false });
     setLoading(false);
   } else {
     try {
@@ -54,7 +52,6 @@ const fetchUserData = async (
           console.log(res.data.accessToken);
           fetchUserData(
             refresh,
-            setRefresh,
             setLoading,
             setImage,
             setEmail,
@@ -73,7 +70,6 @@ const fetchUserData = async (
       if (err.message.includes("Network")) {
         fetchUserData(
           refresh,
-          setRefresh,
           setLoading,
           setImage,
           setEmail,
