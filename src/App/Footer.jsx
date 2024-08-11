@@ -93,7 +93,7 @@ useEffect(()=>{
         duration: 1,
         type: "spring",
         delay: 0.5,
-      }} className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-between items-center">
+      }} className="h-[120px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] md:w-[-webkit-fill-available] w-[100%] flex justify-between items-center">
           <img
             src={file[x.current].image}
             alt="Music Picture"
