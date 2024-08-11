@@ -10,17 +10,15 @@ import { SkeletonTheme } from "react-loading-skeleton";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <SkeletonTheme baseColor="#313131" highlightColor="#525252">
-      <BrowserRouter basename="/Melodia">
-        <Routes>
-          <Route path="/" element={<LogIn />} />
-          <Route path="register" element={<Register />} />
-          <Route path="homepage" element={<App />} />
-          <Route path="forgotPassword" element={<ForgotPassword />} />
-          <Route path="emailSent" element={<EmailSent />} />
-        </Routes>
-      </BrowserRouter>
-    </SkeletonTheme>
-  </React.StrictMode>
+  <SkeletonTheme baseColor="#313131" highlightColor="#525252">
+    <BrowserRouter basename="/Melodia">
+      <Routes>
+        <Route path="/" element={<LogIn />} />
+        <Route path="register" element={<Register />} />
+        <Route path="homepage" element={<App />} />
+        <Route path="forgotPassword" element={<ForgotPassword />} />
+        <Route path="emailSent" element={<EmailSent />} />
+      </Routes>
+    </BrowserRouter>
+  </SkeletonTheme>
 );
