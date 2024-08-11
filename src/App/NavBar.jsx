@@ -50,7 +50,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
               setMenu(!menu);
             }}
             onDoubleClick={() => {
-              setRefresh({ refresh: !refresh, first: false });
+              setRefresh({ refresh: !refresh.refresh, first: false });
             }}
           />
         )}
