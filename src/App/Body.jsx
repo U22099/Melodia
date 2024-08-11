@@ -63,7 +63,8 @@ const Body = ({ page, setErr, err }) => {
         setErr,
         OBJ[index + 3],
         dbName,
-        music
+        music,
+        setMusic
       );
       src && setLoaded(true);
       src && setPause(false);

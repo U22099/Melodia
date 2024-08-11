@@ -192,7 +192,7 @@ useEffect(()=>{
         duration: 1,
         type: "spring",
         delay: 0.5,
-      }} className="h-[60px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] w-[100%] flex justify-center items-center">
+      }} className="h-[60px] cursor-pointer p-[8px] ml-[-16px] gap-[16px] fixed top-[100%] transform translate-y-[-100%] bg-[var(--primary-color)] md:w-[-webkit-fill-available]  w-[100%] flex justify-center items-center">
           <h1 className="flex mx-auto text-[var(--secondary-color)] text-[1.5em] font-serif">
             {text}
           </h1>

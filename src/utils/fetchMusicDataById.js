@@ -9,7 +9,8 @@ const fetchMusicDataById = async (
   setErr,
   setFile,
   dbName,
-  music
+  music,
+  setMusic
 ) => {
   try {
     if (!file[x].data) {
@@ -41,6 +42,7 @@ const fetchMusicDataById = async (
       indexedDB.saveData(newFile, dbName, indexedDB.init);
       indexedDB.saveData(newMusic, "MusicData", indexedDB.init);
       setFile(newFile);
+      setMusic(newMusic);
       return response.data.music.data;
     } else {
       return file[x].data;
