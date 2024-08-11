@@ -1,4 +1,4 @@
-import refresh from "./refresh.js";
+import Refresh from "./refresh.js";
 import axios from "axios";
 import indexedDB from "./indexedDB.js";
 import origin from "../../config/origin.json";
@@ -60,7 +60,7 @@ const updateUserData = async (
       setUpdating(false);
     } catch (err) {
       if (err.response && [401, 402, 403, 404].includes(err.response.status)) {
-        const res = await refresh(navigate);
+        const res = await Refresh(navigate);
         if (res.status === 200) updateUserData();
       } else {
         console.log(err);

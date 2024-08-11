@@ -1,7 +1,7 @@
 import axios from "axios";
 import origin from "../../config/origin.json";
 
-const refresh = async (navigate) => {
+const Refresh = async (navigate) => {
   try {
     const url = origin.default.origin + "/refresh";
     const refreshToken = localStorage.getItem("refreshToken");
@@ -30,4 +30,4 @@ const refresh = async (navigate) => {
   }
 };
 
-export default refresh;
+export default Refresh;

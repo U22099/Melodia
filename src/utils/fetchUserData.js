@@ -49,7 +49,6 @@ const fetchUserData = async (
         const res = await Refresh(navigate);
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
-          console.log(res.data.accessToken);
           fetchUserData(
             refresh,
             setLoading,
@@ -58,10 +57,6 @@ const fetchUserData = async (
             setUsername,
             navigate
           );
-        } else {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          navigate("/", { replace: true });
         }
       } else {
         // props.setErr({ occured: true, msg: err.message });

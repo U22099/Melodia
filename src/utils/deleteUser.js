@@ -2,7 +2,7 @@ import axios from 'axios'
 import indexedDB from './indexedDB.js'
 import origin from '../../config/origin.json'
 import logOut from './logOut.js'
-import refresh from './refresh.js'
+import Refresh from './refresh.js'
 
 const deleteUser = async (setErr, navigate) => {
     try {
@@ -22,12 +22,10 @@ const deleteUser = async (setErr, navigate) => {
       }
     } catch (err) {
       if ([401, 403].includes(err.response.status)) {
-        const res = await refresh();
+        const res = await Refresh();
         if (res.status === 200) {
           localStorage.setItem("accessToken", res.data.accessToken);
           deleteUser();
-        } else {
-          navigate("/", { replace: true });
         }
       } else {
         setErr({ occured: true, msg: err.message });

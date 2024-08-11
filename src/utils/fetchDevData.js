@@ -50,11 +50,6 @@ const fetchDevData = async (
             callback,
             navigate
           );
-        } else {
-          localStorage.removeItem("accessToken");
-          localStorage.removeItem("refreshToken");
-          navigate("/", { replace: true });
-        }
       } else {
         // props.setErr({ occured: true, msg: err.message });
         console.log(err);
