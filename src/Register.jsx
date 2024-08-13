@@ -62,7 +62,7 @@ const Register = () => {
     return data
   }
   return (
-    <div className="flex flex-col justify-start md:p-[30px] p-[0px] rounded-[10px] align-center w-[100vh] overflow-hidden overflow-y-auto md:w-[50%] lg:w-[40%] bg-black md:bg-[var(--primary-color)] gap-[20px] my-[40px]">
+    <div className="flex flex-col justify-start md:p-[30px] p-[0px] rounded-[10px] align-center h-[100vh] overflow-hidden overflow-y-auto w-[80%] md:w-[50%] lg:w-[40%] bg-black md:bg-[var(--primary-color)] gap-[20px] my-[40px]">
       <header className="flex justify-start text-start w-[100%]">
         <h1 className="text-[1.5em] md:text-[2.4em] text-[var(--secondary-color)] font-extrabold">Welcome to Melodia</h1>
       </header>
