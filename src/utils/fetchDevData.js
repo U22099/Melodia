@@ -1,6 +1,6 @@
 import indexedDB from "./indexedDB.js";
 import Refresh from "./refresh.js";
-import origin from "../../config/origin.json";.
+import origin from "../../config/origin.json";
 import axios from "axios";
 
 const fetchDevData = async (
