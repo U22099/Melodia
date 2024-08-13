@@ -1,6 +1,6 @@
-import origin from "../../config/origin.json";
 import indexedDB from "./indexedDB.js";
 import Refresh from "./refresh.js";
+import origin from "../../config/origin.json";.
 import axios from "axios";
 
 const fetchDevData = async (
@@ -55,7 +55,16 @@ const fetchDevData = async (
         console.log(err);
       }
       if (err.message.includes("Network")) {
-        fetchDevData();
+        fetchDevData(
+            refresh,
+            setLoading,
+            storageName,
+            dbName,
+            route,
+            callback,
+            navigate
+          );
+      }
       }
     }
   }
