@@ -49,6 +49,16 @@ const LogIn = () => {
         }
     }
     useEffect(()=>{
+      function reset(){
+    const id = JSON.parse(localStorage.getItem('_id')).id
+    if(!id || id === ""){
+      return true
+      alert("true");
+    } else {
+      return false
+      alert("false")
+    }
+  }
         const refreshToken = localStorage.getItem('refreshToken');
         if(refreshToken&&!reset()) navigate('/homepage', { replace: true });
     }, [])
@@ -85,18 +95,5 @@ const LogIn = () => {
     )
 }
 
-
-
-
-function reset(){
-    const id = JSON.parse(localStorage.getItem('_id')).id
-    if(!id || id === ""){
-      return true
-      alert("true");
-    } else {
-      return false
-      alert("false")
-    }
-  }
 
 export default LogIn

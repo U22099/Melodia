@@ -13,6 +13,16 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [section, setSection] = useState(1);
   useEffect(()=>{
+    function reset(){
+    const id = JSON.parse(localStorage.getItem('_id')).id
+    if(!id || id === ""){
+      return true
+      alert("true");
+    } else {
+      return false
+      alert("false")
+    }
+  }
         const refreshToken = localStorage.getItem('refreshToken');
         if(!refreshToken || reset()) navigate('/', { replace: true });
     }, [])
@@ -60,12 +70,4 @@ const App = () => {
 };
 
 
-  function reset(){
-    const id = JSON.parse(localStorage.getItem('_id')).id
-    if(!id || id === ""){
-      return true
-    } else {
-      return false
-    }
-  }
 export default App;
