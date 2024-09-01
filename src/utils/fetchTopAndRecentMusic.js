@@ -19,7 +19,7 @@ const retrieveStoredData = async (
       callback(data);
       setLoading(false);
     } else {
-      localStorage.setItem(dbName, JSON.stringify(false))
+      localStorage.setItem(storageName, JSON.stringify(false))
       retrieveStoredData(
         refresh,
         setLoading,

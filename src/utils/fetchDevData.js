@@ -21,7 +21,7 @@ const fetchDevData = async (
       callback(data);
       setLoading(false);
     } else {
-      localStorage.setItem(dbName, JSON.stringify(false))
+      localStorage.setItem(storageName, JSON.stringify(false))
       fetchDevData(
         refresh,
         setLoading,
