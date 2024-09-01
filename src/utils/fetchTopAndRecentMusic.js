@@ -15,8 +15,20 @@ const retrieveStoredData = async (
   if (stored && refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
     console.log(`Data from ${dbName} `);
-    callback(data);
-    setLoading(false);
+    if(data){
+      callback(data);
+      setLoading(false);
+    } else {
+      localStorage.setItem(dbName, JSON.stringify(false))
+      retrieveStoredData(
+        refresh,
+        setLoading,
+        storageName,
+        dbName,
+        route,
+        callback
+      );
+    }
   } else {
     await fetchMusic(setLoading, storageName, dbName, route, callback);
     setLoading(false);

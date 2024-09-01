@@ -17,8 +17,21 @@ const fetchDevData = async (
   console.log(stored, refresh);
   if (stored && refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
-    callback(data);
-    setLoading(false);
+    if(data){
+      callback(data);
+      setLoading(false);
+    } else {
+      localStorage.setItem(dbName, JSON.stringify(false))
+      fetchDevData(
+        refresh,
+        setLoading,
+        storageName,
+        dbName,
+        route,
+        callback,
+        navigate
+      );
+    }
   } else {
     try {
       const url = origin.default.origin + route;

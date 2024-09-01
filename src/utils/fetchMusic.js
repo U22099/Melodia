@@ -15,8 +15,20 @@ const fetchMusic = async (
   if (stored && refresh.first) {
     const data = await indexedDB.getData(dbName, indexedDB.init);
     console.log(`Data from ${dbName} `);
-    callback(data);
-    setLoading(false);
+    if(data){
+      callback(data);
+      setLoading(false);
+    } else {
+      localStorage.setItem(dbName, JSON.stringify(false))
+      fetchMusic(
+        refresh,
+        setLoading,
+        storageName,
+        dbName,
+        route,
+        callback
+      );
+    }
   } else {
     try {
       const url = origin.default.origin + route;

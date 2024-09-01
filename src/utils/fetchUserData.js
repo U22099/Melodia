@@ -15,14 +15,22 @@ const fetchUserData = async (
   const stored = JSON.parse(localStorage.getItem("user_stored"));
   if (stored && refresh.first) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
-    setImage(data.image);
-    setEmail(data.email);
-    setUsername(data.username);
-    // if (data.isAdmin) {
-    //   props.setIsAdmin(true);
-    // }
-    // setForceRefresh(true);
-    setLoading(false);
+    if(data){
+      setImage(data.image);
+      setEmail(data.email);
+      setUsername(data.username)
+      setLoading(false);
+    } else {
+      localStorage.setItem("user_stored", JSON.stringify(false))
+      fetchUserData(
+        refresh,
+        setLoading,
+        setImage,
+        setEmail,
+        setUsername,
+        navigate
+      ) 
+    }
   } else {
     try {
       const url = origin.default.origin + "/user";
