@@ -9,7 +9,8 @@ const Upload = ({ setErr, username }) => {
   const fileRef = useRef();
 
   const uploadFile = async () => {
-    await uploadMusic(setUpload, fileRef, username, setFileCount, setErr);
+    //await uploadMusic(setUpload, fileRef, username, setFileCount, setErr);
+     setErr({ occured: true, msg: "Database storage low" });
   };
   return (
     <motion.div

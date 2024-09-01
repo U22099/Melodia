@@ -35,7 +35,7 @@ const updateUserData = async (
       console.log(DATA);
       const url = origin.default.origin + "/user";
       const accessToken = localStorage.getItem("accessToken");
-      const id = localStorage.getItem("_id");
+      const id = JSON.parse(localStorage.getItem('_id')).id
       const response = await axios.put(url, DATA, {
         withCredentials: true,
         headers: {

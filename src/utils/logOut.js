@@ -4,7 +4,7 @@ import axios from 'axios'
 const logOut = async (showErr, navigate) => {
     try {
       const url = origin.default.origin + "/logout";
-      const id = localStorage.getItem("_id");
+      const id = JSON.parse(localStorage.getItem('_id')).id
       const response = await axios.post(
         url,
         {},

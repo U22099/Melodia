@@ -34,7 +34,7 @@ const Register = () => {
 	if(response.status === 200){
 		localStorage.setItem('accessToken', response.data.accessToken);
                     localStorage.setItem('refreshToken', response.data.refreshToken);
-                    localStorage.setItem('_id', response.data._id);
+                    localStorage.setItem('_id', JSON.stringify({ id: response.data._id}));
                     navigate('/homepage', { replace: true });
 	        setError('');
 	}
@@ -100,7 +100,7 @@ const Register = () => {
 
 
 function reset(){
-    const id = localStorage.getItem('_id')
+    const id = JSON.parse(localStorage.getItem('_id')).id
     if(!id || id === ""){
       return true
     } else {

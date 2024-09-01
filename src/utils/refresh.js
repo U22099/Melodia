@@ -5,7 +5,7 @@ const Refresh = async (navigate) => {
   try {
     const url = origin.default.origin + "/refresh";
     const refreshToken = localStorage.getItem("refreshToken");
-    const id = localStorage.getItem("_id");
+    const id = JSON.parse(localStorage.getItem('_id')).id
     const response = await axios.post(
       url,
       {},

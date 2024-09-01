@@ -61,7 +61,7 @@ const App = () => {
 
 
   function reset(){
-    const id = localStorage.getItem('_id')
+    const id = JSON.parse(localStorage.getItem('_id')).id
     if(!id || id === ""){
       return true
     } else {
