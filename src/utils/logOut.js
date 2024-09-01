@@ -4,7 +4,7 @@ import axios from 'axios'
 const logOut = async (showErr, navigate) => {
     try {
       const url = origin.default.origin + "/logout";
-      const refreshToken = localStorage.getItem("refreshToken");
+      const id = localStorage.getItem("_id");
       const response = await axios.post(
         url,
         {},
@@ -12,7 +12,7 @@ const logOut = async (showErr, navigate) => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + refreshToken,
+            Authorization: `Bearer ${id}`,
           },
         }
       );

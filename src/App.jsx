@@ -12,6 +12,10 @@ const App = () => {
   const [menu, setMenu] = useState(false);
   const [page, setPage] = useState(1);
   const [section, setSection] = useState(1);
+  useEffect(()=>{
+        const refreshToken = localStorage.getItem('refreshToken');
+        if(!refreshToken || reset()) navigate('/', { replace: true });
+    }, [])
   return (
     <div
       className={
@@ -55,4 +59,13 @@ const App = () => {
   );
 };
 
+
+  function reset(){
+    const id = localStorage.getItem('_id')
+    if(!id || id === ""){
+      return true
+    } else {
+      return false
+    }
+  }
 export default App;

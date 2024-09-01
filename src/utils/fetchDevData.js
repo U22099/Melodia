@@ -23,10 +23,11 @@ const fetchDevData = async (
     try {
       const url = origin.default.origin + route;
       const accessToken = localStorage.getItem("accessToken");
+      const id = localStorage.getItem("_id");
       const response = await axios.get(url, {
         withCredentials: true,
         headers: {
-          Authorization: "Bearer " + accessToken,
+        Authorization: `Bearer ${accessToken},${id}`,
         },
       });
       const data = response.data.admin;

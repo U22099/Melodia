@@ -15,7 +15,6 @@ const fetchUserData = async (
   const stored = JSON.parse(localStorage.getItem("user_stored"));
   if (stored && refresh.first) {
     const data = await indexedDB.getData("UserData", indexedDB.init);
-    console.log(`Data from ${"UserData"} `);
     setImage(data.image);
     setEmail(data.email);
     setUsername(data.username);
@@ -28,10 +27,11 @@ const fetchUserData = async (
     try {
       const url = origin.default.origin + "/user";
       const accessToken = localStorage.getItem("accessToken");
+      const id = localStorage.getItem("_id");
       const response = await axios.get(url, {
         withCredentials: true,
         headers: {
-          Authorization: "Bearer " + accessToken,
+          Authorization:`Bearer ${accessToken},${id}`,
         },
       });
       indexedDB.saveData(response.data, "UserData", indexedDB.init);

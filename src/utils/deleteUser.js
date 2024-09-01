@@ -8,11 +8,12 @@ const deleteUser = async (setErr, navigate) => {
     try {
       const url = origin.default.origin + "/user";
       const accessToken = localStorage.getItem("accessToken");
+      const id = localStorage.getItem("_id");
       const response = await axios.delete(url, {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + accessToken,
+          Authorization: `Bearer ${accessToken},${id}`,
         },
       });
       if (response.status === 200) {

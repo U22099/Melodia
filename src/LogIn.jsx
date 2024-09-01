@@ -33,8 +33,9 @@ const LogIn = () => {
                         }
                     });
                 if (response.status === 200) {
-                    localStorage.setItem('accessToken', response.data.token.accessToken);
-                    localStorage.setItem('refreshToken', response.data.token?.refreshToken);
+                    localStorage.setItem('accessToken', response.data.accessToken);
+                    localStorage.setItem('refreshToken', response.data.refreshToken);
+                    localStorage.setItem('_id', response.data._id);
                     navigate('/homepage', { replace: true });
                 }
             } catch (err) {
@@ -49,7 +50,7 @@ const LogIn = () => {
     }
     useEffect(()=>{
         const refreshToken = localStorage.getItem('refreshToken');
-        if(refreshToken) navigate('/homepage', { replace: true });
+        if(refreshToken&&!reset()) navigate('/homepage', { replace: true });
     }, [])
     return (
         <div className="flex flex-col justify-center md:p-[30px] rounded-[10px] align-center w-[80%] md:w-[50%] lg:w-[40%] bg-black md:bg-[var(--primary-color)] gap-[20px] my-[20px]">
@@ -83,5 +84,18 @@ const LogIn = () => {
         </div>
     )
 }
+
+
+
+
+function reset(){
+    const id = localStorage.getItem('_id')
+    if(!id || id === ""){
+      return true
+    } else {
+      return false
+    }
+  }
+export def
 
 export default LogIn

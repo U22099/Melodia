@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { FaUser } from 'react-icons/fa'
-import { useState } from 'react'
+import { useState, useEffect} from 'react'
 import origin from '../config/origin.json'
 
 const Register = () => {
@@ -32,9 +32,10 @@ const Register = () => {
             }
           });
 	if(response.status === 200){
-		localStorage.setItem('accessToken', response.data.token.accessToken);
-		localStorage.setItem('refreshToken', response.data.token?.refreshToken);
-	        navigate('/homepage', { replace: true, state: { fromRoute: true } });
+		localStorage.setItem('accessToken', response.data.accessToken);
+                    localStorage.setItem('refreshToken', response.data.refreshToken);
+                    localStorage.setItem('_id', response.data._id);
+                    navigate('/homepage', { replace: true });
 	        setError('');
 	}
 
@@ -48,6 +49,10 @@ const Register = () => {
       setError('An Error occured')
     }
   }
+  useEffect(()=>{
+        const refreshToken = localStorage.getItem('refreshToken');
+        if(refreshToken&&!reset()) navigate('/homepage', { replace: true });
+    }, [])
   const handleImage = async (e) => {
     const data = e.target.files[0] ? await imagebase64(e.target.files[0]) : await imagebase64("image.JPG");
     setImage(data)
@@ -93,4 +98,13 @@ const Register = () => {
   )
 }
 
+
+function reset(){
+    const id = localStorage.getItem('_id')
+    if(!id || id === ""){
+      return true
+    } else {
+      return false
+    }
+  }
 export default Register

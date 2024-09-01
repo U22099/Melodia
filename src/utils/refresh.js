@@ -5,6 +5,7 @@ const Refresh = async (navigate) => {
   try {
     const url = origin.default.origin + "/refresh";
     const refreshToken = localStorage.getItem("refreshToken");
+    const id = localStorage.getItem("_id");
     const response = await axios.post(
       url,
       {},
@@ -12,7 +13,7 @@ const Refresh = async (navigate) => {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + refreshToken,
+          Authorization: `Bearer ${refreshToken},${id}`,
         },
       }
     );
