@@ -96,6 +96,5 @@ function reset(){
       return false
     }
   }
-export def
 
 export default LogIn
