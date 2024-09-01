@@ -92,9 +92,10 @@ function reset(){
     const id = JSON.parse(localStorage.getItem('_id')).id
     if(!id || id === ""){
       return true
-      alert(id);
+      alert("true");
     } else {
       return false
+      alert("false")
     }
   }
 
