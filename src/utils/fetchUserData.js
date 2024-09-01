@@ -39,7 +39,7 @@ const fetchUserData = async (
       const response = await axios.get(url, {
         withCredentials: true,
         headers: {
-          Authorization:`Bearer ${accessToken},${id}`,
+          Authorization:`Bearer ${accessToken}/${id}`,
         },
       });
       indexedDB.saveData(response.data, "UserData", indexedDB.init);

@@ -13,7 +13,7 @@ const deleteUser = async (setErr, navigate) => {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken},${id}`,
+          Authorization: `Bearer ${accessToken}/${id}`,
         },
       });
       if (response.status === 200) {

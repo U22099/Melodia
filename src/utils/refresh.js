@@ -13,7 +13,7 @@ const Refresh = async (navigate) => {
         withCredentials: true,
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${refreshToken},${id}`,
+          Authorization: `Bearer ${refreshToken}/${id}`,
         },
       }
     );

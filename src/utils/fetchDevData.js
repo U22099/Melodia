@@ -40,7 +40,7 @@ const fetchDevData = async (
       const response = await axios.get(url, {
         withCredentials: true,
         headers: {
-        Authorization: `Bearer ${accessToken},${id}`,
+        Authorization: `Bearer ${accessToken}/${id}`,
         },
       });
       const data = response.data.admin;
