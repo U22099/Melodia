@@ -50,11 +50,11 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
               setMenu(!menu);
             }}
             onDoubleClick={() => {
-              localStorage.setItem("user_stored", false)
-              localStorage.setItem("dev__stored", false)
-              localStorage.setItem("music_stored", false)
-              localStorage.setItem("recent_music_stored", false)
-              localStorage.setItem("top_music_stored", false)
+              localStorage.setItem("user_stored", JSON.stringify(false))
+              localStorage.setItem("dev__stored", JSON.stringify(false))
+              localStorage.setItem("music_stored", JSON.stringify(false))
+              localStorage.setItem("recent_music_stored", JSON.stringify(false))
+              localStorage.setItem("top_music_stored", JSON.stringify(false))
               setRefresh({ refresh: !refresh.refresh, first: false });
             }}
           />
