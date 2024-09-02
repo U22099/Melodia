@@ -22,8 +22,8 @@ const LogIn = () => {
                 setText(<a id="roll1"></a>);
                 const url = origin.default.origin + '/auth';
                 const response = await axios.post(url, {
-                    'input': input.value,
-                    'password': pwd.value,
+                    'input': input.value.trim(),
+                    'password': pwd.value.trim(),
                     'rememberMe': check
                 },
                     {

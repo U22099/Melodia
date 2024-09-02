@@ -15,7 +15,7 @@ const ForgotPassword = () => {
                 setText(<a id="roll1"></a>);
                 const url = origin.default.origin + '/forgotPassword';
                 const response = await axios.post(url, {
-                    'input': input.value
+                    'input': input.value.
                 },
                     {
                         withCredentials: true,
