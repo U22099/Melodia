@@ -42,15 +42,12 @@ const fetchUserData = async (
           Authorization:`Bearer ${accessToken}/${id}`,
         },
       });
-      indexedDB.saveData(response.data, "UserData", indexedDB.init);
-      localStorage.setItem("user_stored", true);
       setImage(response.data.image);
       setEmail(response.data.email);
       setUsername(response.data.username);
-      // if (response.data.isAdmin) {
-      //   props.setIsAdmin(true);
-      // }
       if (response.status === 200) setLoading(false);
+      indexedDB.saveData(response.data, "UserData", indexedDB.init);
+      localStorage.setItem("user_stored", true);
     } catch (err) {
       console.log(err);
       if (err.response && [401, 403].includes(err.response.status)) {

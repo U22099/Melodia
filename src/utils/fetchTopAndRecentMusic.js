@@ -39,11 +39,11 @@ const fetchMusic = async (setLoading, storageName, dbName, route, callback) => {
     const url = origin.default.origin + route;
     const response = await axios.get(url, { withCredentials: true });
     const data = response.data.music;
+    callback(data);
+    if (response.status === 200) setLoading(false);
     indexedDB.saveData(data, dbName, indexedDB.init);
     localStorage.setItem(storageName, true);
-    callback(data);
     console.log(response.data.music);
-    if (response.status === 200) setLoading(false);
   } catch (err) {
     console.log(err.message);
   }

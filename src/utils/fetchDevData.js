@@ -44,11 +44,11 @@ const fetchDevData = async (
         },
       });
       const data = response.data.admin;
+      callback(data);
+      if (response.status === 200) setLoading(false);
       indexedDB.saveData(data, dbName, indexedDB.init);
       localStorage.setItem(storageName, true);
-      callback(data);
       console.log(response.data.admin);
-      if (response.status === 200) setLoading(false);
     } catch (err) {
       console.log(err.message);
       if (err.response && [401, 403].includes(err.response.status)) {
