@@ -23,7 +23,7 @@ const LogIn = () => {
                 const url = origin.default.origin + '/auth';
                 const response = await axios.post(url, {
                     'input': input.value.trim(),
-                    'password': pwd.value.trim(),
+                    'password': pwd.value,
                     'rememberMe': check
                 },
                     {
