@@ -19,6 +19,7 @@ const logOut = async (showErr, navigate) => {
       if (response.status === 200) {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
+        localStorage.removeItem("user_stored");
         navigate("/", { replace: true });
       }
     } catch (err) {
