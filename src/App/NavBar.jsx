@@ -45,7 +45,7 @@ const NavBar = ({ section, setSection, setMenu, menu }) => {
           <img
             src={image}
             alt="Profile Picture"
-            className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer"
+            className="bg-[var(--primary-color)] rounded-full w-12 h-12 cursor-pointer object-cover"
             onClick={() => {
               setMenu(!menu);
             }}

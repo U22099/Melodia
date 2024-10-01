@@ -69,7 +69,7 @@ const Profile = () => {
           <img
             src={image}
             alt="Profile Picture"
-            className="bg-[var(--primary-color)] rounded-full md:w-48 md:h-48 w-40 h-40 mx-auto"
+            className="bg-[var(--primary-color)] rounded-full md:w-48 md:h-48 w-40 h-40 mx-auto object-cover"
           />
         </label>
       )}

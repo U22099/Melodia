@@ -79,7 +79,7 @@ const Register = () => {
         <div className="flex justify-center items-center flex-col">
           <input type="file" onChange={handleImage} maxLength={3145728} accept="image/jpeg, image/png, image/jpg" id="input" className="hidden" />
           <div className=" rounded-[100%] flex justify-center align-center items-center bg-[var(--primary-color)] md:bg-[#090909] text-black w-[200px] h-[200px]">
-            {image ? <img src={image} className="w-[200px] h-[200px] rounded-[100%]  cursor-pointer" onClick={() => document.getElementById('input').click()} /> : <FaUser className=" rounded-[100%] flex justify-center align-center items-center bg-[var(--primary-color)] md:bg-[#090909] text-black text-[12em] pt-[10px] cursor-pointer" onClick={() => document.getElementById('input').click()} />}
+            {image ? <img src={image} className="w-[200px] h-[200px] rounded-[100%]  cursor-pointer object-cover" onClick={() => document.getElementById('input').click()} /> : <FaUser className=" rounded-[100%] flex justify-center align-center items-center bg-[var(--primary-color)] md:bg-[#090909] text-black text-[12em] pt-[10px] cursor-pointer" onClick={() => document.getElementById('input').click()} />}
           </div>
           <label htmlFor="input" className="underline text-[1.1em] cursor-pointer">Add Photo</label>
         </div>
