@@ -1,5 +1,5 @@
-import origin from '../../config/origin.json'
-import axios from 'axios'
+import origin from '../../config/origin.json';
+import axios from 'axios';
 
 const logOut = async (showErr, navigate) => {
     try {
@@ -12,7 +12,7 @@ const logOut = async (showErr, navigate) => {
           withCredentials: true,
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${id}`,
+            Authorization: `Bearer ${id}`
           },
         }
       );
