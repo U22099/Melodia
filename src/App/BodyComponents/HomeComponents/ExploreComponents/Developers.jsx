@@ -27,7 +27,7 @@ const Developers = ({loading, devData}) => {
                       // setConfirm(true);
                     }}
                     alt="Music Picture"
-                    className="bg-[black] rounded-full w-36 h-36 m-[0px]"
+                    className="bg-[black] rounded-full w-36 h-36 m-[0px] object-cover"
                   />
                   <div className="flex flex-col justify-center items-start flex-wrap w-[100%]">
                     <h1 className="font-extrabold md:text-[1.3em] font-custom m-[0px ml-[5px]">

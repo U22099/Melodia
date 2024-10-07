@@ -28,7 +28,7 @@ const MusicList = ({ loading, outputData, audio, play, index, dbName, music}) =>
                     // setConfirm(true);
                   }}
                   alt="Music Picture"
-                  className="bg-[black] rounded-[15px] w-36 h-36 m-[0px]"
+                  className="bg-[black] rounded-[15px] w-36 h-36 m-[0px] object-cover"
                 />
                 <div className="">
                   <h1
